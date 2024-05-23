@@ -92,9 +92,9 @@ const MenuPrincipal = () => {
             </ItemMenu>
 
             <ItemMenu
-              ruta="/Clientes"
+              ruta="/Eventos"
               setIsOpen={setIsOpen}
-              border={pathname == "/Clientes" ? true : false}
+              border={pathname == "/Eventos" ? true : false}
             >
               Eventos
             </ItemMenu>
