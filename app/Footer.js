@@ -102,7 +102,7 @@ const Footer = () => {
           </div>
 
           <div className="sm:max-w-[290px] sm:mx-auto sm:col-span-2 lg:col-span-1  mx-auto">
-            <h6 className="font-bold mb-4 text-xl">Nuestras Redes</h6>
+            <h1 className="font-bold mb-4 text-xl">Nuestras Redes</h1>
             <div className="flex gap-3">
               <a
                 href="https://www.facebook.com/corp.lugarsa"
@@ -135,6 +135,22 @@ const Footer = () => {
               >
                 <BsWhatsapp className="text-white w-8 h-8" />
               </a>
+            </div>
+          </div>
+          <div className="  sm:col-span-2 lg:col-span-3 ">
+            <div className="">
+              <hr className=" py-2 border-gray-300" />
+              <div className="flex  flex-wrap items-center md:justify-between justify-center">
+                <div className="w-full  px-4 mx-auto text-center">
+                  <div className="text-sm font-semibold text-white ">
+                    Copyright ©{" "}
+                    <span id="get-current-year">
+                      {new Date().getFullYear()}
+                    </span>{" "}
+                    GETRAINING
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
