@@ -30,7 +30,7 @@ const Footer = () => {
             </div>
           </a>
           <div className="max-w-[290px] mx-auto  ">
-            <h6 className="font-semibold mb-4 text-xl">Contacto</h6>
+            <h1 className="font-semibold mb-4 text-xl">Contacto</h1>
             <div className="space-y-2">
               <div className="flex space-x-2 items-center ">
                 <svg
