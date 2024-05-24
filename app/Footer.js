@@ -110,6 +110,7 @@ const Footer = () => {
                 rel="noopener noreferrer"
                 className=" hover:animate-bounce"
                 title="Facebook"
+                aria-label="Facebook"
               >
                 <BsFacebook className="text-white w-8 h-8" />
               </a>
@@ -119,6 +120,7 @@ const Footer = () => {
                 rel="noopener noreferrer"
                 className=" hover:animate-bounce"
                 title="Instagram"
+                aria-label="Instagram"
               >
                 <BsInstagram className="text-white w-8 h-8" />
               </a>
@@ -129,6 +131,7 @@ const Footer = () => {
                 rel="noopener noreferrer"
                 className=" hover:animate-bounce"
                 title="Whatsapp"
+                aria-label="Whatsappp"
               >
                 <BsWhatsapp className="text-white w-8 h-8" />
               </a>

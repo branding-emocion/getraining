@@ -36,7 +36,7 @@ const Contacto = () => {
       <section className="container mx-auto -m-12 pb-8">
         <Card className=" grid grid-cols-1 lg:grid-cols-2 gap-4 place-items-center">
           <CardContent>
-            <div className="flex flex-col gap-2 space-y-2">
+            <div className="flex flex-col gap-2 space-y-2 pt-4 lg:pt-0">
               <section className="flex gap-x-2">
                 <PhoneCallIcon />
                 <a className="hover:scale-105" href="tel:+51914125509">
