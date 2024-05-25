@@ -8,6 +8,7 @@ import { FaWhatsapp } from "react-icons/fa";
 
 const MenuPrincipal = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [Scroll, setScroll] = useState("");
 
   const pathname = usePathname();
 
@@ -15,6 +16,22 @@ const MenuPrincipal = () => {
     setIsOpen(false);
   }, [pathname]);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      const isElementVisible = window.scrollY > 40;
+      if (isElementVisible) {
+        setScroll("bg-[#004f51] ");
+      } else {
+        setScroll("bg-transparent");
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
   return (
     <>
       <div className="fixed bottom-4 right-4 z-[100]">
@@ -30,7 +47,7 @@ const MenuPrincipal = () => {
       </div>
       <nav
         style={{ filter: "drop-shadow(0px 0px 3px black)" }}
-        className=" sticky z-50 top-0 p-2 md:px-20 shadow-sm md:flex md:items-center md:justify-around 2xl:justify-around bg-[#17282f]"
+        className={`sticky z-50 top-0 p-2 md:px-20 shadow-sm md:flex md:items-center md:justify-around 2xl:justify-around bg-transparent ${Scroll}`}
       >
         <div className="  flex justify-between items-  ">
           {/* Escudo Logo "inicio" */}
@@ -71,7 +88,7 @@ const MenuPrincipal = () => {
         </div>
         <div>
           <div
-            className={` text-center  flex flex-col h-screen md:h-auto  md:flex md:flex-row  md:items-center z-[-1] md:z-auto md:static gap-2 absolute text-white md:text-white  bg-[#17282f] md:bg-transparent w-full left-0 top-full md:w-auto md:py-0  md:pl-0 pl-7 md:opacity-100 opacity-0 right-[-400px] transition-all ease-in  ${
+            className={` text-center  flex flex-col h-screen md:h-auto  md:flex md:flex-row  md:items-center z-[-1] md:z-auto md:static gap-2 absolute text-white md:text-white bg-[#004f51]    md:bg-transparent  w-full left-0 top-full md:w-auto md:py-0  md:pl-0 pl-7 md:opacity-100 opacity-0 right-[-400px] transition-all ease-in  ${
               isOpen ? ` right-0 py-11 opacity-100` : `hidden`
             }`}
           >

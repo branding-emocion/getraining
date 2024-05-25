@@ -39,9 +39,9 @@ const Eventos = () => {
 
   return (
     <div>
-      <section className="bg-center bg-no-repeat bg-[url('/Banners/Eventos.webp')] bg-cover bg-gray-100/90 bg-blend-multiply">
+      <section className="bg-center bg-no-repeat bg-[url('/Banners/Eventos.webp')] bg-cover bg-[#004f51]/80 bg-blend-multiply">
         <div className=" mx-auto max-w-screen-xl text-center py-24 lg:py-[10.5rem]">
-          <div className="rounded-xl bg-gray-800/50 px-1 py-8 shadow-lg backdrop-blur-md  max-w-sm mx-auto">
+          <div className="rounded-xl bg-gray-800/50 px-1 py-8 shadow-lg backdrop-blur-sm  max-w-sm mx-auto">
             <h1 className="mb-4 text-4xl font-extrabold tracking-tight leading-none text-white md:text-5xl lg:text-6xl ">
               Eventos
             </h1>
@@ -49,10 +49,13 @@ const Eventos = () => {
         </div>
       </section>
 
-      <section className="container pt-8 mx-auto grid grid-cols-1  lg:grid-cols-3 gap-6">
+      <section className="container pt-8 mx-auto grid grid-cols-1  lg:grid-cols-4 gap-6">
         {ListEventos.map((Evento, key) => (
-          <div key={key} className="group pb-24 relative overflow-hidden">
-            <div className="group-hover:translate-y-0 transition-all duration-700 translate-y-full top-0 right-0 bottom-24 left-0 absolute bg-gradient-to-b from-transparent to-[#17282f] z-10" />
+          <div
+            key={key}
+            className="group pb-24 relative overflow-hidden rounded-lg"
+          >
+            <div className="group-hover:translate-y-0 transition-all duration-700 translate-y-full top-0 right-0 bottom-24 left-0 absolute bg-gradient-to-b from-transparent to-[#004f51] z-10" />
             <figure className="relative w-full h-[220px]">
               <Image
                 src={Evento.img}
@@ -64,12 +67,8 @@ const Eventos = () => {
                 className="transition-all group-hover:scale-125 duration-700 mr-4 "
               />
             </figure>
-            {/* <img
-              src={Evento.img}
-              className="transition-all group-hover:scale-125 duration-700 mr-4 h-auto w-auto"
-              alt
-            /> */}
-            <div className="bg-[#17282f] absolute z-10 bottom-0 left-0 w-full h-24 flex flex-col justify-center items-center">
+
+            <div className="bg-[#004f51] absolute z-10 bottom-0 left-0 w-full h-24 flex flex-col justify-center items-center">
               <div className="z-20 absolute -top-5 w-full flex justify-center">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -77,7 +76,7 @@ const Eventos = () => {
                   viewBox="0 0 24 24"
                   strokeWidth="1.5"
                   stroke="currentColor"
-                  className="group-hover:bg-white group-hover:text-[#17282f] group-hover:rotate-180 w-10 h-10 bg-black text-white p-2 rounded-full transition-all"
+                  className="group-hover:bg-white group-hover:text-[#004f51] group-hover:rotate-180 w-10 h-10 bg-black text-white p-2 rounded-full transition-all"
                 >
                   <path
                     strokeLinecap="round"
@@ -87,10 +86,10 @@ const Eventos = () => {
                 </svg>
               </div>
               <div className="group-hover:hidden transition-all duration-1000 w-4 absolute overflow-hidden inline-block right-0 -top-6">
-                <div className="h-6  bg-[#17282f] -rotate-45 transform origin-bottom-right" />
+                <div className="h-6  bg-[#004f51] -rotate-45 transform origin-bottom-right" />
               </div>
               {/* <h2 className="font-bold">{Evento.name}</h2> */}
-              <span className="text-white text-center">{Evento.name}</span>
+              <span className="text-white text-center px-2">{Evento.name}</span>
             </div>
           </div>
         ))}
