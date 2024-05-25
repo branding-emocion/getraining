@@ -35,49 +35,69 @@ const Nosotros = () => {
   ];
   return (
     <section>
-      <section className="bg-center bg-no-repeat bg-[url('/Banners/Nosotros.webp')] bg-cover bg-gray-100/90 bg-blend-multiply">
+      <section className="bg-center bg-no-repeat bg-[url('/Banners/Nosotros.webp')] bg-cover  bg-[#004f51]/80 bg-blend-multiply">
         <div className=" mx-auto max-w-screen-xl text-center py-24 lg:py-[10.5rem]">
-          <div className="rounded-xl bg-gray-800/50 px-1 py-8 shadow-lg backdrop-blur-md  max-w-sm mx-auto">
+          <div className="rounded-xl bg-gray-800/50 px-1 py-8 shadow-lg backdrop-blur-sm  max-w-sm mx-auto">
             <h1 className="mb-4 text-4xl font-extrabold tracking-tight leading-none text-white md:text-5xl lg:text-6xl ">
               Nosotros
             </h1>
           </div>
         </div>
       </section>
-      <div className="container ">
-        <Card className=" shadow-md bg-white grid w-full grid-cols-1 my-auto mt-6 mb-8     gap-6 ">
+      <div className="container -mt-[5rem]">
+        <Card className=" border-2 border-[#17282f] bg-white grid w-full grid-cols-1 my-auto mt-6 mb-8 shadow-md gap-6 ">
           <CardContent>
-            <div className="flex flex-col justify-center items-center text-base font-normal leading-7 text-gray-600    w-full px-2 lg:px-4 text-grey-900 text-justify  space-y-4">
-              <h1 className=" text-xl font-extrabold leading-tight lg:text-2xl text-grey-900 uppercase">
+            <div className="flex flex-col justify-center items-center text-base font-normal leading-7    w-full px-2 lg:px-4 text-grey-900 text-justify  space-y-4">
+              <h1 className=" text-xl font-extrabold leading-tight lg:text-2xl text-grey-900 pt-4 uppercase">
                 Global Executive Training (GET){" "}
               </h1>
-              <p>
-                En el mundo de hoy, los profesionales tienen la necesidad de ser
-                cada vez más competitivos, contar con herramientas y habilidades
-                que les permitan acceder a mejores oportunidades de crecimiento
-                y desarrollo personal y profesional. Global Executive Training
-                (GET) ha diseñado programas, capacitaciones y entrenamientos
-                para profesionales de los distintos niveles de gestión y
-                especialidades, cuyo propósito es ampliar sus conocimientos y
-                desarrollar habilidades en las áreas de gestión de personal,
-                liderazgo y emprendimiento.
-              </p>
-              <p>
-                Nuestro compromiso es contribuir e incentivar el desarrollo
-                personal, cultural y profesional buscando la innovación y el
-                empoderamiento, con responsabilidad social. Para ello, contamos
-                con una red de alianzas internacionales que garantizan mejorar
-                las perspectivas, capacidades y experiencias profesionales,
-                accediendo a entrenamientos y capacitaciones a través de sus
-                diferentes programas y actividades.
-              </p>
-              <p>
-                Como resultado los participantes de un programa GET, además de
-                mejorar su competitividad, se beneficiarán de las oportunidades
-                de creación de redes de contacto, convirtiéndose en líderes de
-                emprendimiento y de cambio en la sociedad. Te invitamos a ser un
-                profesional global, únete a GET.
-              </p>
+              <section className="grid grid-cols-1 md:grid-cols-2 gap-x-8">
+                <div>
+                  <p className="text-justify">
+                    En el mundo de hoy, los profesionales tienen la necesidad de
+                    ser cada vez más competitivos, contar con herramientas y
+                    habilidades que les permitan acceder a mejores oportunidades
+                    de crecimiento y desarrollo personal y profesional. Global
+                    Executive Training (GET) ha diseñado programas,
+                    capacitaciones y entrenamientos para profesionales de los
+                    distintos niveles de gestión y especialidades, cuyo
+                    propósito es ampliar sus conocimientos y desarrollar
+                    habilidades en las áreas de gestión de personal, liderazgo y
+                    emprendimiento.
+                  </p>
+                  <p className="text-justify">
+                    Nuestro compromiso es contribuir e incentivar el desarrollo
+                    personal, cultural y profesional buscando la innovación y el
+                    empoderamiento, con responsabilidad social. Para ello,
+                    contamos con una red de alianzas internacionales que
+                    garantizan mejorar las perspectivas, capacidades y
+                    experiencias profesionales, accediendo a entrenamientos y
+                    capacitaciones a través de sus diferentes programas y
+                    actividades.
+                  </p>
+                  <p className="text-justify">
+                    Como resultado los participantes de un programa GET, además
+                    de mejorar su competitividad, se beneficiarán de las
+                    oportunidades de creación de redes de contacto,
+                    convirtiéndose en líderes de emprendimiento y de cambio en
+                    la sociedad. Te invitamos a ser un profesional global, únete
+                    a GET.
+                  </p>
+                </div>
+                <section className=" w-full h-full">
+                  <figure className="relative w-full h-[500px] ">
+                    <Image
+                      src={"/imgNosotros.webp"}
+                      alt="Foto"
+                      fill
+                      style={{
+                        objectFit: "cover",
+                      }}
+                      className="rounded-md"
+                    />
+                  </figure>
+                </section>
+              </section>
             </div>
           </CardContent>
           {/* <CardContent>
@@ -99,10 +119,10 @@ const Nosotros = () => {
               {/* <div className="inline-block text-blue-500  ">
                 <Image src={item?.icon} width={48} height={48} alt="Mision" />
               </div> */}
-              <h1 className="text-2xl font-semibold text-gray-700 capitalize  ">
+              <h1 className="text-2xl font-semibold  capitalize  ">
                 {item.title}
               </h1>
-              <p className="text-gray-600  text-justify">{item.description}</p>
+              <p className="text-gray-900  text-justify">{item.description}</p>
             </div>
           ))}
         </div>

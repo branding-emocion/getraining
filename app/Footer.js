@@ -6,7 +6,7 @@ import { BsFacebook, BsInstagram, BsWhatsapp } from "react-icons/bs";
 const Footer = () => {
   return (
     <>
-      <div className="border-t mt-12 py-6 px-4 lg:px-0 bg-[#17282f] text-white">
+      <div className="border-t mt-12 py-6 px-4 lg:px-0 bg-[#004f51] text-white">
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 justify-center gap-4 items-center sm:items-start">
           <a
             href="https://jkinmobiliaria.com/"

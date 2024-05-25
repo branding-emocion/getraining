@@ -7,6 +7,7 @@ import { Textarea } from "@/components/ui/textarea";
 import {
   Facebook,
   Instagram,
+  Linkedin,
   MailIcon,
   PhoneCallIcon,
   Youtube,
@@ -24,16 +25,16 @@ const Contacto = () => {
 
   return (
     <div>
-      <section className="bg-center bg-no-repeat bg-[url('/Banners/ContactoBanner.webp')] bg-cover bg-gray-100/90 bg-blend-multiply">
+      <section className="bg-center bg-no-repeat bg-[url('/Banners/ContactoBanner.webp')] bg-cover  bg-[#004f51]/80 bg-blend-multiply">
         <div className=" mx-auto max-w-screen-xl text-center py-24 lg:py-[10.5rem]">
-          <div className="rounded-xl bg-gray-800/50 px-1 py-8 shadow-lg backdrop-blur-md  max-w-[30rem] mx-auto">
+          <div className="rounded-xl bg-gray-800/50 px-1 py-8 shadow-lg backdrop-blur-sm  max-w-[30rem] mx-auto">
             <h1 className="mb-4 text-4xl font-extrabold tracking-tight leading-none text-white md:text-5xl lg:text-6xl ">
               CONTÁCTANOS
             </h1>
           </div>
         </div>
       </section>
-      <section className="container mx-auto -m-12 pb-8">
+      <section className="container mx-auto  -m-[5rem] pb-8">
         <Card className=" grid grid-cols-1 lg:grid-cols-2 gap-4 place-items-center">
           <CardContent>
             <div className="flex flex-col gap-2 space-y-2 pt-4 lg:pt-0">
@@ -57,6 +58,8 @@ const Contacto = () => {
                   href="https://www.facebook.com/GETraining.org?mibextid=LQQJ4d"
                   target="_blank"
                   rel="noopener noreferrer"
+                  aria-label="Facebook"
+                  title="Faceboosk"
                 >
                   <Facebook className="w-7 h-6 text-blue-800" />
                 </a>
@@ -65,6 +68,8 @@ const Contacto = () => {
                   href="https://www.instagram.com/get.peru/"
                   target="_blank"
                   rel="noopener noreferrer"
+                  aria-label="Instagram"
+                  title="Instagram"
                 >
                   <Instagram className="w-7 h-6 text-blue-800" />
                 </a>
@@ -73,8 +78,20 @@ const Contacto = () => {
                   href="https://www.youtube.com/@get-globalexecutivetrainin9805"
                   target="_blank"
                   rel="noopener noreferrer"
+                  aria-label="Youtube"
+                  title="Youtube"
                 >
                   <Youtube className="w-7 h-6 text-blue-800" />
+                </a>
+                <a
+                  className="hover:scale-105"
+                  href="https://www.linkedin.com/company/global-e-training-get/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Linkeding"
+                  title="Linkeding"
+                >
+                  <Linkedin className="w-7 h-6 text-blue-800" />
                 </a>
               </section>
             </div>
