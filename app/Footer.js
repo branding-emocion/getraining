@@ -1,4 +1,5 @@
 "use client";
+import { Facebook, Youtube } from "lucide-react";
 import Image from "next/image";
 import React from "react";
 import { BsFacebook, BsInstagram, BsWhatsapp } from "react-icons/bs";
@@ -105,17 +106,17 @@ const Footer = () => {
             <h1 className="font-bold mb-4 text-xl">Nuestras Redes</h1>
             <div className="flex gap-3">
               <a
-                href="https://www.facebook.com/corp.lugarsa"
+                href="https://www.facebook.com/GETraining.org?mibextid=LQQJ4dF"
                 target="_blank"
                 rel="noopener noreferrer"
                 className=" hover:animate-bounce"
                 title="Facebook"
                 aria-label="Facebook"
               >
-                <BsFacebook className="text-white w-8 h-8" />
+                <Facebook className="text-white w-8 h-8" />
               </a>
               <a
-                href="https://www.instagram.com/lugarsa.constructora/"
+                href="https://www.instagram.com/get.peru/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className=" hover:animate-bounce"
@@ -134,6 +135,16 @@ const Footer = () => {
                 aria-label="Whatsappp"
               >
                 <BsWhatsapp className="text-white w-8 h-8" />
+              </a>
+              <a
+                href="https://www.youtube.com/@get-globalexecutivetrainin9805"
+                target="_blank"
+                rel="noopener noreferrer"
+                className=" hover:animate-bounce"
+                title="Youtube"
+                aria-label="Youtube"
+              >
+                <Youtube className="text-white w-8 h-8" />
               </a>
             </div>
           </div>

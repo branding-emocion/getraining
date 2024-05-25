@@ -17,8 +17,11 @@ export default function RootLayout({ children }) {
     <html lang="es">
       <body className={inter.className}>
         <MenuPrincipal />
-        <main className="md:-mt-[98px]">{children}</main>
-        <Footer />
+        <main className="-mt-[98px] bg-gray-50">
+          {children}
+          <Footer />
+        </main>
+
         <Toaster />
       </body>
     </html>
