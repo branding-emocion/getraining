@@ -40,7 +40,7 @@ const HomePage = () => {
         </div>
         <div className="relative w-full h-[20rem]  sm:h-[476px] bg-[#004f51]/80">
           <Image
-            src={"/Banners/Banner2.webp"}
+            src={"/Banners/Banner3.webp"}
             alt="banner1"
             fill
             style={{
@@ -51,7 +51,7 @@ const HomePage = () => {
         </div>
         <div className="relative w-full h-[20rem]  sm:h-[476px] bg-[#004f51]/80">
           <Image
-            src={"/Banners/Banner3.webp"}
+            src={"/Banners/Banner4.webp"}
             alt="banner1"
             fill
             style={{
