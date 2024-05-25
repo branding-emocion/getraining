@@ -95,16 +95,16 @@ const HomePage = () => {
               <h1 className="text-xl text-center  font-extrabold leading-tight lg:text-2xl text-grey-900 py-4  uppercase">
                 NUESTRAS ALIANZAS
               </h1>
-              <div className=" grid place-items-center grid-cols-1 lg:grid-cols-2 gap-2 md:gap-4 lg:gap-x-8 :gap-y-4">
+              <div className=" grid  place-items-center grid-cols-1 lg:grid-cols-2 gap-2 md:gap-4 lg:gap-x-8 :gap-y-4">
                 {Alianzas.map((alianza, key) => (
                   <a
                     href={alianza.link}
                     key={key}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-full"
+                    className="w-full max-w-sm"
                   >
-                    <div className=" hover:-translate-y-2 shadow-md border  rounded-lg max-w-sm  bg-[#004f51] border-[#004f51]">
+                    <div className=" hover:-translate-y-2 shadow-md border  rounded-lg   bg-[#004f51] border-[#004f51]">
                       <figure className="relative w-full h-[18rem]">
                         <Image
                           className="rounded-t-lg object-fill"
