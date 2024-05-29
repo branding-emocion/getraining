@@ -84,9 +84,9 @@ const HomePage = () => {
                       gestión de personal, liderazgo y emprendimiento.
                     </p>
                     <Link href={"/Nosotros"} className="flex  ">
-                      <button className="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#004f51] bg-[#004f51] transition duration-150 ease-in-out hover:bg-[#00a6b6] lg:text-xl lg:font-bold  rounded text-white px-4 sm:px-10 border border-[#004f51] py-2 sm:py-4 text-sm">
+                      <div className="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#004f51] bg-[#004f51] transition duration-150 ease-in-out hover:bg-[#00a6b6] lg:text-xl lg:font-bold  rounded text-white px-4 sm:px-10 border border-[#004f51] py-2 sm:py-4 text-sm">
                         Más Información{" "}
-                      </button>
+                      </div>
                     </Link>
                   </div>
                   <figure className="   relative w-full h-[200px] md:h-[400px]   ">
@@ -182,9 +182,9 @@ const HomePage = () => {
 
                     <li className="flex justify-start  items-center">
                       <Link href={"/Servicios"}>
-                        <button className="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#004f51] bg-[#004f51] transition duration-150 ease-in-out hover:bg-[#00a6b6] lg:text-xl lg:font-bold  rounded text-white px-4 sm:px-10 border border-[#004f51] py-2 sm:py-4 text-sm">
+                        <div className="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#004f51] bg-[#004f51] transition duration-150 ease-in-out hover:bg-[#00a6b6] lg:text-xl lg:font-bold  rounded text-white px-4 sm:px-10 border border-[#004f51] py-2 sm:py-4 text-sm">
                           Más Información{" "}
-                        </button>
+                        </div>
                       </Link>
                     </li>
                   </ul>
