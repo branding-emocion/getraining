@@ -48,7 +48,10 @@ const Contacto = () => {
 
               <section className="flex gap-x-2">
                 <MailIcon />
-                <a className="hover:scale-105" href="mailto:get@getraining.org">
+                <a
+                  className="text-lg hover:scale-105"
+                  href="mailto:get@getraining.org"
+                >
                   get@getraining.org
                 </a>
               </section>
@@ -61,7 +64,7 @@ const Contacto = () => {
                   aria-label="Facebook"
                   title="Faceboosk"
                 >
-                  <Facebook className="w-7 h-6 text-blue-800" />
+                  <Facebook className="w-7 h-6 text-[#004f51]" />
                 </a>
                 <a
                   className="hover:scale-105"
@@ -71,7 +74,7 @@ const Contacto = () => {
                   aria-label="Instagram"
                   title="Instagram"
                 >
-                  <Instagram className="w-7 h-6 text-blue-800" />
+                  <Instagram className="w-7 h-6 text-[#004f51]" />
                 </a>
                 <a
                   className="hover:scale-105"
@@ -81,7 +84,7 @@ const Contacto = () => {
                   aria-label="Youtube"
                   title="Youtube"
                 >
-                  <Youtube className="w-7 h-6 text-blue-800" />
+                  <Youtube className="w-7 h-6 text-[#004f51]" />
                 </a>
                 <a
                   className="hover:scale-105"
@@ -91,7 +94,7 @@ const Contacto = () => {
                   aria-label="Linkeding"
                   title="Linkeding"
                 >
-                  <Linkedin className="w-7 h-6 text-blue-800" />
+                  <Linkedin className="w-7 h-6 text-[#004f51]" />
                 </a>
               </section>
             </div>

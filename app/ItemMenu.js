@@ -5,6 +5,7 @@ const ItemMenu = ({ children, ruta, border }) => {
   return (
     <Link href={`${ruta || "hay señor"}`}>
       <div
+        title={`ir a ${ruta}`}
         className={`${
           border && "border-white  border-b-2"
         } mx-3 my-6 md:mx-1 lg:mx-3 hover:border-white hover:border-b-2 `}

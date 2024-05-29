@@ -84,9 +84,13 @@ const HomePage = () => {
                       gestión de personal, liderazgo y emprendimiento.
                     </p>
                     <Link href={"/Nosotros"} className="flex  ">
-                      <button className="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#004f51] bg-[#004f51] transition duration-150 ease-in-out hover:bg-[#00a6b6] lg:text-xl lg:font-bold  rounded text-white px-4 sm:px-10 border border-[#004f51] py-2 sm:py-4 text-sm">
+                      <div
+                        aria-label="Nosotros"
+                        title="Nosotros"
+                        className="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#004f51] bg-[#004f51] transition duration-150 ease-in-out hover:bg-[#00a6b6] lg:text-xl lg:font-bold  rounded text-white px-4 sm:px-10 border border-[#004f51] py-2 sm:py-4 text-sm"
+                      >
                         Más Información{" "}
-                      </button>
+                      </div>
                     </Link>
                   </div>
                   <figure className="   relative w-full h-[200px] md:h-[400px]   ">
@@ -110,7 +114,7 @@ const HomePage = () => {
             <CardContent>
               <div className="space-y-4 flex items-center flex-col  justify-center">
                 <h1 className=" text-xl ztext-center  font-extrabold leading-tight lg:text-3xl text-grey-900 pt-4 uppercase">
-                  Nuestros servicos
+                  Nuestros servicios
                 </h1>
               </div>
               <div className="grid grid-cols-1 lg:grid-cols-2 place-items-center gap-x-8 gap-y-4">
@@ -182,9 +186,13 @@ const HomePage = () => {
 
                     <li className="flex justify-start  items-center">
                       <Link href={"/Servicios"}>
-                        <button className="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#004f51] bg-[#004f51] transition duration-150 ease-in-out hover:bg-[#00a6b6] lg:text-xl lg:font-bold  rounded text-white px-4 sm:px-10 border border-[#004f51] py-2 sm:py-4 text-sm">
+                        <div
+                          title="Servicios"
+                          aria-label="Servicios"
+                          className="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#004f51] bg-[#004f51] transition duration-150 ease-in-out hover:bg-[#00a6b6] lg:text-xl lg:font-bold  rounded text-white px-4 sm:px-10 border border-[#004f51] py-2 sm:py-4 text-sm"
+                        >
                           Más Información{" "}
-                        </button>
+                        </div>
                       </Link>
                     </li>
                   </ul>
