@@ -48,7 +48,10 @@ const Contacto = () => {
 
               <section className="flex gap-x-2">
                 <MailIcon />
-                <a className="hover:scale-105" href="mailto:get@getraining.org">
+                <a
+                  className="text-lg hover:scale-105"
+                  href="mailto:get@getraining.org"
+                >
                   get@getraining.org
                 </a>
               </section>
