@@ -37,7 +37,7 @@ const Nosotros = () => {
     <section>
       <section className="bg-center bg-no-repeat bg-[url('/Banners/Nosotros.webp')] bg-cover  bg-[#004f51]/80 bg-blend-multiply">
         <div className=" mx-auto max-w-screen-xl text-center py-24 lg:py-[10.5rem]">
-          <div className="rounded-xl bg-gray-800/50  px-1 py-8   max-w-sm mx-auto">
+          <div className="rounded-xl bg-[#004f51]/50  px-1 py-8   max-w-sm mx-auto">
             <h1 className="mb-4 text-4xl font-extrabold tracking-tight leading-none text-white md:text-5xl lg:text-6xl ">
               Nosotros
             </h1>
