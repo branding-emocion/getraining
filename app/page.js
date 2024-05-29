@@ -10,6 +10,8 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { ClipboardListIcon, ListChecks, UsersRound } from "lucide-react";
+import Link from "next/link";
 
 const HomePage = () => {
   const Alianzas = [
@@ -62,50 +64,155 @@ const HomePage = () => {
         </div>
       </Carousel>
 
-      <section className="relative container mx-auto  -m-[6rem] pb-8 z-20">
-        <Card className="bg-white border-[#004f51] ">
-          <CardContent>
-            <div className="space-y-2">
-              <h1 className=" text-xl text-center  font-extrabold leading-tight lg:text-2xl text-grey-900 pt-4 uppercase">
-                Global Executive Training (GET){" "}
-              </h1>
-              <section className="grid grid-cols-1 lg:grid-cols-1 gap-x-8 gap-y-4">
-                <p className="text text-justify">
-                  Brindamos Consultoría, asesoría y capacitación en desarrollo
-                  personal y profesional. Hemos diseñado programas,
-                  capacitaciones y entrenamientos para profesionales de los
-                  distintos niveles de gestión y especialidades, cuyo propósito
-                  es ampliar sus conocimientos y desarrollar habilidades en las
-                  áreas de gestión de personal, liderazgo y emprendimiento.
-                </p>
-                <figure className="   relative w-full h-[200px] md:h-[400px]  border">
-                  <Image
-                    src={"/home.webp"}
-                    alt="Foto"
-                    fill
-                    style={{
-                      objectFit: "cover",
-                    }}
-                    className="rounded-md"
-                  />
-                </figure>
-              </section>
-            </div>
-            <div className="space-y-3">
-              <h1 className="text-xl text-center  font-extrabold leading-tight lg:text-2xl text-grey-900 py-4  uppercase">
-                NUESTRAS ALIANZAS
-              </h1>
-              <div className=" grid  place-items-center grid-cols-1 lg:grid-cols-2 gap-2 md:gap-4 lg:gap-x-8 :gap-y-4">
+      <div className="space-y-10 -mt-[6rem]">
+        <section className="relative container mx-auto   z-20">
+          <Card className="bg-white  shadow-lg  ">
+            <CardContent>
+              <div className="space-y-2 pt-6">
+                <section className="grid grid-cols-1 lg:grid-cols-2 gap-x-8 gap-y-4">
+                  <div className="space-y-4 flex items-start flex-col  justify-center">
+                    <h1 className=" text-xl ztext-center  font-extrabold leading-tight lg:text-3xl text-grey-900 pt-4 uppercase">
+                      Global Executive Training (GET){" "}
+                    </h1>
+                    <p className="text-lg text-justify">
+                      Brindamos Consultoría, asesoría y capacitación en
+                      desarrollo personal y profesional. Hemos diseñado
+                      programas, capacitaciones y entrenamientos para
+                      profesionales de los distintos niveles de gestión y
+                      especialidades, cuyo propósito es ampliar sus
+                      conocimientos y desarrollar habilidades en las áreas de
+                      gestión de personal, liderazgo y emprendimiento.
+                    </p>
+                    <Link href={"/Nosotros"} className="flex  ">
+                      <button className="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#004f51] bg-[#004f51] transition duration-150 ease-in-out hover:bg-[#00a6b6] lg:text-xl lg:font-bold  rounded text-white px-4 sm:px-10 border border-[#004f51] py-2 sm:py-4 text-sm">
+                        Más Información{" "}
+                      </button>
+                    </Link>
+                  </div>
+                  <figure className="   relative w-full h-[200px] md:h-[400px]   ">
+                    <Image
+                      src={"/home.webp"}
+                      alt="Foto"
+                      fill
+                      style={{
+                        objectFit: "cover",
+                      }}
+                      className="rounded-md"
+                    />
+                  </figure>
+                </section>
+              </div>
+            </CardContent>
+          </Card>
+        </section>
+        <section className="  container mx-auto mt-32   ">
+          <Card className=" bg-white shadow-lg  ">
+            <CardContent>
+              <div className="space-y-4 flex items-center flex-col  justify-center">
+                <h1 className=" text-xl ztext-center  font-extrabold leading-tight lg:text-3xl text-grey-900 pt-4 uppercase">
+                  Nuestros servicos
+                </h1>
+              </div>
+              <div className="grid grid-cols-1 lg:grid-cols-2 place-items-center gap-x-8 gap-y-4">
+                <div className="pt-4">
+                  <Carousel
+                    infiniteLoop
+                    autoPlay
+                    showThumbs={false}
+                    showStatus={false}
+                  >
+                    <div className=" rounded-md w-full h-full max-h-[346px] ">
+                      <Image
+                        className="rounded-md"
+                        src={"/slider/img.webp"}
+                        alt="banner1"
+                        width={601}
+                        height={436}
+                        style={{
+                          objectFit: "cover",
+                        }}
+                      />
+                    </div>
+                    <div className=" rounded-md w-full h-full  max-h-[346px]">
+                      <Image
+                        className="rounded-md"
+                        src={"/slider/img2.webp"}
+                        alt="banner1"
+                        width={450}
+                        height={450}
+                        style={{
+                          objectFit: "cover",
+                        }}
+                      />
+                    </div>
+
+                    <div className=" rounded-md w-full h-full max-h-[346px]">
+                      <Image
+                        className="rounded-md"
+                        src={"/slider/img5.webp"}
+                        alt="banner1"
+                        width={450}
+                        height={450}
+                        style={{
+                          objectFit: "cover",
+                        }}
+                      />
+                    </div>
+                  </Carousel>
+                </div>
+                <div>
+                  <ul className="space-y-5">
+                    <li className="flex justify-start  items-center">
+                      <UsersRound className="w-10 text-[#004f51] h-14 " />
+                      <p className="pl-4 text-lg font-medium">
+                        Desarrollo Profesional Desarrollo del Talento Humano -
+                        Mentoring Organizacional y
+                      </p>
+                    </li>
+                    <li className="flex justify-start  items-center">
+                      <ClipboardListIcon className="w-10 text-[#004f51] h-14 " />
+                      <p className="pl-3 text-lg font-medium">
+                        Empleabilidad y Emprendimiento
+                      </p>
+                    </li>
+                    <li className="flex justify-start  items-center">
+                      <ListChecks className="w-10 text-[#004f51] h-14 " />
+                      <p className="pl-3 text-lg font-medium">Marca personal</p>
+                    </li>
+
+                    <li className="flex justify-start  items-center">
+                      <Link href={"/Servicios"}>
+                        <button className="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#004f51] bg-[#004f51] transition duration-150 ease-in-out hover:bg-[#00a6b6] lg:text-xl lg:font-bold  rounded text-white px-4 sm:px-10 border border-[#004f51] py-2 sm:py-4 text-sm">
+                          Más Información{" "}
+                        </button>
+                      </Link>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </section>
+
+        <section className="  container mx-auto ">
+          <Card className=" bg-white shadow-lg  ">
+            <CardContent>
+              <div className="space-y-4 flex items-center flex-col  justify-center">
+                <h1 className=" text-xl ztext-center  font-extrabold leading-tight lg:text-3xl text-grey-900 pt-4 uppercase">
+                  NUESTRAS ALIANZAS
+                </h1>
+              </div>
+              <div className=" pt-3 grid  place-items-center grid-cols-1 lg:grid-cols-2 gap-2 md:gap-4 lg:gap-x-8 :gap-y-4">
                 {Alianzas.map((alianza, key) => (
                   <a
                     href={alianza.link}
                     key={key}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-full max-w-sm"
+                    className="w-full max-w-72 shadow-lg"
                   >
                     <div className=" hover:-translate-y-2 shadow-md border  rounded-lg   bg-[#004f51] border-[#004f51]">
-                      <figure className="relative w-full h-[18rem]">
+                      <figure className="relative w-full h-[18rem] ">
                         <Image
                           className="rounded-t-lg object-fill"
                           src={alianza.img}
@@ -113,7 +220,7 @@ const HomePage = () => {
                           alt={key}
                         />
                       </figure>
-                      <div className="p-5">
+                      <div className="p-4 h-32">
                         <div>
                           <h5 className=" text-center  font-bold text-2xl tracking-tight mb-2 text-white">
                             {alianza.nombre}{" "}
@@ -124,10 +231,10 @@ const HomePage = () => {
                   </a>
                 ))}
               </div>
-            </div>
-          </CardContent>
-        </Card>
-      </section>
+            </CardContent>
+          </Card>
+        </section>
+      </div>
     </div>
   );
 };

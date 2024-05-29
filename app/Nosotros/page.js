@@ -37,7 +37,7 @@ const Nosotros = () => {
     <section>
       <section className="bg-center bg-no-repeat bg-[url('/Banners/Nosotros.webp')] bg-cover  bg-[#004f51]/80 bg-blend-multiply">
         <div className=" mx-auto max-w-screen-xl text-center py-24 lg:py-[10.5rem]">
-          <div className="rounded-xl bg-gray-800/50 px-1 py-8 shadow-lg backdrop-blur-sm  max-w-sm mx-auto">
+          <div className="rounded-xl bg-gray-800/50  px-1 py-8   max-w-sm mx-auto">
             <h1 className="mb-4 text-4xl font-extrabold tracking-tight leading-none text-white md:text-5xl lg:text-6xl ">
               Nosotros
             </h1>
@@ -45,37 +45,33 @@ const Nosotros = () => {
         </div>
       </section>
       <div className="container -mt-[5rem]">
-        <Card className=" border-2 border-[#17282f] bg-white grid w-full grid-cols-1 my-auto mt-6 mb-8 shadow-md gap-6 ">
-          <CardContent>
+        <Card className=" border-2 border-[#004f51] bg-white grid w-full grid-cols-1 my-auto mt-6 mb-8 shadow-md gap-6 ">
+          <CardContent className="pt-5">
             <div className="flex flex-col justify-center items-center text-base font-normal leading-7    w-full px-2 lg:px-4 text-grey-900 text-justify  space-y-4">
-              <h1 className=" text-xl font-extrabold leading-tight lg:text-2xl text-grey-900 pt-4 uppercase">
-                Global Executive Training (GET){" "}
-              </h1>
-              <section className="grid grid-cols-1 md:grid-cols-2 gap-x-8">
-                <div>
-                  <p className="text-justify">
-                    En el mundo de hoy, los profesionales tienen la necesidad de
-                    ser cada vez más competitivos, contar con herramientas y
-                    habilidades que les permitan acceder a mejores oportunidades
-                    de crecimiento y desarrollo personal y profesional. Global
-                    Executive Training (GET) ha diseñado programas,
-                    capacitaciones y entrenamientos para profesionales de los
-                    distintos niveles de gestión y especialidades, cuyo
-                    propósito es ampliar sus conocimientos y desarrollar
-                    habilidades en las áreas de gestión de personal, liderazgo y
-                    emprendimiento.
+              <section className="grid grid-cols-1 lg:grid-cols-2 gap-x-8   ">
+                <div className="   space-y-4 max-h-[500px] overflow-auto  scrollbar-hide">
+                  <h1 className=" text-xl font-extrabold leading-tight lg:text-2xl text-grey-900 uppercase">
+                    Global Executive Training (GET){" "}
+                  </h1>
+                  <p>
+                    En el mundo actual, los profesionales deben ser más
+                    competitivos y contar con herramientas y habilidades para
+                    acceder a mejores oportunidades de crecimiento personal y
+                    profesional. Global Executive Training (GET) ofrece
+                    programas y capacitaciones para profesionales en distintos
+                    niveles de gestión y especialidades, con el propósito de
+                    ampliar conocimientos y desarrollar habilidades en gestión
+                    de personal, liderazgo y emprendimiento.
                   </p>
-                  <p className="text-justify">
-                    Nuestro compromiso es contribuir e incentivar el desarrollo
-                    personal, cultural y profesional buscando la innovación y el
-                    empoderamiento, con responsabilidad social. Para ello,
-                    contamos con una red de alianzas internacionales que
-                    garantizan mejorar las perspectivas, capacidades y
-                    experiencias profesionales, accediendo a entrenamientos y
-                    capacitaciones a través de sus diferentes programas y
-                    actividades.
+                  <p>
+                    Nuestro compromiso es fomentar el desarrollo personal,
+                    cultural y profesional, buscando la innovación y el
+                    empoderamiento con responsabilidad social. Contamos con
+                    alianzas internacionales que mejoran las perspectivas y
+                    experiencias profesionales mediante programas y actividades
+                    de capacitación y entrenamiento.
                   </p>
-                  <p className="text-justify">
+                  <p>
                     Como resultado los participantes de un programa GET, además
                     de mejorar su competitividad, se beneficiarán de las
                     oportunidades de creación de redes de contacto,
@@ -85,7 +81,7 @@ const Nosotros = () => {
                   </p>
                 </div>
                 <section className=" w-full h-full">
-                  <figure className="relative w-full h-[500px] ">
+                  <figure className="relative w-full h-[200px] md:h-[300px] lg:h-[500px] ">
                     <Image
                       src={"/imgNosotros.webp"}
                       alt="Foto"
@@ -111,18 +107,17 @@ const Nosotros = () => {
           </CardContent> */}
         </Card>
         <div className="grid grid-cols-1 gap-6 md:gap-8 md:grid-cols-2    ">
-          {Data?.map((item) => (
+          {Data?.map((item, key) => (
             <div
               key={item.id}
-              className="p-8 space-y-3 border-2 border-[#17282f]  rounded-xl shadow-lg bg-white"
+              className={`p-8 space-y-3 border-2 border-[#004f51]  rounded-xl shadow-lg bg-[${
+                key == 0 || key == 3 ? "#004f51" : "#fff"
+              }] ${key == 0 || key == 3 ? "text-white" : "text-gray-900"}`}
             >
-              {/* <div className="inline-block text-blue-500  ">
-                <Image src={item?.icon} width={48} height={48} alt="Mision" />
-              </div> */}
-              <h1 className="text-2xl font-semibold  capitalize  ">
+              <h1 className="text-2xl font-semibold  capitalize  text-center ">
                 {item.title}
               </h1>
-              <p className="text-gray-900  text-justify">{item.description}</p>
+              <p className="  text-justify">{item.description}</p>
             </div>
           ))}
         </div>

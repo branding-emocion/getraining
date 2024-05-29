@@ -107,7 +107,13 @@ const MenuPrincipal = () => {
             >
               Nosotros
             </ItemMenu>
-
+            <ItemMenu
+              ruta="/Servicios"
+              setIsOpen={setIsOpen}
+              border={pathname == "/Servicios" ? true : false}
+            >
+              Servicios
+            </ItemMenu>
             <ItemMenu
               ruta="/Eventos"
               setIsOpen={setIsOpen}

@@ -1,6 +1,7 @@
 "use client";
 import { Facebook, Youtube } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 import { BsFacebook, BsInstagram, BsWhatsapp } from "react-icons/bs";
 
@@ -9,11 +10,7 @@ const Footer = () => {
     <>
       <div className="border-t mt-12 py-6 px-4 lg:px-0 bg-[#004f51] text-white">
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 justify-center gap-4 items-center sm:items-start">
-          <a
-            href="https://jkinmobiliaria.com/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+          <Link href={"/"}>
             <div className="flex flex-col justify-center items-center">
               <div className="space-y-4 pt-4">
                 <Image
@@ -29,7 +26,7 @@ const Footer = () => {
                 />
               </div>
             </div>
-          </a>
+          </Link>
           <div className="max-w-[290px] mx-auto  ">
             <h1 className="font-semibold mb-4 text-xl">Contacto</h1>
             <div className="space-y-2">
@@ -55,7 +52,7 @@ const Footer = () => {
                 <div>
                   <a
                     href="tel:+51914125509"
-                    className="text-xl  hover:text-[#3adaff] transition-colors duration-300"
+                    className="text-xl  hover:text-[#00a6b6] transition-colors duration-300"
                   >
                     (+51) 914-125-509
                   </a>
@@ -74,7 +71,7 @@ const Footer = () => {
                 </svg>
 
                 <a
-                  className=" text-xl hover:text-[#3adaff] transition-colors duration-300"
+                  className=" text-xl hover:text-[#00a6b6] transition-colors duration-300"
                   href="mailto:get@getraining.org"
                 >
                   get@getraining.org{" "}
@@ -94,7 +91,7 @@ const Footer = () => {
                     clipRule="evenodd"
                   />
                 </svg>
-                <p className="  hover:text-[#3adaff] transition-colors duration-300">
+                <p className="  hover:text-[#00a6b6] transition-colors duration-300">
                   Av. Circunvalación Club Golf 206 <br /> Urb. Urbanización Club
                   Golf Los Incas Int. 803
                 </p>
