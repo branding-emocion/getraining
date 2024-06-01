@@ -121,19 +121,20 @@ const MenuPrincipal = () => {
             >
               Eventos
             </ItemMenu>
-            {/* <ItemMenu
-              ruta="/Blogs"
-              setIsOpen={setIsOpen}
-              border={pathname == "/Blogs" ? true : false}
-            >
-              Blog
-            </ItemMenu> */}
+
             <ItemMenu
               ruta="/Contacto"
               setIsOpen={setIsOpen}
               border={pathname == "/Contacto" ? true : false}
             >
               Contacto
+            </ItemMenu>
+            <ItemMenu
+              ruta="/Blog"
+              setIsOpen={setIsOpen}
+              border={pathname == "/Blog" ? true : false}
+            >
+              Blog
             </ItemMenu>
           </div>
         </div>

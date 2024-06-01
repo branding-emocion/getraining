@@ -3,6 +3,7 @@ import "./globals.css";
 import MenuPrincipal from "./MenuPrincipal";
 import Footer from "./Footer";
 import { Toaster } from "@/components/ui/toaster";
+import Main from "./Main";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,11 +17,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="es">
       <body className={inter.className}>
-        <MenuPrincipal />
-        <main className="-mt-[98px] bg-gray-50">
-          {children}
-          <Footer />
-        </main>
+        <Main>{children}</Main>
 
         <Toaster />
       </body>
