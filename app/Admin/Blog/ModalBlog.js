@@ -151,6 +151,7 @@ const ModalBlog = ({ OpenModal, setOpenModal }) => {
 
   const HandlerChange = (e) => {
     setInputValues({
+      ...InputValues,
       [e.target.name]: e.target.value,
     });
   };
