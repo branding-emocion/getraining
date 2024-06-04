@@ -32,7 +32,7 @@ const Blog = () => {
   const [Blog, setBlog] = useState([]);
 
   useEffect(() => {
-    const q = query(collection(db, "Blog"), orderBy("CreatAt", "asc"));
+    const q = query(collection(db, "Blog"), orderBy("CreatAt", "desc"));
 
     const unsubscribe = onSnapshot(q, (snapshot) => {
       setBlog(

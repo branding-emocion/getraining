@@ -22,7 +22,7 @@ const ItemBlog = ({ params: { id } }) => {
   console.log("Comentarios", Comentarios);
   useEffect(() => {
     if (id) {
-      const q = query(collection(db, "Blog"), orderBy("CreatAt", "asc"));
+      const q = query(collection(db, "Blog"), orderBy("CreatAt", "desc"));
       const qComentarios = query(
         collection(db, "Blog", `${id}`, "Comentarios"),
         orderBy("CreatAt", "asc")
@@ -104,8 +104,8 @@ const ItemBlog = ({ params: { id } }) => {
                   {Blogs?.filter((item, index) => item.id != id)?.map(
                     (blog, index) => (
                       <Link key={blog.id} href={`/Blog/${blog.id}`}>
-                        <div className="py-2 mx-auto  max-w-sm sm:w-full flex flex-col md:flex-row mb-10">
-                          <figure className="relative min-w-[167px]  w-[167px] h-28 m-4 md:m-0">
+                        <div className="py-2 mx-auto  max-w-sm sm:w-full flex flex-col md:flex-row mb-4">
+                          <figure className="relative min-w-[167px]  w-[167px] h-32 m-4 md:m-0">
                             <Image
                               src={blog.Imagenes[0]}
                               alt="IMG blog"
@@ -118,7 +118,7 @@ const ItemBlog = ({ params: { id } }) => {
                               {blog.TituloBlog}
                             </p>
                             <div
-                              className="quill-content   text-justify line-clamp-3"
+                              className="quill-content   text-justify line-clamp-2"
                               dangerouslySetInnerHTML={{
                                 __html: blog?.ContenidoBLog,
                               }}

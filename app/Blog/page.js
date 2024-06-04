@@ -10,7 +10,7 @@ const Blog = () => {
   const [IsLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const q = query(collection(db, "Blog"), orderBy("CreatAt", "asc"));
+    const q = query(collection(db, "Blog"), orderBy("CreatAt", "desc"));
 
     const unsubscribe = onSnapshot(q, (snapshot) => {
       setBlog(
@@ -40,37 +40,41 @@ const Blog = () => {
       ) : (
         <div>
           {/* blog */}
-          <div className="mx-auto grid max-w-6xl  grid-cols-1 md:gap-4 lg:gap-6 p-6 sm:grid-cols-2 md:grid-cols-3  ">
+          <div className="mx-auto grid max-w-6xl  grid-cols-1 md:gap-4 lg:gap-6 pt-7 sm:grid-cols-2 md:grid-cols-3  ">
             {Blog?.map((blog) => (
               <Link
                 href={`/Blog/${blog.id}`}
                 key={blog.id}
-                className="max-w-lg mx-auto cursor-pointer   w-full"
+                className="max-w-lg mx-auto cursor-pointer h-full  w-full shadow-lg"
+                title={`LEER ${blog?.TituloBlog}`}
               >
-                <div className="  bg-white shadow-md hover:shadow-xl border border-gray-200  rounded-lg max-w-sm mb-5">
+                <div className=" h-full  bg-white shadow-md hover:shadow-xl border border-gray-200  rounded-lg max-w-sm ">
                   <figure className="w-full h-64 relative ">
                     <Image
                       className="rounded-t-lg"
                       src={blog?.Imagenes[0] || ""}
                       alt="imageBlog"
                       fill
+                      style={{
+                        objectFit: "cover",
+                      }}
                     />
                   </figure>
 
-                  <div className="p-5 h-[198px]">
-                    <div>
-                      <h5 className="text-gray-900 font-bold text-2xl tracking-tight mb-2">
+                  <div className="p-5  text-center flex flex-col justify-between items-center">
+                    <div className="">
+                      <h5 className="text-gray-900 font-bold text-xl tracking-tight mb-2">
                         {blog?.TituloBlog}
                       </h5>
                     </div>
                     <div
-                      className="quill-content line-clamp-3   text-justify"
+                      className="quill-content line-clamp-3 text-justify"
                       dangerouslySetInnerHTML={{ __html: blog?.ContenidoBLog }}
                     />
 
-                    <button className="text-white mt-2 bg-sky-700 hover:bg-sky-500 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-2 text-center inline-flex items-center">
+                    {/* <button className="text-white mt-2 bg-[#004f51] hover:opacity-75 focus:ring-4 font-medium rounded-lg text-sm px-3 py-2 text-center inline-flex items-center ">
                       Leer más
-                    </button>
+                    </button> */}
                   </div>
                 </div>
               </Link>
