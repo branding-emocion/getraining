@@ -28,6 +28,8 @@ const ModalAddComent = ({ OpenModal, setOpenModal }) => {
   const [InputValues, setInputValues] = useState({});
   const [Loading, setLoading] = useState(false);
   const { toast } = useToast();
+  const [isActive, setIsActive] = useState(false);
+
   const closeModal = () => {
     setOpenModal({
       Visible: false,
@@ -35,9 +37,6 @@ const ModalAddComent = ({ OpenModal, setOpenModal }) => {
     });
     setInputValues({});
   };
-  const [isActive, setIsActive] = useState(false);
-
-  console.log("InputValues", InputValues);
 
   const handleClick = (Calificacion) => {
     setIsActive({

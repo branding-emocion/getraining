@@ -8,12 +8,17 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import "react-quill/dist/quill.snow.css"; // Para el tema 'snow'
 import ModalAddComent from "./ModalAddComment";
+import ModalShowComment from "./ModalShowComment";
 
 const ItemBlog = ({ params: { id } }) => {
   const [Blogs, setBlogs] = useState([]);
   const [Isloading, setIsloading] = useState(true);
   const [SeeBlog, setSeeBlog] = useState({});
   const [Comentarios, setComentarios] = useState([]);
+  const [ModalSeeBlog, setModalSeeBlog] = useState({
+    Visible: false,
+    Info: {},
+  });
   const [OpenModal, setOpenModal] = useState({
     Visible: false,
     idBlog: null,
@@ -62,6 +67,12 @@ const ItemBlog = ({ params: { id } }) => {
       {OpenModal.Visible && (
         <ModalAddComent OpenModal={OpenModal} setOpenModal={setOpenModal} />
       )}
+      {ModalSeeBlog.Visible && (
+        <ModalShowComment
+          ModalSeeBlog={ModalSeeBlog}
+          setModalSeeBlog={setModalSeeBlog}
+        />
+      )}
       <section className="bg-center bg-no-repeat bg-[url('/Banners/Blog.webp')] bg-cover bg-[#004f51]/80 bg-blend-multiply">
         <div className=" mx-auto max-w-screen-xl text-center py-24 lg:py-[10.5rem]">
           <div className="rounded-xl bg-[#004f51]/50 px-1 py-8     max-w-sm mx-auto">
@@ -101,33 +112,31 @@ const ItemBlog = ({ params: { id } }) => {
                   Más Lectura
                 </h1>
                 <div className=" max-h-[700px]  overflow-auto shadow-md rounded-md space-y-2">
-                  {Blogs?.filter((item, index) => item.id != id)?.map(
-                    (blog, index) => (
-                      <Link key={blog.id} href={`/Blog/${blog.id}`}>
-                        <div className="py-2 mx-auto  max-w-sm sm:w-full flex flex-col md:flex-row mb-4">
-                          <figure className="relative min-w-[167px]  w-[167px] h-32 m-4 md:m-0">
-                            <Image
-                              src={blog.Imagenes[0]}
-                              alt="IMG blog"
-                              fill
-                              className="rounded-md object-cover"
-                            />
-                          </figure>
-                          <div className="bg-white rounded pl-3">
-                            <p className=" text-gray-p00 font-semibold text-base mb-2">
-                              {blog.TituloBlog}
-                            </p>
-                            <div
-                              className="quill-content   text-justify line-clamp-2"
-                              dangerouslySetInnerHTML={{
-                                __html: blog?.ContenidoBLog,
-                              }}
-                            />
-                          </div>
+                  {Blogs?.filter((item) => item.id != id)?.map((blog) => (
+                    <Link key={blog.id} href={`/Blog/${blog.id}`}>
+                      <div className="py-2 mx-auto max-w-md px-4  sm:w-full flex flex-col md:flex-row mb-3">
+                        <figure className="relative mx-auto min-w-[167px] w-[280px]  h-40 lg:w-[167px] lg:h-32 m-4 md:m-0">
+                          <Image
+                            src={blog.Imagenes[0]}
+                            alt="IMG blog"
+                            fill
+                            className="rounded-md object-cover "
+                          />
+                        </figure>
+                        <div className="bg-white rounded pl-3">
+                          <p className=" text-gray-p00 font-semibold text-base mb-2">
+                            {blog.TituloBlog}
+                          </p>
+                          <div
+                            className="quill-content   text-justify line-clamp-2"
+                            dangerouslySetInnerHTML={{
+                              __html: blog?.ContenidoBLog,
+                            }}
+                          />
                         </div>
-                      </Link>
-                    )
-                  )}
+                      </div>
+                    </Link>
+                  ))}
                 </div>
               </div>
 
@@ -139,29 +148,38 @@ const ItemBlog = ({ params: { id } }) => {
                   <div>
                     <div className="w-full   bg-white px-4 py-4 shadow rounded-sm">
                       <div className=" max-h-[700px] ">
-                        <div className="flex flex-col ">
+                        <div className="flex flex-col gap-y-3 ">
                           {Comentarios?.map((comment) => (
-                            <div className="flex gap-2" key={comment.id}>
+                            <div
+                              onClick={(e) => {
+                                e.preventDefault();
+                                setModalSeeBlog({
+                                  Visible: true,
+                                  Info: comment,
+                                });
+                              }}
+                              className="flex gap-2 cursor-pointer hover:-translate-y-1 border-b py-2"
+                              key={comment.id}
+                            >
                               <div className="flex flex-shrink-0">
-                                <Avatar className="h-16 w-16">
+                                <Avatar className="h-20 w-20">
                                   <AvatarImage src="https://github.com/shadcn.png" />
                                   <AvatarFallback>CN</AvatarFallback>
                                 </Avatar>
                               </div>
                               <div className="flex flex-col space-y-2  ">
                                 <div className="font-semibold">
-                                  <p>{comment?.Nombre}</p>
+                                  <p className="uppercase">{comment?.Nombre}</p>
                                 </div>
                                 <div className="flex justify-start items-center space-x-2">
                                   <div className="w-auto text-sm leading-none">
                                     <div className="max-h-[400px] h-full w-full  overflow-auto ">
                                       <div
-                                        className=" first-letter:   text-justify "
+                                        className=" line-clamp-3  text-justify "
                                         dangerouslySetInnerHTML={{
                                           __html: comment?.Comentario,
                                         }}
                                       />
-                                      <p></p>
                                     </div>
                                   </div>
                                 </div>
