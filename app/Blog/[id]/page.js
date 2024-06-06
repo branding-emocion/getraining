@@ -88,7 +88,7 @@ const ItemBlog = ({ params: { id } }) => {
             <div className="mb-4 lg:mb-0  p-4 block lg:col-span-2 text-justify  bg-white shadow-lg rounded-md ">
               <div className="p-5 ">
                 <div>
-                  <h5 className="text-gray-900 font-bold text-2xl tracking-tight mb-2">
+                  <h5 className="text-gray-900 font-bold text-2xl tracking-tight mb-2 text-center">
                     {SeeBlog?.TituloBlog}
                   </h5>
 
