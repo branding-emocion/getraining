@@ -17,11 +17,11 @@ const DashboardLayout = ({ children }) => {
       link: "/Admin/Blog",
       icon: <BookOpenText className="w-6 h-6 text-white" />,
     },
-    {
-      name: "Eventos",
-      link: "/Admin/Eventos",
-      icon: <Cake className="w-6 h-6 text-white" />,
-    },
+    // {
+    //   name: "Eventos",
+    //   link: "/Admin/Eventos",
+    //   icon: <Cake className="w-6 h-6 text-white" />,
+    // },
   ];
 
   if (loading) return <p>Loading...</p>;
