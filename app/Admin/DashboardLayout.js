@@ -4,7 +4,13 @@ import Login from "./Login";
 import useAuthState from "@/lib/useAuthState";
 import { auth } from "@/firebase/firebaseClient";
 import Link from "next/link";
-import { BookOpenText, Cake, HomeIcon, MonitorXIcon } from "lucide-react";
+import {
+  BookOpenText,
+  Cake,
+  HomeIcon,
+  MonitorXIcon,
+  YoutubeIcon,
+} from "lucide-react";
 import { signOut } from "firebase/auth";
 import { FaEvernote } from "react-icons/fa";
 
@@ -13,15 +19,15 @@ const DashboardLayout = ({ children }) => {
 
   const menu = [
     {
+      name: "Pódcast",
+      link: "/Admin/Podcast",
+      icon: <YoutubeIcon className="w-6 h-6 text-white" />,
+    },
+    {
       name: "Blog",
       link: "/Admin/Blog",
       icon: <BookOpenText className="w-6 h-6 text-white" />,
     },
-    // {
-    //   name: "Eventos",
-    //   link: "/Admin/Eventos",
-    //   icon: <Cake className="w-6 h-6 text-white" />,
-    // },
   ];
 
   if (loading) return <p>Loading...</p>;
