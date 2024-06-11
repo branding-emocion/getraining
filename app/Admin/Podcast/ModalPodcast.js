@@ -26,7 +26,13 @@ import {
   where,
 } from "firebase/firestore";
 import FileUploader from "../Blog/FileUploader";
-import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import {
+  deleteObject,
+  getDownloadURL,
+  listAll,
+  ref,
+  uploadBytes,
+} from "firebase/storage";
 
 const QuillNoSSRWrapper = dynamic(() => import("react-quill"), {
   ssr: false,
