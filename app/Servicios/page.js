@@ -5,6 +5,11 @@ import React from "react";
 const Servicios = () => {
   const ListServices = [
     {
+      name: "Outplacement",
+      description:
+        "Asesoramiento profesional y personal: Incluye coaching, mentoring y herramientas de evaluación de habilidades, intereses y objetivos de carrera. Así como el apoyo emocional.",
+    },
+    {
       name: "Programas de Mentoring Organizacional y Profesional",
       description:
         "Orientación y apoyo para el desarrollo de habilidades y competencias.",
@@ -15,14 +20,11 @@ const Servicios = () => {
         "Evaluación integral para identificar áreas de mejora y fortalecer las capacidades de liderazgo.",
     },
     {
-      name: "Talleres en Habilidades Ejecutivas y de Gestión",
-      description: "Capacitación en técnicas avanzadas de gestión y liderazgo.",
-    },
-    {
-      name: "Modelo de Competencias y Habilidades Blandas",
+      name: "Talleres en Habilidades Blandas y de Gestión",
       description:
-        "Desarrollo de habilidades interpersonales y emocionales esenciales para el éxito profesional.",
+        "Capacitación en técnicas avanzadas de gestión y liderazgo. Desarrollo de habilidades interpersonales y emocionales esenciales para el éxito profesional.",
     },
+
     {
       name: "Marca Personal",
       description:
@@ -99,12 +101,7 @@ const Servicios = () => {
                     necesidades de cada cliente, ajustando los presupuestos a la
                     medida de cada organización.
                   </p>
-                  <p>
-                    Nuestro compromiso es ofrecer programas, capacitaciones y
-                    entrenamientos diseñados específicamente para las
-                    necesidades de cada cliente, ajustando los presupuestos a la
-                    medida de cada organización.
-                  </p>
+                  <p></p>
                 </div>
                 <section className=" w-full h-full">
                   <figure className="relative w-full h-[200px] md:h-[300px] lg:h-[400px] ">

@@ -1,5 +1,5 @@
 "use client";
-import { Facebook, Youtube } from "lucide-react";
+import { Facebook, Linkedin, Youtube } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
@@ -110,7 +110,7 @@ const Footer = () => {
                 title="Facebook"
                 aria-label="Facebook"
               >
-                <Facebook className="text-white w-8 h-8" />
+                <Facebook className="text-white w-7 h-7" />
               </a>
               <a
                 href="https://www.instagram.com/get.peru/"
@@ -120,18 +120,28 @@ const Footer = () => {
                 title="Instagram"
                 aria-label="Instagram"
               >
-                <BsInstagram className="text-white w-8 h-8" />
+                <BsInstagram className="text-white w-7 h-7" />
               </a>
 
               <a
-                href="https://bit.ly/lotes-en-pimentel"
+                href="https://api.whatsapp.com/send?phone=51914125509&text=Hola%2C%20quiero%20m%C3%A1s%20informaci%C3%B3n%20sobre%20"
                 target="_blank"
                 rel="noopener noreferrer"
                 className=" hover:animate-bounce"
                 title="Whatsapp"
                 aria-label="Whatsappp"
               >
-                <BsWhatsapp className="text-white w-8 h-8" />
+                <BsWhatsapp className="text-white w-7 h-7" />
+              </a>
+              <a
+                href="https://www.linkedin.com/company/global-e-training-get/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className=" hover:animate-bounce"
+                title="Linkedin"
+                aria-label="Linkedin"
+              >
+                <Linkedin className="text-white w-7 h-7  " />
               </a>
               <a
                 href="https://www.youtube.com/@get-globalexecutivetrainin9805"

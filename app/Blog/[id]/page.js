@@ -24,7 +24,6 @@ const ItemBlog = ({ params: { id } }) => {
     idBlog: null,
   });
 
-  console.log("Comentarios", Comentarios);
   useEffect(() => {
     if (id) {
       const q = query(collection(db, "Blog"), orderBy("CreatAt", "desc"));
