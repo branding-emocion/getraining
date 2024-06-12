@@ -79,6 +79,7 @@ const ModalAddComent = ({ OpenModal, setOpenModal }) => {
         {
           ...InputValues,
           CreatAt: serverTimestamp(),
+          Show: false,
         }
       );
       setLoading(false);
