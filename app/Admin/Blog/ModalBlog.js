@@ -21,7 +21,7 @@ import {
   ref,
   uploadBytes,
 } from "firebase/storage";
-import { db, storage } from "@/firebase/firebaseClient";
+import { auth, db, storage } from "@/firebase/firebaseClient";
 import {
   addDoc,
   collection,
@@ -32,6 +32,7 @@ import {
   updateDoc,
   where,
 } from "firebase/firestore";
+import useAuthState from "@/lib/useAuthState";
 
 const QuillNoSSRWrapper = dynamic(() => import("react-quill"), {
   ssr: false,
@@ -39,6 +40,8 @@ const QuillNoSSRWrapper = dynamic(() => import("react-quill"), {
 });
 
 const ModalBlog = ({ OpenModal, setOpenModal }) => {
+  const [{ user }, loading, error] = useAuthState(auth);
+
   const [InputValues, setInputValues] = useState({});
   const [files, setFiles] = useState([]);
   const [Loading, setLoading] = useState(false);
@@ -132,6 +135,7 @@ const ModalBlog = ({ OpenModal, setOpenModal }) => {
           ...InputValues,
           Imagenes: ImagesUrl, // Ahora ImagesUrl es una matriz de cadenas de texto
           CreatAt: serverTimestamp(),
+          NombreAutor: user?.displayName || "Miriam Roncal",
         });
       }
       setLoading(false);
