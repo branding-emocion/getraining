@@ -9,18 +9,21 @@ import {
   Cake,
   HomeIcon,
   MonitorXIcon,
+  PartyPopper,
   User,
+  Users,
   YoutubeIcon,
 } from "lucide-react";
 import { signOut } from "firebase/auth";
 import { usePathname, useRouter } from "next/navigation";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 const DashboardLayout = ({ children }) => {
   const [{ user, claims }, loading, error] = useAuthState(auth);
 
   const pathname = usePathname();
   const router = useRouter();
-  if (pathname == "/Admin/Usuarios" && claims?.UsuarioBase) {
+  if (pathname != "/Admin/Blog" && claims?.UsuarioBase) {
     router.replace("/Admin");
   }
 
@@ -28,13 +31,20 @@ const DashboardLayout = ({ children }) => {
     {
       name: "Usuarios",
       link: "/Admin/Usuarios",
-      icon: <User className="w-6 h-6 text-white" />,
+      icon: <Users className="w-6 h-6 text-white" />,
       hidden: claims?.UsuarioBase,
     },
     {
       name: "Pódcast",
       link: "/Admin/Podcast",
       icon: <YoutubeIcon className="w-6 h-6 text-white" />,
+      hidden: claims?.UsuarioBase,
+    },
+    {
+      name: "Eventos",
+      link: "/Admin/Eventos",
+      icon: <PartyPopper className="w-6 h-6 text-white" />,
+      hidden: claims?.UsuarioBase,
     },
     {
       name: "Blog",
@@ -53,6 +63,21 @@ const DashboardLayout = ({ children }) => {
         <div className="fixed flex flex-col left-0 w-14 hover:w-64 md:w-64 bg-[#004f51] h-full text-white transition-all duration-300 border-none z-10 sidebar">
           <div className="overflow-y-auto overflow-x-hidden flex flex-col justify-between flex-grow">
             <ul className="flex flex-col py-4 space-y-1">
+              <li>
+                <div className="flex flex-row items-center h-11 focus:outline-none   text-white-600 hover:text-white-800 border-l-4 border-transparent    pr-6">
+                  <div className="inline-flex justify-center items-center ml-4">
+                    {/* <User className="w-6 h-6 text-white" /> */}
+                    <Avatar className="h-6 w-6 lg:w-9 lg:h-9">
+                      <AvatarImage src="https://github.com/shadcn.png" />
+                      <AvatarFallback>CN</AvatarFallback>
+                    </Avatar>
+                  </div>
+                  <span className="ml-2 text-sm tracking-wide truncate uppercase">
+                    {user.displayName || "Miriam Roncal"}
+                  </span>
+                </div>
+              </li>
+
               <li className="px-5 hidden md:block">
                 <div className="flex flex-row items-center h-8">
                   <div className="text-sm font-light tracking-wide text-gray-p00 uppercase">
@@ -66,7 +91,10 @@ const DashboardLayout = ({ children }) => {
                     <li key={key}>
                       <Link
                         href={men.link}
-                        className="relative flex flex-row items-center h-11 focus:outline-none hover:bg-blue-800  text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500  pr-6"
+                        className={` flex flex-row items-center h-11 focus:outline-none hover:bg-blue-800  text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500  pr-6 ${
+                          pathname.includes(men.link) &&
+                          "bg-blue-800 border-blue-500 "
+                        }`}
                       >
                         <span className="inline-flex justify-center items-center ml-4">
                           {men.icon}
