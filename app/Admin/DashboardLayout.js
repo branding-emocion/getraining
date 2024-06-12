@@ -9,15 +9,28 @@ import {
   Cake,
   HomeIcon,
   MonitorXIcon,
+  User,
   YoutubeIcon,
 } from "lucide-react";
 import { signOut } from "firebase/auth";
-import { FaEvernote } from "react-icons/fa";
+import { usePathname, useRouter } from "next/navigation";
 
 const DashboardLayout = ({ children }) => {
   const [{ user, claims }, loading, error] = useAuthState(auth);
 
+  const pathname = usePathname();
+  const router = useRouter();
+  if (pathname == "/Admin/Usuarios" && claims?.UsuarioBase) {
+    router.replace("/Admin");
+  }
+
   const menu = [
+    {
+      name: "Usuarios",
+      link: "/Admin/Usuarios",
+      icon: <User className="w-6 h-6 text-white" />,
+      hidden: claims?.UsuarioBase,
+    },
     {
       name: "Pódcast",
       link: "/Admin/Podcast",
@@ -48,19 +61,23 @@ const DashboardLayout = ({ children }) => {
                 </div>
               </li>
               {menu.map((men, key) => (
-                <li key={key}>
-                  <Link
-                    href={men.link}
-                    className="relative flex flex-row items-center h-11 focus:outline-none hover:bg-blue-800  text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500  pr-6"
-                  >
-                    <span className="inline-flex justify-center items-center ml-4">
-                      {men.icon}
-                    </span>
-                    <span className="ml-2 text-sm tracking-wide truncate">
-                      {men.name}
-                    </span>
-                  </Link>
-                </li>
+                <>
+                  {!men.hidden && (
+                    <li key={key}>
+                      <Link
+                        href={men.link}
+                        className="relative flex flex-row items-center h-11 focus:outline-none hover:bg-blue-800  text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500  pr-6"
+                      >
+                        <span className="inline-flex justify-center items-center ml-4">
+                          {men.icon}
+                        </span>
+                        <span className="ml-2 text-sm tracking-wide truncate">
+                          {men.name}
+                        </span>
+                      </Link>
+                    </li>
+                  )}
+                </>
               ))}
 
               <li>
