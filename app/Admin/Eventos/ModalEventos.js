@@ -5,23 +5,13 @@ import {
   DialogDescription,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/components/ui/use-toast";
-import { formats, modules } from "@/lib/QuillConfig";
-import dynamic from "next/dynamic";
 import React, { useState } from "react";
-import "react-quill/dist/quill.snow.css";
-import FileUploader from "./FileUploader";
-import {
-  deleteObject,
-  getDownloadURL,
-  ref,
-  uploadBytes,
-} from "firebase/storage";
-import { auth, db, storage } from "@/firebase/firebaseClient";
+
+import { db, storage } from "@/firebase/firebaseClient";
 import {
   addDoc,
   collection,
@@ -32,16 +22,16 @@ import {
   updateDoc,
   where,
 } from "firebase/firestore";
-import useAuthState from "@/lib/useAuthState";
+import FileUploader from "../Blog/FileUploader";
+import {
+  deleteObject,
+  getDownloadURL,
+  listAll,
+  ref,
+  uploadBytes,
+} from "firebase/storage";
 
-const QuillNoSSRWrapper = dynamic(() => import("react-quill"), {
-  ssr: false,
-  loading: () => <p>Loading ...</p>,
-});
-
-const ModalBlog = ({ OpenModal, setOpenModal }) => {
-  const [{ user }, loading, error] = useAuthState(auth);
-
+const ModalEventos = ({ OpenModal, setOpenModal }) => {
   const [InputValues, setInputValues] = useState({});
   const [files, setFiles] = useState([]);
   const [Loading, setLoading] = useState(false);
@@ -57,10 +47,7 @@ const ModalBlog = ({ OpenModal, setOpenModal }) => {
   const uploadImages = async (images, name) => {
     const urlLinks = await Promise.all(
       images.map(async (image, index) => {
-        const imageRef = ref(
-          storage,
-          `ImagenesBlog/${name}/image-${index}.jpg`
-        );
+        const imageRef = ref(storage, `Eventos/${name}/image-${index}.jpg`);
         await uploadBytes(imageRef, image);
         const url = await getDownloadURL(imageRef);
         return url;
@@ -75,7 +62,7 @@ const ModalBlog = ({ OpenModal, setOpenModal }) => {
       setLoading(true);
       if (Object.keys(OpenModal?.InfoEditar).length > 0) {
         if (Object.keys(InputValues).length > 0) {
-          const UpdateRef = doc(db, "Blog", `${OpenModal?.InfoEditar?.id}`);
+          const UpdateRef = doc(db, "Eventos", `${OpenModal?.InfoEditar?.id}`);
 
           // Set the "capital" field of the city 'DC'
           await updateDoc(UpdateRef, {
@@ -86,7 +73,7 @@ const ModalBlog = ({ OpenModal, setOpenModal }) => {
           // Borrar las imágenes antiguas
           const ImgRef = ref(
             storage,
-            `ImagenesBlog/${OpenModal?.InfoEditar?.TituloBlog?.replace(
+            `Eventos/${OpenModal?.InfoEditar?.TituloEvento?.replace(
               /\s+/g,
               "_"
             )}/`
@@ -108,13 +95,13 @@ const ModalBlog = ({ OpenModal, setOpenModal }) => {
             });
 
           const NombreCarpeta =
-            InputValues?.TituloBlog?.replace(/\s+/g, "_") ||
-            OpenModal?.InfoEditar?.TituloBlog?.replace(/\s+/g, "_");
+            InputValues?.TituloEvento?.replace(/\s+/g, "_") ||
+            OpenModal?.InfoEditar?.TituloEvento?.replace(/\s+/g, "_");
 
           // toca modificar la funcion y enviarle el values para que funcione mejor
           const ImagesUrl = await uploadImages(files, NombreCarpeta);
 
-          const UpdateRef = doc(db, "Blog", `${OpenModal?.InfoEditar?.id}`);
+          const UpdateRef = doc(db, "Eventos", `${OpenModal?.InfoEditar?.id}`);
           await updateDoc(UpdateRef, {
             Imagenes: ImagesUrl,
           });
@@ -127,15 +114,14 @@ const ModalBlog = ({ OpenModal, setOpenModal }) => {
           return;
         }
 
-        const NombreCarpeta = InputValues?.TituloBlog?.replace(/\s+/g, "_");
+        const NombreCarpeta = InputValues?.TituloEvento?.replace(/\s+/g, "_");
 
         const ImagesUrl = await uploadImages(files, NombreCarpeta); // Asegúrate de que la promesa se haya resuelto
 
-        const docRef = await addDoc(collection(db, "Blog"), {
+        const docRef = await addDoc(collection(db, "Eventos"), {
           ...InputValues,
           Imagenes: ImagesUrl, // Ahora ImagesUrl es una matriz de cadenas de texto
           CreatAt: serverTimestamp(),
-          NombreAutor: user?.displayName || "Miriam Roncal",
         });
       }
       setLoading(false);
@@ -167,55 +153,50 @@ const ModalBlog = ({ OpenModal, setOpenModal }) => {
             {Object.keys(OpenModal?.InfoEditar).length > 0
               ? "Editar"
               : "Agregar"}{" "}
-            blog
+            Eventos
           </DialogTitle>
           <DialogDescription>
             <form onSubmit={HandlerSubmit} className="space-y-4 w-full h-full">
               <div className="grid grid-cols-1 gap-4">
                 <div className="space-y-2">
-                  <Label htmlFor="TituloBlog" className="">
-                    Titulo del blog <span className="text-red-600">(*)</span>
+                  <Label htmlFor="TituloEvento" className="">
+                    Titulo del Eventos <span className="text-red-600">(*)</span>
                   </Label>
                   <Input
-                    id="TituloBlog"
-                    name="TituloBlog"
+                    id="TituloEvento"
+                    name="TituloEvento"
                     className="w-full text-gray-900"
                     onChange={HandlerChange}
-                    defaultValue={OpenModal?.InfoEditar?.TituloBlog}
+                    defaultValue={OpenModal?.InfoEditar?.TituloEvento}
                     required
                     autoComplete="off"
                     autoFocus
                   />
                 </div>
                 <div>
-                  <Label htmlFor="ImagenPrincipal" className="">
-                    Imagen Principal <span className="text-red-600">(*)</span>
-                  </Label>
-                  <FileUploader
-                    setFiles={setFiles}
-                    files={files}
-                    Modal={OpenModal}
-                  />
+                  <div>
+                    <Label htmlFor="ImagenPrincipal" className="">
+                      Imagen Principal <span className="text-red-600">(*)</span>
+                    </Label>
+                    <FileUploader
+                      setFiles={setFiles}
+                      files={files}
+                      Modal={OpenModal}
+                    />
+                  </div>
                 </div>
-
-                <div className="">
-                  <Label htmlFor="ContenidoBLog" className="">
-                    Contenido <span className="text-red-600">(*)</span>
+                <div className="space-y-2">
+                  <Label htmlFor="LinkEvento" className="">
+                    Link Externo
                   </Label>
-                  <QuillNoSSRWrapper
-                    id="ContenidoBLog"
-                    modules={modules}
-                    formats={formats}
-                    theme="snow"
-                    placeholder="Escriba aqui..."
-                    onChange={(e) => {
-                      setInputValues({
-                        ...InputValues,
-                        ContenidoBLog: e,
-                      });
-                    }}
-                    className="text-black  overflow-auto"
-                    defaultValue={OpenModal?.InfoEditar?.ContenidoBLog}
+                  <Input
+                    id="LinkEvento"
+                    name="LinkEvento"
+                    className="w-full text-gray-900"
+                    onChange={HandlerChange}
+                    defaultValue={OpenModal?.InfoEditar?.LinkEvento}
+                    autoComplete="off"
+                    autoFocus
                   />
                 </div>
               </div>
@@ -235,4 +216,4 @@ const ModalBlog = ({ OpenModal, setOpenModal }) => {
   );
 };
 
-export default ModalBlog;
+export default ModalEventos;
