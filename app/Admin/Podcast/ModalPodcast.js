@@ -10,8 +10,6 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/components/ui/use-toast";
-import { formats, modules } from "@/lib/QuillConfig";
-import dynamic from "next/dynamic";
 import React, { useState } from "react";
 
 import { db, storage } from "@/firebase/firebaseClient";
@@ -33,11 +31,6 @@ import {
   ref,
   uploadBytes,
 } from "firebase/storage";
-
-const QuillNoSSRWrapper = dynamic(() => import("react-quill"), {
-  ssr: false,
-  loading: () => <p>Loading ...</p>,
-});
 
 const ModalPodcast = ({ OpenModal, setOpenModal }) => {
   const [InputValues, setInputValues] = useState({});
@@ -168,7 +161,7 @@ const ModalPodcast = ({ OpenModal, setOpenModal }) => {
               <div className="grid grid-cols-1 gap-4">
                 <div className="space-y-2">
                   <Label htmlFor="TituloPodcast" className="">
-                    Titulo del Pódcast{" "}
+                    Titulo del Pódcast <span className="text-red-600">(*)</span>
                   </Label>
                   <Input
                     id="TituloPodcast"
@@ -184,7 +177,7 @@ const ModalPodcast = ({ OpenModal, setOpenModal }) => {
                 <div>
                   <div>
                     <Label htmlFor="ImagenPrincipal" className="">
-                      Imagen Principal{" "}
+                      Imagen Principal <span className="text-red-600">(*)</span>
                     </Label>
                     <FileUploader
                       setFiles={setFiles}
@@ -195,7 +188,7 @@ const ModalPodcast = ({ OpenModal, setOpenModal }) => {
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="LinkPodcast" className="">
-                    Link de youtube{" "}
+                    Link de youtube <span className="text-red-600">(*)</span>
                   </Label>
                   <Input
                     id="LinkPodcast"
