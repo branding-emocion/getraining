@@ -10,9 +10,17 @@ import {
 import { Button } from "@/components/ui/button";
 import { BadgePlus, PencilIcon, TrashIcon, YoutubeIcon } from "lucide-react";
 import Image from "next/image";
-import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
-import { db } from "@/firebase/firebaseClient";
+import {
+  collection,
+  deleteDoc,
+  doc,
+  onSnapshot,
+  orderBy,
+  query,
+} from "firebase/firestore";
+import { db, storage } from "@/firebase/firebaseClient";
 import ModalEventos from "./ModalEventos";
+import { deleteObject, listAll, ref } from "firebase/storage";
 
 const EventosPage = () => {
   const [OpenModal, setOpenModal] = useState({

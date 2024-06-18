@@ -196,7 +196,6 @@ const ModalEventos = ({ OpenModal, setOpenModal }) => {
                     onChange={HandlerChange}
                     defaultValue={OpenModal?.InfoEditar?.LinkEvento}
                     autoComplete="off"
-                    autoFocus
                   />
                 </div>
               </div>

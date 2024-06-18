@@ -77,7 +77,7 @@ const Eventos = () => {
       <section className="container pt-8 mx-auto grid grid-cols-1  lg:grid-cols-4 gap-6">
         {Eventos?.map((Evento, key) => (
           <div key={key}>
-            {Evento.LinkEvento ? (
+            {Evento?.LinkEvento?.length > 0 ? (
               <a
                 href={Evento.LinkEvento}
                 target="_blank"
@@ -130,7 +130,7 @@ const Eventos = () => {
                   e.preventDefault();
                   setModalImage({
                     Visible: true,
-                    Nombre: Evento.name || TituloEvento,
+                    Nombre: Evento?.name || Evento?.TituloEvento,
                     src: Evento.img || Evento.Imagenes[0],
                   });
                 }}

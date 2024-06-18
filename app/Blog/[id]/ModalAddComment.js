@@ -30,6 +30,7 @@ const ModalAddComent = ({ OpenModal, setOpenModal }) => {
   const { toast } = useToast();
   const [isActive, setIsActive] = useState(false);
 
+  console.log("OpenModal", OpenModal);
   const closeModal = () => {
     setOpenModal({
       Visible: false,
@@ -74,7 +75,7 @@ const ModalAddComent = ({ OpenModal, setOpenModal }) => {
         return;
       }
 
-      const docRef = await addDoc(
+      const ResComment = await addDoc(
         collection(db, "Blog", `${OpenModal?.idBlog}`, "Comentarios"),
         {
           ...InputValues,
@@ -82,9 +83,23 @@ const ModalAddComent = ({ OpenModal, setOpenModal }) => {
           Show: false,
         }
       );
+
+      await addDoc(collection(db, "Notificaciones"), {
+        ...InputValues,
+        idBlog: OpenModal?.idBlog,
+        CreatAt: serverTimestamp(),
+        Show: true,
+        idComentario: ResComment.id,
+      });
       setLoading(false);
 
-      //   closeModal();
+      toast({
+        title: "Notificación",
+        description:
+          "Se ha guardado correctamente, se notificará al administrador para su aprobación",
+      });
+
+      closeModal();
     } catch (error) {
       setLoading(false);
       toast({

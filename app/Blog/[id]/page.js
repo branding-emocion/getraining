@@ -2,13 +2,20 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { db } from "@/firebase/firebaseClient";
-import { query, onSnapshot, collection, orderBy } from "firebase/firestore";
+import {
+  query,
+  onSnapshot,
+  collection,
+  orderBy,
+  where,
+} from "firebase/firestore";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import "react-quill/dist/quill.snow.css"; // Para el tema 'snow'
 import ModalAddComent from "./ModalAddComment";
 import ModalShowComment from "./ModalShowComment";
+import { Star } from "lucide-react";
 
 const ItemBlog = ({ params: { id } }) => {
   const [Blogs, setBlogs] = useState([]);
@@ -29,7 +36,7 @@ const ItemBlog = ({ params: { id } }) => {
       const q = query(collection(db, "Blog"), orderBy("CreatAt", "desc"));
       const qComentarios = query(
         collection(db, "Blog", `${id}`, "Comentarios"),
-        orderBy("CreatAt", "asc")
+        where("Show", "==", true)
       );
 
       const unsubscribe = onSnapshot(q, (snapshot) => {
@@ -70,6 +77,7 @@ const ItemBlog = ({ params: { id } }) => {
         <ModalShowComment
           ModalSeeBlog={ModalSeeBlog}
           setModalSeeBlog={setModalSeeBlog}
+          SeeBlog={SeeBlog}
         />
       )}
       <section className="bg-center bg-no-repeat bg-[url('/Banners/Blog.webp')] bg-cover bg-[#004f51]/80 bg-blend-multiply">
@@ -113,7 +121,7 @@ const ItemBlog = ({ params: { id } }) => {
                 <div className=" max-h-[700px]  overflow-auto shadow-md rounded-md space-y-2">
                   {Blogs?.filter((item) => item.id != id)?.map((blog) => (
                     <Link key={blog.id} href={`/Blog/${blog.id}`}>
-                      <div className="py-2 mx-auto max-w-md px-4  sm:w-full flex flex-col md:flex-row mb-3">
+                      <div className="py-2 mx-auto max-w-md px-4  sm:w-full flex flex-col md:flex-row mb-2">
                         <figure className="relative mx-auto min-w-[167px] w-[280px]  h-40 lg:w-[167px] lg:h-32 m-4 md:m-0">
                           <Image
                             src={blog.Imagenes[0]}
@@ -148,7 +156,9 @@ const ItemBlog = ({ params: { id } }) => {
                     <div className="w-full   bg-white px-4 py-4 shadow rounded-sm">
                       <div className=" max-h-[700px] ">
                         <div className="flex flex-col gap-y-3 ">
-                          {Comentarios?.map((comment) => (
+                          {Comentarios.sort(
+                            (a, b) => b.Calificacion - a.Calificacion
+                          )?.map((comment) => (
                             <div
                               onClick={(e) => {
                                 e.preventDefault();
@@ -169,12 +179,26 @@ const ItemBlog = ({ params: { id } }) => {
                               <div className="flex flex-col space-y-2  ">
                                 <div className="font-semibold">
                                   <p className="uppercase">{comment?.Nombre}</p>
+                                  <span className="flex gap-x-2">
+                                    {[1, 2, 3, 4, 5].map((value, key) => (
+                                      <div
+                                        key={key}
+                                        className={`${
+                                          comment.Calificacion >= value
+                                            ? "text-orange-700"
+                                            : ""
+                                        }   `}
+                                      >
+                                        <Star />
+                                      </div>
+                                    ))}
+                                  </span>
                                 </div>
                                 <div className="flex justify-start items-center space-x-2">
                                   <div className="w-auto text-sm leading-none">
                                     <div className="max-h-[400px] h-full w-full  overflow-auto ">
                                       <div
-                                        className=" line-clamp-3  text-justify "
+                                        className=" line-clamp-2  text-justify "
                                         dangerouslySetInnerHTML={{
                                           __html: comment?.Comentario,
                                         }}
