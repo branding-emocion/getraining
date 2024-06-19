@@ -98,7 +98,7 @@ const DashboardLayout = ({ children }) => {
                     </Avatar>
                   </div>
                   <span className="ml-2 text-sm tracking-wide truncate uppercase">
-                    {user.displayName || "Miriam Roncal"}
+                    {user.displayName || "Miryam Roncal"}
                   </span>
                 </div>
               </li>

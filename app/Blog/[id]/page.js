@@ -95,9 +95,13 @@ const ItemBlog = ({ params: { id } }) => {
             <div className="mb-4 lg:mb-0  p-4 block lg:col-span-2 text-justify  bg-white shadow-lg rounded-md ">
               <div className="p-5 ">
                 <div>
-                  <h5 className="text-gray-900 font-bold text-2xl tracking-tight mb-2 text-center">
+                  <h1 className="text-gray-900 font-bold text-2xl tracking-tight mb-2 text-center">
                     {SeeBlog?.TituloBlog}
-                  </h5>
+                  </h1>
+                  <h2 className="text-center pb-3 text-lg uppercase">
+                    <span className="font-semibold capitalize">By. </span>{" "}
+                    {SeeBlog?.NombreAutor || "Miryam Roncal"}
+                  </h2>
 
                   {SeeBlog?.Imagenes?.length > 0 && (
                     <img
