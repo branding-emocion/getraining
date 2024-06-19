@@ -135,7 +135,7 @@ const ModalBlog = ({ OpenModal, setOpenModal }) => {
           ...InputValues,
           Imagenes: ImagesUrl, // Ahora ImagesUrl es una matriz de cadenas de texto
           CreatAt: serverTimestamp(),
-          NombreAutor: user?.displayName || "Miriam Roncal",
+          NombreAutor: user?.displayName || "Miryam Roncal",
         });
       }
       setLoading(false);
