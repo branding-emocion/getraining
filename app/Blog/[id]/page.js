@@ -16,6 +16,16 @@ import "react-quill/dist/quill.snow.css"; // Para el tema 'snow'
 import ModalAddComent from "./ModalAddComment";
 import ModalShowComment from "./ModalShowComment";
 import { Star } from "lucide-react";
+import {
+  FacebookShareButton,
+  TwitterShareButton,
+  WhatsappShareButton,
+  LinkedinShareButton,
+  FacebookIcon,
+  TwitterIcon,
+  WhatsappIcon,
+  LinkedinIcon,
+} from "react-share";
 
 const ItemBlog = ({ params: { id } }) => {
   const [Blogs, setBlogs] = useState([]);
@@ -68,6 +78,8 @@ const ItemBlog = ({ params: { id } }) => {
     }
   }, [id]);
 
+  const shareUrl = typeof window !== "undefined" ? window.location.href : "";
+
   return (
     <div>
       {OpenModal.Visible && (
@@ -82,7 +94,7 @@ const ItemBlog = ({ params: { id } }) => {
       )}
       <section className="bg-center bg-no-repeat bg-[url('/Banners/Blog.webp')] bg-cover bg-[#004f51]/80 bg-blend-multiply">
         <div className=" mx-auto max-w-screen-xl text-center py-24 lg:py-[10.5rem]">
-          <div className="rounded-xl bg-[#004f51]/50 px-1 py-8     max-w-sm mx-auto">
+          <div className="rounded-xl bg-[#004f51]/50 px-1 py-8 max-w-sm mx-auto">
             <h1 className="mb-4 text-4xl font-extrabold tracking-tight leading-none text-white md:text-5xl lg:text-6xl ">
               Blog
             </h1>
@@ -92,7 +104,7 @@ const ItemBlog = ({ params: { id } }) => {
       <div className=" mx-auto">
         <main className="mt-12">
           <div className="grid lg:grid-cols-3 gap-4">
-            <div className="mb-4 lg:mb-0  p-4 block lg:col-span-2 text-justify  bg-white shadow-lg rounded-md ">
+            <div className="mb-4 lg:mb-0 p-4 block lg:col-span-2 text-justify bg-white shadow-lg rounded-md">
               <div className="p-5 ">
                 <div>
                   <h1 className="text-gray-900 font-bold text-2xl tracking-tight mb-2 text-center">
@@ -102,7 +114,6 @@ const ItemBlog = ({ params: { id } }) => {
                     <span className="font-semibold capitalize">By. </span>{" "}
                     {SeeBlog?.NombreAutor || "Miryam Roncal"}
                   </h2>
-
                   {SeeBlog?.Imagenes?.length > 0 && (
                     <img
                       className="rounded-t-lg"
@@ -112,34 +123,48 @@ const ItemBlog = ({ params: { id } }) => {
                   )}
                 </div>
                 <div
-                  className="quill-content   text-justify"
+                  className="quill-content text-justify"
                   dangerouslySetInnerHTML={{ __html: SeeBlog?.ContenidoBLog }}
                 />
+                <div className="flex justify-center space-x-2 mt-4">
+                  <FacebookShareButton url={shareUrl}>
+                    <FacebookIcon size={32} round />
+                  </FacebookShareButton>
+                  <TwitterShareButton url={shareUrl}>
+                    <TwitterIcon size={32} round />
+                  </TwitterShareButton>
+                  <WhatsappShareButton url={shareUrl}>
+                    <WhatsappIcon size={32} round />
+                  </WhatsappShareButton>
+                  <LinkedinShareButton url={shareUrl}>
+                    <LinkedinIcon size={32} round />
+                  </LinkedinShareButton>
+                </div>
               </div>
             </div>
-            <div className=" space-y-3 px-2 sm:px-0 w-full py-2 sm:col-span-1 rounded-2xl bg-white shadow-md ">
+            <div className="space-y-3 px-2 sm:px-0 w-full py-2 sm:col-span-1 rounded-2xl bg-white shadow-md">
               <div className="w-full">
-                <h1 className="text-center  text-xl font-semibold leading-tight lg:text-2xl text-grey-900 uppercase">
+                <h1 className="text-center text-xl font-semibold leading-tight lg:text-2xl text-grey-900 uppercase">
                   Más Lectura
                 </h1>
-                <div className=" max-h-[700px]  overflow-auto shadow-md rounded-md space-y-2">
+                <div className="max-h-[700px] overflow-auto shadow-md rounded-md space-y-2">
                   {Blogs?.filter((item) => item.id != id)?.map((blog) => (
                     <Link key={blog.id} href={`/Blog/${blog.id}`}>
-                      <div className="py-2 mx-auto max-w-md px-4  sm:w-full flex flex-col md:flex-row mb-2">
-                        <figure className="relative mx-auto min-w-[167px] w-[280px]  h-40 lg:w-[167px] lg:h-32 m-4 md:m-0">
+                      <div className="py-2 mx-auto max-w-md px-4 sm:w-full flex flex-col md:flex-row mb-2">
+                        <figure className="relative mx-auto min-w-[167px] w-[280px] h-40 lg:w-[167px] lg:h-32 m-4 md:m-0">
                           <Image
                             src={blog.Imagenes[0]}
                             alt="IMG blog"
                             fill
-                            className="rounded-md object-cover "
+                            className="rounded-md object-cover"
                           />
                         </figure>
                         <div className="bg-white rounded pl-3">
-                          <p className=" text-gray-p00 font-semibold text-base mb-2">
+                          <p className="text-gray-900 font-semibold text-base mb-2">
                             {blog.TituloBlog}
                           </p>
                           <div
-                            className="quill-content   text-justify line-clamp-2"
+                            className="quill-content text-justify line-clamp-2"
                             dangerouslySetInnerHTML={{
                               __html: blog?.ContenidoBLog,
                             }}
@@ -150,16 +175,15 @@ const ItemBlog = ({ params: { id } }) => {
                   ))}
                 </div>
               </div>
-
-              <div className=" max-h-[700px] overflow-auto shadow-md rounded-md">
+              <div className="max-h-[700px] overflow-auto shadow-md rounded-md">
                 <div>
-                  <h1 className="text-center  text-xl font-semibold leading-tight lg:text-2xl text-grey-900 uppercase">
+                  <h1 className="text-center text-xl font-semibold leading-tight lg:text-2xl text-grey-900 uppercase">
                     Comentarios
                   </h1>
                   <div>
-                    <div className="w-full   bg-white px-4 py-4 shadow rounded-sm">
-                      <div className=" max-h-[700px] ">
-                        <div className="flex flex-col gap-y-3 ">
+                    <div className="w-full bg-white px-4 py-4 shadow rounded-sm">
+                      <div className="max-h-[700px]">
+                        <div className="flex flex-col gap-y-3">
                           {Comentarios.sort(
                             (a, b) => b.Calificacion - a.Calificacion
                           )?.map((comment) => (
@@ -180,7 +204,7 @@ const ItemBlog = ({ params: { id } }) => {
                                   <AvatarFallback>CN</AvatarFallback>
                                 </Avatar>
                               </div>
-                              <div className="flex flex-col space-y-2  ">
+                              <div className="flex flex-col space-y-2">
                                 <div className="font-semibold">
                                   <p className="uppercase">{comment?.Nombre}</p>
                                   <span className="flex gap-x-2">
@@ -191,7 +215,7 @@ const ItemBlog = ({ params: { id } }) => {
                                           comment.Calificacion >= value
                                             ? "text-orange-700"
                                             : ""
-                                        }   `}
+                                        }`}
                                       >
                                         <Star />
                                       </div>
@@ -200,9 +224,9 @@ const ItemBlog = ({ params: { id } }) => {
                                 </div>
                                 <div className="flex justify-start items-center space-x-2">
                                   <div className="w-auto text-sm leading-none">
-                                    <div className="max-h-[400px] h-full w-full  overflow-auto ">
+                                    <div className="max-h-[400px] h-full w-full overflow-auto">
                                       <div
-                                        className=" line-clamp-2  text-justify "
+                                        className="line-clamp-2 text-justify"
                                         dangerouslySetInnerHTML={{
                                           __html: comment?.Comentario,
                                         }}
