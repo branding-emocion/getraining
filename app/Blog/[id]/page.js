@@ -81,7 +81,7 @@ const ItemBlog = ({ params: { id } }) => {
   const shareUrl = typeof window !== "undefined" ? window.location.href : "";
 
   return (
-    <div>
+    <>
       {OpenModal.Visible && (
         <ModalAddComent OpenModal={OpenModal} setOpenModal={setOpenModal} />
       )}
@@ -92,6 +92,7 @@ const ItemBlog = ({ params: { id } }) => {
           SeeBlog={SeeBlog}
         />
       )}
+
       <section className="bg-center bg-no-repeat bg-[url('/Banners/Blog.webp')] bg-cover bg-[#004f51]/80 bg-blend-multiply">
         <div className=" mx-auto max-w-screen-xl text-center py-24 lg:py-[10.5rem]">
           <div className="rounded-xl bg-[#004f51]/50 px-1 py-8 max-w-sm mx-auto">
@@ -260,7 +261,7 @@ const ItemBlog = ({ params: { id } }) => {
         {/* main ends here */}
         {/* footer */}
       </div>
-    </div>
+    </>
   );
 };
 
