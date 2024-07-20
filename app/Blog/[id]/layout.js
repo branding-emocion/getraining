@@ -8,8 +8,6 @@ const LayoutBlog = async ({ children, params: { id } }) => {
   const doc = await blogRef.get();
   const blog = doc.data();
 
-  console.log(blog);
-
   //TitleBlog en el metadata
   //authors   authors: [{ name: 'Seb' }, { name: 'Josh', url: 'https://nextjs.org' }],
   metadata.title = blog.TituloBlog;

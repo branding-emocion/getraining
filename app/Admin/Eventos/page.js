@@ -21,6 +21,16 @@ import {
 import { db, storage } from "@/firebase/firebaseClient";
 import ModalEventos from "./ModalEventos";
 import { deleteObject, listAll, ref } from "firebase/storage";
+import {
+  FacebookShareButton,
+  TwitterShareButton,
+  WhatsappShareButton,
+  LinkedinShareButton,
+  FacebookIcon,
+  TwitterIcon,
+  WhatsappIcon,
+  LinkedinIcon,
+} from "react-share";
 
 const EventosPage = () => {
   const [OpenModal, setOpenModal] = useState({
@@ -171,6 +181,28 @@ const EventosPage = () => {
                       >
                         <TrashIcon className="w-4 h-4" />
                       </button>
+                    </div>
+                    <div className="flex justify-center space-x-2 py-4">
+                      <FacebookShareButton
+                        url={`https://www.getraining.org/Eventos/${Eventos.id}`}
+                      >
+                        <FacebookIcon size={32} round />
+                      </FacebookShareButton>
+                      <TwitterShareButton
+                        url={`https://www.getraining.org/Eventos/${Eventos.id}`}
+                      >
+                        <TwitterIcon size={32} round />
+                      </TwitterShareButton>
+                      <WhatsappShareButton
+                        url={`https://www.getraining.org/Eventos/${Eventos.id}`}
+                      >
+                        <WhatsappIcon size={32} round />
+                      </WhatsappShareButton>
+                      <LinkedinShareButton
+                        url={`https://www.getraining.org/Eventos/${Eventos.id}`}
+                      >
+                        <LinkedinIcon size={32} round />
+                      </LinkedinShareButton>
                     </div>
                   </div>
                 </div>
