@@ -22,6 +22,16 @@ import {
 import { db, storage } from "@/firebase/firebaseClient";
 import Image from "next/image";
 import { deleteObject, listAll, ref } from "firebase/storage";
+import {
+  FacebookShareButton,
+  TwitterShareButton,
+  WhatsappShareButton,
+  LinkedinShareButton,
+  FacebookIcon,
+  TwitterIcon,
+  WhatsappIcon,
+  LinkedinIcon,
+} from "react-share";
 
 const Blog = () => {
   const [OpenModal, setOpenModal] = useState({
@@ -181,6 +191,28 @@ const Blog = () => {
                       >
                         <TrashIcon className="w-4 h-4" />
                       </button>
+                    </div>
+                    <div className="flex justify-center space-x-2 py-4">
+                      <FacebookShareButton
+                        url={`https://www.getraining.org/Blog/${blog.id}`}
+                      >
+                        <FacebookIcon size={32} round />
+                      </FacebookShareButton>
+                      <TwitterShareButton
+                        url={`https://www.getraining.org/Blog/${blog.id}`}
+                      >
+                        <TwitterIcon size={32} round />
+                      </TwitterShareButton>
+                      <WhatsappShareButton
+                        url={`https://www.getraining.org/Blog/${blog.id}`}
+                      >
+                        <WhatsappIcon size={32} round />
+                      </WhatsappShareButton>
+                      <LinkedinShareButton
+                        url={`https://www.getraining.org/Blog/${blog.id}`}
+                      >
+                        <LinkedinIcon size={32} round />
+                      </LinkedinShareButton>
                     </div>
                   </div>
                 </div>
