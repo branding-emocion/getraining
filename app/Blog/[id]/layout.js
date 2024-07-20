@@ -27,6 +27,14 @@ const LayoutBlog = async ({ children, params: { id } }) => {
         alt: blog.TituloBlog, // Descripción alternativa para la imagen
       },
     ],
+    locale: "es_PE",
+    type: "article",
+  };
+  metadata.twitter = {
+    title: blog.TituloBlog,
+    description: getBriefDescription(blog?.ContenidoBLog),
+    creator: "@getraining",
+    images: blog?.Imagenes,
   };
   return <div>{children}</div>;
 };
