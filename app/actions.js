@@ -5,8 +5,8 @@ export async function SendMail(formData) {
   try {
     const { Nombre, Correo, CelularCountry, Celular, Mensaje } =
       Object.fromEntries(formData);
-
-    const transporter = nodemailer.createTransport({
+    
+  const transporter = nodemailer.createTransport({
       host: "smtp.zoho.com",
       port: 465,
       secure: true,
@@ -17,7 +17,7 @@ export async function SendMail(formData) {
     });
 
     const mensaje = {
-      from: "notificacion@brandingemocion.com",
+    from: '"Contacto" <notificacion@brandingemocion.com>',
       to: "get@getraining.org",
       subject: `🎉🥳 ¡Solicitud de contacto: ${Nombre || ""}! 🥳🎉`,
       html: `
