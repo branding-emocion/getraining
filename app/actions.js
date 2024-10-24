@@ -7,17 +7,16 @@ export async function SendMail(formData) {
       Object.fromEntries(formData);
     
   const transporter = nodemailer.createTransport({
-      host: "smtp.zoho.com",
-      port: 465,
-      secure: true,
-      auth: {
-        user: "notificacion@brandingemocion.com",
-        pass: "n7t!gqyQ",
-      },
-    });
-
+    host: "mail.brandingemocion.net",
+    port: 465,
+    secure: true,
+    auth: {
+      user: "notificacion@brandingemocion.net",
+      pass: "noti@2024",
+    },
+  });
     const mensaje = {
-    from: '"Contacto" <notificacion@brandingemocion.com>',
+    from: '"Contacto" <notificacion@brandingemocion.net>',
       to: "get@getraining.org",
       subject: `🎉🥳 ¡Solicitud de contacto: ${Nombre || ""}! 🥳🎉`,
       html: `
