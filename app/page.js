@@ -21,7 +21,7 @@ const HomePage = () => {
       link: "https://congresohispanoamericanodenegocios.com",
     },
     {
-      img: "/Aliado.webp",
+      img: "/Aliado3.jpg",
       nombre: "Red Latinoamericana de conferencistas",
       link: "https://redconferencistas.com/",
     },
@@ -220,9 +220,9 @@ const HomePage = () => {
                     className="w-full max-w-72 shadow-lg"
                   >
                     <div className=" hover:-translate-y-2 shadow-md border  rounded-lg   bg-[#004f51] border-[#004f51]">
-                      <figure className="relative w-full h-[18rem] ">
+                      <figure className="relative w-full h-[18rem]   ">
                         <Image
-                          className="rounded-t-lg object-fill"
+                          className="rounded-t-lg object-fill  p-0.5"
                           src={alianza.img}
                           fill
                           alt={key}
