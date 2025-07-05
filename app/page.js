@@ -128,7 +128,7 @@ const HomePage = () => {
                     <div className=" rounded-md w-full h-full max-h-[346px] ">
                       <Image
                         className="rounded-md"
-                        src={"/slider/img.webp"}
+                        src={"/slider/s1.jpg"}
                         alt="banner1"
                         width={601}
                         height={436}
@@ -140,7 +140,7 @@ const HomePage = () => {
                     <div className=" rounded-md w-full h-full  max-h-[346px]">
                       <Image
                         className="rounded-md"
-                        src={"/slider/img2.webp"}
+                        src={"/slider/s2.jpg"}
                         alt="banner1"
                         width={450}
                         height={450}
@@ -153,7 +153,7 @@ const HomePage = () => {
                     <div className=" rounded-md w-full h-full max-h-[346px]">
                       <Image
                         className="rounded-md"
-                        src={"/slider/img5.webp"}
+                        src={"/slider/s3.jpg"}
                         alt="banner1"
                         width={450}
                         height={450}
