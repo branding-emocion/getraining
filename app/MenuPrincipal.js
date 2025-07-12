@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import ItemMenu from "./ItemMenu";
 import { usePathname } from "next/navigation";
-import { FaWhatsapp } from "react-icons/fa";
+import { FaPaypal, FaWhatsapp } from "react-icons/fa";
 
 const MenuPrincipal = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -34,7 +34,7 @@ const MenuPrincipal = () => {
   }, []);
   return (
     <>
-      <div className="fixed bottom-4 right-4 z-[100]">
+      <div className="fixed bottom-5 right-5 z-[100] space-y-5">
         <a
           href="https://api.whatsapp.com/send?phone=51932067330&text=Hola%2C%20quiero%20m%C3%A1s%20informaci%C3%B3n%20sobre%20"
           target="_blank"
@@ -44,6 +44,18 @@ const MenuPrincipal = () => {
         >
           <FaWhatsapp className="w-10 h-10" />{" "}
         </a>
+
+        {/* add button de paypal  href="https://www.paypal.com/sdk/js?client-id=BAACucgOAtxMe_cBKAHW2hWAwImUs5WNz-mjh438RLgrvOcRFqn4sWoYosWTzzDtnR3y_BWvdlsjFa5tWI&components=hosted-buttons&enable-funding=venmo&currency=USD">   */}
+
+        {/* <a
+          href="/"
+          target="_blank"
+          title="paypal"
+          rel="noopener noreferrer"
+          className="flex items-center justify-center w-16 h-16 rounded-full bg-[#002991] hover:bg-[#60cdff] text-white focus:outline-none"
+        >
+          <FaPaypal className="w-10 h-10" />{" "}
+        </a> */}
       </div>
       <nav
         style={{ filter: "drop-shadow(0px 0px 3px black)" }}
