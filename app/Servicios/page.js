@@ -1,324 +1,337 @@
 "use client";
 
-import { Card, CardContent } from "@/components/ui/card";
 import Image from "next/image";
-import { motion } from "framer-motion";
-import {
-  Briefcase,
-  Users,
-  BarChart,
-  Lightbulb,
-  Star,
-  Rocket,
-} from "lucide-react"; // Importar iconos
+import { motion, AnimatePresence } from "framer-motion";
+import { ChevronDown, Briefcase, Rocket, Building2, CreditCard } from "lucide-react";
+import { useState } from "react";
+import { useLanguage } from "../LanguageContext";
 
 const Servicios = () => {
-  const ListServices = [
+  const [expandedSection, setExpandedSection] = useState(null);
+  const { language } = useLanguage();
+
+  const toggleSection = (id) => {
+    setExpandedSection(expandedSection === id ? null : id);
+  };
+
+  const serviciosData = [
     {
-      name: "Outplacement",
-      description:
-        "Asesoramiento profesional y personal: Incluye coaching, mentoring y herramientas de evaluación de habilidades, intereses y objetivos de carrera. Así como el apoyo emocional.",
+      id: 1,
+      title: language === "es" ? "Para Profesionales" : "For Professionals",
+      subtitle:
+        language === "es"
+          ? "Potencia tu empleabilidad y desarrollo personal"
+          : "Enhance your employability and personal development",
       icon: Briefcase,
+      color: "from-[#004f51] to-[#007a7c]",
+      description:
+        language === "es"
+          ? "Acompañamos a quienes desean fortalecer su perfil profesional para ser más competitivos en el mercado laboral. Potenciamos habilidades blandas y ayudamos a construir carreras con propósito."
+          : "We support those who want to strengthen their professional profile to be more competitive in the job market. We enhance soft skills and help build purposeful careers.",
+      items:
+        language === "es"
+          ? [
+              "Liderazgo y gestión de equipos",
+              "Comunicación efectiva e influencia",
+              "Inteligencia emocional y resiliencia",
+              "Marca personal y empleabilidad estratégica",
+            ]
+          : [
+              "Leadership and team management",
+              "Effective communication and influence",
+              "Emotional intelligence and resilience",
+              "Personal branding and strategic employability",
+            ],
+      detailedContent: null,
     },
     {
-      name: "Programas De Mentoring Organizacional Y Profesional",
-      description:
-        "Orientación y apoyo para el desarrollo de habilidades y competencias.",
-      icon: Users,
-    },
-    {
-      name: "Diagnóstico De Desempeño Y Desarrollo De Competencias Directivas",
-      description:
-        "Evaluación integral para identificar áreas de mejora y fortalecer las capacidades de liderazgo.",
-      icon: BarChart,
-    },
-    {
-      name: "Talleres En Habilidades Blandas Y De Gestión",
-      description:
-        "Capacitación en técnicas avanzadas de gestión y liderazgo. Desarrollo de habilidades interpersonales y emocionales esenciales para el éxito profesional.",
-      icon: Lightbulb,
-    },
-    {
-      name: "Marca Personal",
-      description:
-        "Estrategias para construir y fortalecer la imagen profesional.",
-      icon: Star,
-    },
-    {
-      name: "Emprendimiento",
-      description:
-        "Asesoría y formación para el desarrollo de proyectos empresariales.",
+      id: 2,
+      title: language === "es" ? "Para Emprendedores" : "For Entrepreneurs",
+      subtitle: language === "es" ? "Mentorías segmentadas por niveles" : "Mentorships segmented by levels",
       icon: Rocket,
+      color: "from-[#007a7c] to-[#00a5a8]",
+      description:
+        language === "es"
+          ? "Creemos que emprender es una forma de liderar el cambio. Transformamos ideas en negocios sostenibles y escalables. Programa de mentorías que responde a las distintas necesidades del ecosistema emprendedor:"
+          : "We believe that entrepreneurship is a way to lead change. We transform ideas into sustainable and scalable businesses. Mentorship program that responds to the different needs of the entrepreneurial ecosystem:",
+      items:
+        language === "es"
+          ? [
+              "Mentoría Junior: para quienes desean emprender pero aún no tienen una idea definida",
+              "Mentoría Semilla: para validar ideas de negocio en etapas tempranas",
+              "Mentoría Pro: para emprendedores en marcha que buscan crecer y mejorar sus resultados",
+              "Mentoría Expansión: para escalar y profesionalizar proyectos ya consolidados",
+            ]
+          : [
+              "Junior Mentorship: for those who want to start a business but don't have a defined idea yet",
+              "Seed Mentorship: to validate business ideas in early stages",
+              "Pro Mentorship: for entrepreneurs in progress looking to grow and improve their results",
+              "Expansion Mentorship: to scale and professionalize already established projects",
+            ],
+      detailedContent: null,
+    },
+    {
+      id: 3,
+      title: language === "es" ? "Para Empresas" : "For Companies",
+      subtitle:
+        language === "es"
+          ? "Invierte en tu talento y en tus clientes"
+          : "Invest in your talent and your customers",
+      icon: Building2,
+      color: "from-[#00a5a8] to-[#004f51]",
+      description:
+        language === "es"
+          ? "Programas de entrenamiento corporativo y consultoría especializada para desarrollar el potencial de equipos y mejorar la experiencia de clientes. Desarrollamos talento humano, mejoramos gestión y fortalecemos la relación con clientes."
+          : "Corporate training programs and specialized consulting to develop team potential and improve customer experience. We develop human talent, improve management and strengthen customer relationships.",
+      items:
+        language === "es"
+          ? [
+              "Desarrollo del Talento Humano",
+              "Consultoría en Marketing y Clientes",
+              "Clima organizacional y bienestar laboral",
+              "Posicionamiento de marca y fidelización",
+            ]
+          : [
+              "Human Talent Development",
+              "Marketing and Customer Consulting",
+              "Organizational climate and work wellbeing",
+              "Brand positioning and customer loyalty",
+            ],
+      detailedContent: null,
     },
   ];
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 50 },
-    visible: { opacity: 1, y: 0 },
-  };
-
   return (
     <div className="">
-      {/* Sección del banner principal */}
-      <section className="bg-center bg-no-repeat bg-[url('/Banners/Servicios.webp')] bg-cover  bg-[#004f51]/80 bg-blend-multiply">
-        <div className=" mx-auto max-w-screen-xl text-center py-24 lg:py-[10.5rem]">
-          <div className="rounded-xl bg-[#004f51]/50  px-1 py-8   max-w-sm mx-auto">
-            <h1 className="mb-4 text-4xl font-extrabold tracking-tight leading-none text-white md:text-5xl lg:text-6xl ">
-              Servicios
+      {/* Banner principal */}
+      <section className="bg-center bg-no-repeat bg-[url('/Banners/Servicios.webp')] bg-cover bg-[#004f51]/80 bg-blend-multiply">
+        <div className="mx-auto max-w-screen-xl text-center py-24 lg:py-[10.5rem]">
+          <div className="rounded-xl bg-[#004f51]/50 px-1 py-8 max-w-sm mx-auto">
+            <h1 className="mb-4 text-4xl font-extrabold tracking-tight leading-none text-white md:text-5xl lg:text-6xl">
+              {language === "es" ? "Servicios" : "Services"}
             </h1>
           </div>
         </div>
       </section>
+
       <div className="container -mt-[5rem] pb-8">
-        {/* Sección de introducción GETRAINING */}
+        {/* Introducción GET */}
         <section className="bg-white rounded-xl border-2 border-[#004f51] shadow-md p-6 my-6">
-          <div className="flex flex-col justify-center items-center text-base font-normal leading-7 w-full px-2 lg:px-4 text-grey-900 text-justify space-y-4">
+          <div className="flex flex-col justify-center items-center text-base font-normal leading-7 w-full px-2 lg:px-4 text-gray-900 text-justify space-y-4">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-8 gap-y-5 pb-2">
               <div className="flex flex-col justify-center items-center gap-4 text-justify">
-                <h1 className="text-xl font-semibold leading-tight lg:text-2xl text-grey-900 uppercase">
-                  GETRAINING{" "}
+                <h1 className="text-xl font-semibold leading-tight lg:text-2xl text-gray-900 uppercase">
+                  GETRAINING
                 </h1>
+
                 <p>
-                  En GET, ofrecemos una amplia gama de servicios de consultoría,
-                  asesoría, mentoring y capacitación enfocados en el desarrollo
-                  organizacional y profesional. Nuestros programas están
-                  diseñados para satisfacer las necesidades específicas de cada
-                  organización, brindando soluciones a medida que generan
-                  resultados tangibles.
+                  {language === "es"
+                    ? "En Global Executive Training (GET) impulsamos el crecimiento de profesionales, emprendedores y empresas a través de consultoría, capacitación, mentorías y programas de desarrollo enfocados en resultados reales."
+                    : "At Global Executive Training (GET) we drive the growth of professionals, entrepreneurs and companies through consulting, training, mentorships and development programs focused on real results."}
                 </p>
+
                 <p>
-                  Nuestro compromiso es ofrecer programas, capacitaciones y
-                  entrenamientos diseñados específicamente para las necesidades
-                  de cada cliente, ajustando los presupuestos a la medida de
-                  cada organización.
+                  {language === "es"
+                    ? "Diseñamos soluciones estratégicas que fortalecen la empleabilidad, el liderazgo, la marca personal y el espíritu emprendedor, alineando el talento con los desafíos del entorno actual."
+                    : "We design strategic solutions that strengthen employability, leadership, personal branding and entrepreneurial spirit, aligning talent with current challenges."}
                 </p>
-                <p></p>
+
+                <div className="w-full space-y-3 bg-[#004f51] text-white p-4 rounded-lg">
+                  <h3 className="font-bold text-lg">
+                    {language === "es" ? "Acompañamos a:" : "We support:"}
+                  </h3>
+                  <ul className="space-y-2">
+                    <li className="flex items-start gap-2">
+                      <span className="text-[#00a6b6] font-bold">•</span>
+                      <span>
+                        <strong>{language === "es" ? "Profesionales:" : "Professionals:"}</strong>{" "}
+                        {language === "es"
+                          ? "a potenciar sus habilidades blandas y construir carreras con propósito."
+                          : "to enhance their soft skills and build purposeful careers."}
+                      </span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-[#00a6b6] font-bold">•</span>
+                      <span>
+                        <strong>{language === "es" ? "Emprendedores:" : "Entrepreneurs:"}</strong>{" "}
+                        {language === "es"
+                          ? "a transformar ideas en negocios sostenibles y escalables."
+                          : "to transform ideas into sustainable and scalable businesses."}
+                      </span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-[#00a6b6] font-bold">•</span>
+                      <span>
+                        <strong>{language === "es" ? "Empresas:" : "Companies:"}</strong>{" "}
+                        {language === "es"
+                          ? "a desarrollar su talento humano, mejorar su gestión y fortalecer su relación con clientes."
+                          : "to develop their human talent, improve their management and strengthen their customer relationships."}
+                      </span>
+                    </li>
+                  </ul>
+                </div>
+
+                <p className="font-semibold text-[#004f51] text-center">
+                  {language === "es"
+                    ? "En GET no solo formamos: diagnosticamos, acompañamos y transformamos personas, proyectos y organizaciones para que generen impacto y crecimiento sostenible."
+                    : "At GET we don't just train: we diagnose, support and transform people, projects and organizations to generate impact and sustainable growth."}
+                </p>
               </div>
+
               <div className="w-full h-full">
-                <figure className="relative w-full h-[200px] md:h-[300px] lg:h-[400px] ">
+                <figure className="relative w-full h-[200px] md:h-[300px] lg:h-[500px]">
                   <Image
                     src={"/slider/img4.webp"}
-                    alt="Foto"
+                    alt="GET Training"
                     fill
-                    style={{
-                      objectFit: "cover",
-                    }}
-                    className="rounded-md"
+                    className="rounded-md object-cover"
                   />
                 </figure>
               </div>
             </div>
           </div>
         </section>
-        {/* Sección destacada: Marketing & Customer Consulting */}
-        <section className="w-full py-8 bg-gradient-to-br from-[#004f51] to-[#007a7c] text-white rounded-lg shadow-xl overflow-hidden my-8">
-          <div className="relative w-full h-[300px] md:h-[400px] lg:h-[500px] flex items-center justify-center">
-            <Image
-              src="/images/mentoring-program.png"
-              alt="Programa de Mentoría"
-              fill
-              style={{ objectFit: "cover" }}
-              className="absolute inset-0 z-0 opacity-50"
-            />
-            <div className="relative z-10 text-center space-y-4 p-4">
-              <h2 className="text-4xl font-extrabold tracking-tight leading-none md:text-5xl lg:text-6xl uppercase">
-                PROGRAMA DE MENTORÍA
-              </h2>
-              <div className="bg-white text-[#004f51] rounded-full px-6 py-3 inline-block text-lg font-semibold shadow-lg">
-                Inscríbete y vuelve a tomar el control de tu negocio.
-              </div>
-            </div>
-          </div>
-          <div className="relative z-10 p-6 md:p-10 lg:p-12 -mt-16 md:-mt-24 lg:-mt-32">
-            <Card className="bg-white text-gray-900 rounded-xl shadow-2xl p-6 md:p-8 lg:p-10">
-              <CardContent className="space-y-6">
-                <motion.h3
-                  className="text-3xl font-bold text-[#004f51] text-center"
-                  initial="hidden"
-                  animate="visible"
-                  variants={itemVariants}
-                  transition={{ duration: 0.5, delay: 0.1 }}
+
+        {/* Secciones Expandibles */}
+        <section className="space-y-6 my-8">
+          <h2 className="text-3xl font-bold text-center text-[#004f51] mb-8">
+            {language === "es" ? "Nuestros Servicios" : "Our Services"}
+          </h2>
+
+          {serviciosData.map((servicio) => {
+            const IconComponent = servicio.icon;
+            const isExpanded = expandedSection === servicio.id;
+
+            return (
+              <motion.div
+                key={servicio.id}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.3 }}
+                className="bg-white rounded-xl border-2 border-[#004f51] shadow-lg overflow-hidden"
+              >
+                <button
+                  type="button"
+                  onClick={() => toggleSection(servicio.id)}
+                  className={`w-full p-6 flex items-center justify-between bg-gradient-to-r ${servicio.color} text-white hover:opacity-90 transition-opacity`}
                 >
-                  Marketing & Customer Consulting
-                </motion.h3>
-                <motion.div
-                  className="text-center space-y-4"
-                  initial="hidden"
-                  animate="visible"
-                  variants={itemVariants}
-                  transition={{ duration: 0.5, delay: 0.2 }}
-                >
-                  <h4 className="text-xl font-semibold text-[#004f51]">
-                    ¿Sabes qué le duele a tu negocio?
-                  </h4>
-                  <p className="text-lg">
-                    Muchos negocios enfrentan síntomas como la caída en ventas,
-                    pérdida de clientes, campañas que no generan resultados o un
-                    crecimiento que se estanca, pero pocos saben cuál es la
-                    causa real del problema.
-                  </p>
-                  <p className="text-lg">
-                    En GET, te ayudamos a diagnosticar con precisión lo que está
-                    afectando a tu negocio para que puedas tomar decisiones
-                    basadas en datos y no en suposiciones.
-                  </p>
-                </motion.div>
-              </CardContent>
-            </Card>
-          </div>
-          <div className="p-6 md:p-10 lg:p-12 space-y-8">
-            <motion.div
-              className="space-y-6"
-              initial="hidden"
-              animate="visible"
-              variants={itemVariants}
-              transition={{ duration: 0.5, delay: 0.4 }}
-            >
-              <h3 className="text-2xl font-bold">
-                Diagnóstico e Investigación de Mercados
-              </h3>
-              <p className="text-lg">
-                Tu punto de partida para tomar decisiones estratégicas.
-              </p>
-              <p className="text-lg">
-                Antes de lanzar una campaña, rediseñar tu propuesta de valor o
-                invertir en nuevos canales, necesitas comprender a fondo qué
-                está pasando con tu mercado, tus clientes y tu marca.
-              </p>
-              <p className="text-lg">
-                En GET, desarrollamos diagnósticos comerciales personalizados
-                que incluyen:
-              </p>
-              <ul className="list-disc space-y-2 pl-8 text-lg">
-                <li>Análisis de la experiencia y satisfacción del cliente</li>
-                <li>Evaluación del posicionamiento y percepción de marca</li>
-                <li>
-                  Investigación de hábitos, necesidades y motivaciones del
-                  consumidor
-                </li>
-                <li>Revisión de estrategias de comunicación y fidelización</li>
-                <li>Mapeo de la competencia y tendencias de mercado</li>
-              </ul>
-            </motion.div>
-            <motion.div
-              className="space-y-6"
-              initial="hidden"
-              animate="visible"
-              variants={itemVariants}
-              transition={{ duration: 0.5, delay: 0.5 }}
-            >
-              <h3 className="text-2xl font-bold">
-                ¿Qué podemos resolver contigo?
-              </h3>
-              <ul className="list-disc space-y-2 pl-8 text-lg">
-                <li>¿Tus clientes ya no te eligen como antes?</li>
-                <li>¿No sabes cómo diferenciarte en tu mercado?</li>
-                <li>¿Inviertes en marketing, pero no ves resultados claros?</li>
-                <li>¿Tus canales digitales no conectan con tu público?</li>
-                <li>
-                  ¿Quieres lanzar un nuevo producto, pero no estás seguro de
-                  cómo será recibido?
-                </li>
-              </ul>
-              <p className="text-lg">
-                No estás solo. A través de nuestra consultoría en marketing y
-                clientes, te acompañamos paso a paso para transformar estos
-                retos en oportunidades.
-              </p>
-            </motion.div>
-            <motion.div
-              className="space-y-6"
-              initial="hidden"
-              animate="visible"
-              variants={itemVariants}
-              transition={{ duration: 0.5, delay: 0.6 }}
-            >
-              <h3 className="text-2xl font-bold">
-                ¿Qué obtienes con nuestro servicio?
-              </h3>
-              <ul className="list-disc space-y-2 pl-8 text-lg">
-                <li>Un diagnóstico claro de la situación real de tu negocio</li>
-                <li>Recomendaciones estratégicas y accionables</li>
-                <li>Soporte en la toma de decisiones comerciales</li>
-                <li>Herramientas para medir el impacto de tus acciones</li>
-                <li>
-                  Acompañamiento profesional con visión global y enfoque local
-                </li>
-              </ul>
-            </motion.div>
-            <motion.div
-              className="space-y-4 text-center"
-              initial="hidden"
-              animate="visible"
-              variants={itemVariants}
-              transition={{ duration: 0.5, delay: 0.7 }}
-            >
-              <h3 className="text-2xl font-bold">Trabajemos juntos</h3>
-              <p className="text-lg">
-                En GET, creemos que el conocimiento profundo de tu cliente es la
-                base de toda estrategia exitosa.
-              </p>
-              <p className="text-lg">
-                Te invitamos a dar el primer paso con un diagnóstico completo de
-                tu situación comercial. Contáctanos hoy y empieza a descubrir lo
-                que tu negocio necesita para crecer. Conecta con tus clientes.
-                Fortalece tu marca.
-              </p>
-            </motion.div>
-          </div>
-        </section>
-        {/* Sección de la lista de servicios (las 6 tarjetas) - REDISEÑADA */}
-        <section className="bg-white rounded-xl border-2 border-[#004f51] shadow-md p-6 my-6">
-          <div className="flex flex-col justify-center items-center text-base font-normal leading-7 w-full px-2 lg:px-4 text-grey-900 text-justify space-y-4">
-            <h2 className="text-3xl font-bold text-[#004f51] text-center mb-8">
-              Nuestros Servicios Adicionales
-            </h2>
-            <motion.div
-              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 w-full"
-              variants={containerVariants}
-              initial="hidden"
-              animate="visible"
-            >
-              {ListServices?.map((item, key) => {
-                const IconComponent = item.icon;
-                return (
+                  <div className="flex items-center gap-4">
+                    <div className="p-3 bg-white/20 rounded-full">
+                      <IconComponent size={32} />
+                    </div>
+                    <div className="text-left">
+                      <h3 className="text-2xl font-bold">{servicio.title}</h3>
+                      <p className="text-sm opacity-90">{servicio.subtitle}</p>
+                    </div>
+                  </div>
+
                   <motion.div
-                    key={key}
-                    variants={itemVariants}
-                    whileHover={{
-                      scale: 1.03,
-                      boxShadow: "0 10px 15px rgba(0, 0, 0, 0.1)",
-                    }}
-                    transition={{ type: "spring", stiffness: 300 }}
+                    animate={{ rotate: isExpanded ? 180 : 0 }}
+                    transition={{ duration: 0.3 }}
                   >
-                    <Card className="h-full flex flex-col p-6 space-y-4 border-2 border-[#004f51] rounded-xl shadow-lg bg-white text-gray-900">
-                      <CardContent className="flex flex-col items-center text-center p-0">
-                        <div className="mb-4 p-3 rounded-full bg-[#004f51] text-white">
-                          <IconComponent size={48} />
-                        </div>
-                        <h1 className="text-2xl font-semibold capitalize mb-2">
-                          {item.name}
-                        </h1>
-                        <p className="text-justify text-base">
-                          {item.description}
-                        </p>
-                      </CardContent>
-                    </Card>
+                    <ChevronDown size={32} />
                   </motion.div>
-                );
-              })}
-            </motion.div>
-          </div>
+                </button>
+
+                <AnimatePresence>
+                  {isExpanded && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.3 }}
+                      className="overflow-hidden"
+                    >
+                      <div className="p-6 space-y-6">
+                        <p className="text-gray-700 text-lg text-justify">
+                          {servicio.description}
+                        </p>
+
+                        <div className="space-y-3">
+                          {servicio.items.map((item, index) => (
+                            <div
+                              key={index}
+                              className="flex items-start gap-3 p-3 bg-gray-50 rounded-lg"
+                            >
+                              <div className="mt-1 w-2 h-2 rounded-full bg-[#004f51] flex-shrink-0" />
+                              <p className="text-gray-700">{item}</p>
+                            </div>
+                          ))}
+                        </div>
+
+                        {/* Sección de PayPal */}
+                        <div className="mt-6 p-6 bg-gradient-to-r from-blue-50 to-blue-100 rounded-lg border-2 border-blue-200">
+                          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+                            <div className="flex items-center gap-4">
+                              <div className="p-3 bg-white rounded-full shadow-md">
+                                <CreditCard className="text-[#0070ba]" size={32} />
+                              </div>
+                              <div>
+                                <h4 className="text-xl font-bold text-gray-800 mb-1">
+                                  💳 {language === "es" ? "Métodos de Pago" : "Payment Methods"}
+                                </h4>
+                                <p className="text-gray-600">
+                                  {language === "es"
+                                    ? "Aceptamos pagos seguros con PayPal"
+                                    : "We accept secure payments with PayPal"}
+                                </p>
+                              </div>
+                            </div>
+
+                            <div className="flex flex-col items-center gap-3">
+                              <Image
+                                src="https://www.paypalobjects.com/webstatic/mktg/logo/pp_cc_mark_111x69.jpg"
+                                alt="PayPal Logo"
+                                width={111}
+                                height={69}
+                                className="object-contain"
+                              />
+
+                              <a
+                                href="https://www.paypal.me/tuenlace"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="bg-[#0070ba] hover:bg-[#005ea6] text-white px-6 py-2 rounded-full font-semibold transition-colors shadow-md"
+                              >
+                                {language === "es" ? "Pagar con PayPal" : "Pay with PayPal"}
+                              </a>
+                            </div>
+                          </div>
+                        </div>
+
+                        {servicio.detailedContent && (
+                          <div className="mt-6 p-6 bg-gray-50 rounded-lg">
+                            {servicio.detailedContent}
+                          </div>
+                        )}
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </motion.div>
+            );
+          })}
+        </section>
+
+        {/* Call to Action */}
+        <section className="bg-gradient-to-r from-[#004f51] to-[#007a7c] text-white rounded-xl shadow-xl p-8 my-8 text-center">
+          <h2 className="text-3xl font-bold mb-4">
+            {language === "es"
+              ? "¿Listo para transformar tu carrera o negocio?"
+              : "Ready to transform your career or business?"}
+          </h2>
+          <p className="text-lg mb-6">
+            {language === "es"
+              ? "Contáctanos y descubre cómo podemos ayudarte a alcanzar tus objetivos"
+              : "Contact us and discover how we can help you achieve your goals"}
+          </p>
+
+          <a
+            href="/Contacto"
+            className="inline-block bg-white text-[#004f51] px-8 py-3 rounded-full font-semibold hover:bg-gray-100 transition-colors"
+          >
+            {language === "es" ? "Contáctanos" : "Contact Us"}
+          </a>
         </section>
       </div>
     </div>

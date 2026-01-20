@@ -4,6 +4,7 @@ import MenuPrincipal from "./MenuPrincipal";
 import Footer from "./Footer";
 import { Toaster } from "@/components/ui/toaster";
 import Main from "./Main";
+import { LanguageProvider } from "./LanguageContext";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -17,8 +18,11 @@ export default function RootLayout({ children }) {
   return (
     <html lang="es">
       <body className={inter.className}>
-        <Main>{children}</Main>
-
+        <LanguageProvider>
+        <Main> 
+          {children}
+          </Main>
+        </LanguageProvider>
         <Toaster />
       </body>
     </html>

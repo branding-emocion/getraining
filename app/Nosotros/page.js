@@ -1,114 +1,168 @@
 "use client";
 import { CardContent } from "@/components/ui/card";
 import Image from "next/image";
-import { motion } from "framer-motion"; // Importa motion para animaciones
+import { motion } from "framer-motion";
+import { useLanguage } from "../LanguageContext";
 
 const Nosotros = () => {
+  const { language } = useLanguage();
+
   const Data = [
     {
       id: 1,
-      title: "MISIÓN",
+      title: language === "es" ? "MISIÓN" : "MISSION",
       icon: "/Nosotros/Mision.png",
       description:
-        "Impulsar el desarrollo de competencias personales y profesionales que empoderen a las personas para liderar su crecimiento, transformar sus organizaciones y generar un impacto positivo en la sociedad. En GET, trabajamos como aliados estratégicos de nuestros clientes, fomentando una cultura de mejora continua, innovación y compromiso con el bienestar colectivo.",
+        language === "es"
+          ? "Impulsar el desarrollo de competencias personales y profesionales que empoderen a las personas para liderar su crecimiento, transformar sus organizaciones y generar un impacto positivo en la sociedad. En GET, trabajamos como aliados estratégicos de nuestros clientes, fomentando una cultura de mejora continua, innovación y compromiso con el bienestar colectivo."
+          : "Drive the development of personal and professional competencies that empower people to lead their growth, transform their organizations and generate a positive impact on society. At GET, we work as strategic allies of our clients, fostering a culture of continuous improvement, innovation and commitment to collective wellbeing.",
     },
     {
       id: 2,
-      title: "VISIÓN",
+      title: language === "es" ? "VISIÓN" : "VISION",
       icon: "/Nosotros/Vision.png",
       description:
-        "Ser una organización líder a nivel global en la formación de profesionales y emprendedores capaces de transformar su entorno, promoviendo la innovación, el empoderamiento y la responsabilidad social como pilares para construir una sociedad más consciente, equitativa y sostenible. En GET soñamos con un mundo donde cada persona tenga las herramientas para liderar su carrera, su emprendimiento y su impacto en el mundo.",
+        language === "es"
+          ? "Ser una organización líder a nivel global en la formación de profesionales y emprendedores capaces de transformar su entorno, promoviendo la innovación, el empoderamiento y la responsabilidad social como pilares para construir una sociedad más consciente, equitativa y sostenible. En GET soñamos con un mundo donde cada persona tenga las herramientas para liderar su carrera, su emprendimiento y su impacto en el mundo."
+          : "Be a global leading organization in training professionals and entrepreneurs capable of transforming their environment, promoting innovation, empowerment and social responsibility as pillars to build a more conscious, equitable and sustainable society. At GET we dream of a world where everyone has the tools to lead their career, their entrepreneurship and their impact on the world.",
     },
   ];
 
   const Valores = [
     {
       id: 1,
-      title: "Desarrollo Humano Integral",
+      title: language === "es" ? "Desarrollo Humano Integral" : "Integral Human Development",
       description:
-        "Creemos en el crecimiento personal como base del crecimiento profesional. Promovemos el autoconocimiento, la inteligencia emocional y el liderazgo con sentido.",
+        language === "es"
+          ? "Creemos en el crecimiento personal como base del crecimiento profesional. Promovemos el autoconocimiento, la inteligencia emocional y el liderazgo con sentido."
+          : "We believe in personal growth as the basis of professional growth. We promote self-knowledge, emotional intelligence and meaningful leadership.",
     },
     {
       id: 2,
-      title: "Espíritu Emprendedor",
+      title: language === "es" ? "Espíritu Emprendedor" : "Entrepreneurial Spirit",
       description:
-        "Impulsamos la creatividad, la autonomía y la capacidad de generar valor desde cualquier lugar: una organización, una comunidad o un emprendimiento propio.",
+        language === "es"
+          ? "Impulsamos la creatividad, la autonomía y la capacidad de generar valor desde cualquier lugar: una organización, una comunidad o un emprendimiento propio."
+          : "We promote creativity, autonomy and the ability to generate value from anywhere: an organization, a community or your own entrepreneurship.",
     },
     {
       id: 3,
-      title: "Innovación con Propósito",
+      title: language === "es" ? "Innovación con Propósito" : "Innovation with Purpose",
       description:
-        "Fomentamos una actitud de aprendizaje constante y apertura al cambio, integrando nuevas ideas y tecnologías para resolver desafíos reales.",
+        language === "es"
+          ? "Fomentamos una actitud de aprendizaje constante y apertura al cambio, integrando nuevas ideas y tecnologías para resolver desafíos reales."
+          : "We foster an attitude of constant learning and openness to change, integrating new ideas and technologies to solve real challenges.",
     },
     {
       id: 4,
-      title: "Excelencia y Mejora Continua",
+      title: language === "es" ? "Excelencia y Mejora Continua" : "Excellence and Continuous Improvement",
       description:
-        "Nos comprometemos con altos estándares de calidad en todo lo que hacemos, impulsando procesos formativos que evolucionan junto a las necesidades del mundo actual.",
+        language === "es"
+          ? "Nos comprometemos con altos estándares de calidad en todo lo que hacemos, impulsando procesos formativos que evolucionan junto a las necesidades del mundo actual."
+          : "We are committed to high quality standards in everything we do, driving training processes that evolve alongside current world needs.",
     },
     {
       id: 5,
-      title: "Responsabilidad Social",
+      title: language === "es" ? "Responsabilidad Social" : "Social Responsibility",
       description:
-        "Formamos profesionales y emprendedores conscientes de su impacto, que actúan con ética y compromiso para construir una sociedad más consciente, equitativa y sostenible.",
+        language === "es"
+          ? "Formamos profesionales y emprendedores conscientes de su impacto, que actúan con ética y compromiso para construir una sociedad más consciente, equitativa y sostenible."
+          : "We train professionals and entrepreneurs aware of their impact, who act with ethics and commitment to build a more conscious, equitable and sustainable society.",
     },
     {
       id: 6,
-      title: "Colaboración y Red de Valor",
+      title: language === "es" ? "Colaboración y Red de Valor" : "Collaboration and Value Network",
       description:
-        "Valoramos el trabajo en equipo, la construcción de redes y el intercambio de experiencias como motores del crecimiento colectivo.",
+        language === "es"
+          ? "Valoramos el trabajo en equipo, la construcción de redes y el intercambio de experiencias como motores del crecimiento colectivo."
+          : "We value teamwork, network building and the exchange of experiences as engines of collective growth.",
     },
     {
       id: 7,
-      title: "Visión Global, Acción Local",
+      title: language === "es" ? "Visión Global, Acción Local" : "Global Vision, Local Action",
       description:
-        "Promovemos una mirada internacional y multicultural, con acciones concretas que generen transformación en contextos locales.",
+        language === "es"
+          ? "Promovemos una mirada internacional y multicultural, con acciones concretas que generen transformación en contextos locales."
+          : "We promote an international and multicultural perspective, with concrete actions that generate transformation in local contexts.",
     },
   ];
 
   const Servicios = [
     {
       id: 1,
-      title: "Para Profesionales",
-      subtitle: "Potencia tu empleabilidad y desarrollo personal",
+      title: language === "es" ? "Para Profesionales" : "For Professionals",
+      subtitle:
+        language === "es"
+          ? "Potencia tu empleabilidad y desarrollo personal"
+          : "Enhance your employability and personal development",
       description:
-        "Acompañamos a quienes desean fortalecer su perfil profesional para ser más competitivos en el mercado laboral.",
-      items: [
-        "Liderazgo y gestión de equipos",
-        "Comunicación efectiva e influencia",
-        "Inteligencia emocional y resiliencia",
-        "Marca personal y empleabilidad estratégica",
-      ],
+        language === "es"
+          ? "Acompañamos a quienes desean fortalecer su perfil profesional para ser más competitivos en el mercado laboral."
+          : "We support those who want to strengthen their professional profile to be more competitive in the job market.",
+      items:
+        language === "es"
+          ? [
+              "Liderazgo y gestión de equipos",
+              "Comunicación efectiva e influencia",
+              "Inteligencia emocional y resiliencia",
+              "Marca personal y empleabilidad estratégica",
+            ]
+          : [
+              "Leadership and team management",
+              "Effective communication and influence",
+              "Emotional intelligence and resilience",
+              "Personal branding and strategic employability",
+            ],
     },
     {
       id: 2,
-      title: "Para Emprendedores",
-      subtitle: "Mentorías segmentadas por niveles",
+      title: language === "es" ? "Para Emprendedores" : "For Entrepreneurs",
+      subtitle: language === "es" ? "Mentorías segmentadas por niveles" : "Mentorships segmented by levels",
       description:
-        "Creemos que emprender es una forma de liderar el cambio. Programa de mentorías que responde a las distintas necesidades del ecosistema emprendedor:",
-      items: [
-        "Mentoría Junior: para quienes desean emprender pero aún no tienen una idea definida",
-        "Mentoría Semilla: para validar ideas de negocio en etapas tempranas",
-        "Mentoría Pro: para emprendedores en marcha que buscan crecer y mejorar sus resultados",
-        "Mentoría Expansión: para escalar y profesionalizar proyectos ya consolidados",
-      ],
+        language === "es"
+          ? "Creemos que emprender es una forma de liderar el cambio. Programa de mentorías que responde a las distintas necesidades del ecosistema emprendedor:"
+          : "We believe that entrepreneurship is a way to lead change. Mentorship program that responds to the different needs of the entrepreneurial ecosystem:",
+      items:
+        language === "es"
+          ? [
+              "Mentoría Junior: para quienes desean emprender pero aún no tienen una idea definida",
+              "Mentoría Semilla: para validar ideas de negocio en etapas tempranas",
+              "Mentoría Pro: para emprendedores en marcha que buscan crecer y mejorar sus resultados",
+              "Mentoría Expansión: para escalar y profesionalizar proyectos ya consolidados",
+            ]
+          : [
+              "Junior Mentorship: for those who want to start a business but don't have a defined idea yet",
+              "Seed Mentorship: to validate business ideas in early stages",
+              "Pro Mentorship: for entrepreneurs in progress looking to grow and improve their results",
+              "Expansion Mentorship: to scale and professionalize already established projects",
+            ],
     },
     {
       id: 3,
-      title: "Para Empresas",
-      subtitle: "Invierte en tu talento y en tus clientes",
+      title: language === "es" ? "Para Empresas" : "For Companies",
+      subtitle:
+        language === "es" ? "Invierte en tu talento y en tus clientes" : "Invest in your talent and your customers",
       description:
-        "Programas de entrenamiento corporativo y consultoría especializada para desarrollar el potencial de equipos y mejorar la experiencia de clientes.",
-      items: [
-        "Desarrollo del Talento Humano",
-        "Consultoría en Marketing y Clientes",
-        "Clima organizacional y bienestar laboral",
-        "Posicionamiento de marca y fidelización",
-      ],
+        language === "es"
+          ? "Programas de entrenamiento corporativo y consultoría especializada para desarrollar el potencial de equipos y mejorar la experiencia de clientes."
+          : "Corporate training programs and specialized consulting to develop team potential and improve customer experience.",
+      items:
+        language === "es"
+          ? [
+              "Desarrollo del Talento Humano",
+              "Consultoría en Marketing y Clientes",
+              "Clima organizacional y bienestar laboral",
+              "Posicionamiento de marca y fidelización",
+            ]
+          : [
+              "Human Talent Development",
+              "Marketing and Customer Consulting",
+              "Organizational climate and work wellbeing",
+              "Brand positioning and customer loyalty",
+            ],
     },
   ];
 
-  // Variantes de animación para las secciones principales
   const sectionVariants = {
     hidden: { opacity: 0, y: 50 },
     visible: {
@@ -118,7 +172,6 @@ const Nosotros = () => {
     },
   };
 
-  // Variantes de animación para las tarjetas individuales (Misión/Visión, Valores, Servicios)
   const cardVariants = {
     hidden: { opacity: 0, y: 20 },
     visible: {
@@ -134,7 +187,7 @@ const Nosotros = () => {
         <div className="mx-auto max-w-screen-xl text-center py-24 lg:py-[10.5rem]">
           <div className="rounded-xl bg-[#004f51]/50 px-1 py-8 max-w-sm mx-auto">
             <h1 className="mb-4 text-4xl font-extrabold tracking-tight leading-none text-white md:text-5xl lg:text-6xl">
-              Nosotros
+              {language === "es" ? "Nosotros" : "About Us"}
             </h1>
           </div>
         </div>
@@ -153,36 +206,29 @@ const Nosotros = () => {
               <section className="grid grid-cols-1 lg:grid-cols-2 gap-x-8">
                 <div className="space-y-4 max-h-[500px] overflow-auto scrollbar-hide">
                   <h1 className="text-xl font-extrabold leading-tight lg:text-2xl text-grey-900 uppercase">
-                    Bienvenido a GET — Donde la Empleabilidad y el
-                    Emprendimiento se Transforman en Oportunidad
+                    {language === "es"
+                      ? "Bienvenido a GET — Donde la Empleabilidad y el Emprendimiento se Transforman en Oportunidad"
+                      : "Welcome to GET — Where Employability and Entrepreneurship Transform into Opportunity"}
                   </h1>
                   <p>
-                    En un mundo en constante cambio, los profesionales y
-                    emprendedores necesitan más que conocimientos: necesitan
-                    visión, agilidad y propósito. En Global Executive Training
-                    (GET), creemos en el poder de las personas para
-                    reinventarse, crecer y liderar el cambio, ya sea desde una
-                    organización o creando la propia.
+                    {language === "es"
+                      ? "En un mundo en constante cambio, los profesionales y emprendedores necesitan más que conocimientos: necesitan visión, agilidad y propósito. En Global Executive Training (GET), creemos en el poder de las personas para reinventarse, crecer y liderar el cambio, ya sea desde una organización o creando la propia."
+                      : "In a constantly changing world, professionals and entrepreneurs need more than knowledge: they need vision, agility and purpose. At Global Executive Training (GET), we believe in people's power to reinvent themselves, grow and lead change, either from within an organization or by creating their own."}
                   </p>
                   <p>
-                    Ofrecemos programas de capacitación diseñados para potenciar
-                    tu perfil profesional, fortalecer tus habilidades de
-                    liderazgo y acompañarte en el desarrollo de tu proyecto
-                    personal o empresarial. No importa en qué etapa estés
-                    —inicio de carrera, transición profesional o expansión de tu
-                    emprendimiento— nuestros programas están pensados para ti.
+                    {language === "es"
+                      ? "Ofrecemos programas de capacitación diseñados para potenciar tu perfil profesional, fortalecer tus habilidades de liderazgo y acompañarte en el desarrollo de tu proyecto personal o empresarial. No importa en qué etapa estés —inicio de carrera, transición profesional o expansión de tu emprendimiento— nuestros programas están pensados para ti."
+                      : "We offer training programs designed to enhance your professional profile, strengthen your leadership skills and support you in developing your personal or business project. No matter what stage you're at —career start, professional transition or entrepreneurship expansion— our programs are designed for you."}
                   </p>
                   <p>
-                    Con más de una década de experiencia, GET se posiciona como
-                    un aliado estratégico en el desarrollo del talento. Nuestra
-                    red de alianzas internacionales y nuestro enfoque práctico y
-                    humano nos permiten ofrecer experiencias formativas con
-                    impacto real.
+                    {language === "es"
+                      ? "Con más de una década de experiencia, GET se posiciona como un aliado estratégico en el desarrollo del talento. Nuestra red de alianzas internacionales y nuestro enfoque práctico y humano nos permiten ofrecer experiencias formativas con impacto real."
+                      : "With more than a decade of experience, GET positions itself as a strategic ally in talent development. Our network of international alliances and our practical and human approach allow us to offer training experiences with real impact."}
                   </p>
                   <p className="font-semibold text-[#004f51]">
-                    Formarte con GET es más que capacitarte: es conectarte con
-                    tu propósito, con personas que inspiran y con oportunidades
-                    que transforman.
+                    {language === "es"
+                      ? "Formarte con GET es más que capacitarte: es conectarte con tu propósito, con personas que inspiran y con oportunidades que transforman."
+                      : "Training with GET is more than getting qualified: it's connecting with your purpose, with people who inspire and with opportunities that transform."}
                   </p>
                 </div>
                 <section className="w-full h-full">
@@ -236,7 +282,7 @@ const Nosotros = () => {
           viewport={{ once: true, amount: 0.3 }}
         >
           <h2 className="text-3xl font-bold text-center text-[#004f51] mb-8">
-            VALORES INSTITUCIONALES DE GET
+            {language === "es" ? "VALORES INSTITUCIONALES DE GET" : "GET INSTITUTIONAL VALUES"}
           </h2>
           <motion.div
             className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3"
@@ -273,13 +319,12 @@ const Nosotros = () => {
           viewport={{ once: true, amount: 0.3 }}
         >
           <h2 className="text-3xl font-bold text-center text-[#004f51] mb-4">
-            ¿Qué hacemos en GET?
+            {language === "es" ? "¿Qué hacemos en GET?" : "What do we do at GET?"}
           </h2>
           <p className="text-center text-gray-700 mb-8 max-w-4xl mx-auto">
-            En Global Executive Training (GET), diseñamos soluciones formativas
-            y de consultoría que impulsan el crecimiento de profesionales,
-            emprendedores y organizaciones, alineando el talento con los
-            desafíos del entorno actual.
+            {language === "es"
+              ? "En Global Executive Training (GET), diseñamos soluciones formativas y de consultoría que impulsan el crecimiento de profesionales, emprendedores y organizaciones, alineando el talento con los desafíos del entorno actual."
+              : "At Global Executive Training (GET), we design training and consulting solutions that drive the growth of professionals, entrepreneurs and organizations, aligning talent with current challenges."}
           </p>
           <motion.div
             className="grid grid-cols-1 gap-8 lg:grid-cols-3"
@@ -288,7 +333,7 @@ const Nosotros = () => {
             viewport={{ once: true, amount: 0.3 }}
             transition={{ staggerChildren: 0.15 }}
           >
-            {Servicios.map((servicio, index) => (
+            {Servicios.map((servicio) => (
               <motion.div
                 key={servicio.id}
                 className="p-6 border-2 border-[#004f51] rounded-xl shadow-lg bg-white"
@@ -328,14 +373,19 @@ const Nosotros = () => {
           viewport={{ once: true, amount: 0.3 }}
         >
           <h2 className="text-2xl font-bold mb-4">
-            En GET, formamos líderes que se reinventan, emprenden y transforman
+            {language === "es"
+              ? "En GET, formamos líderes que se reinventan, emprenden y transforman"
+              : "At GET, we train leaders who reinvent themselves, start businesses and transform"}
           </h2>
           <p className="text-lg mb-4">
-            Sea cual sea tu punto de partida, estamos aquí para acompañarte con
-            conocimiento, cercanía y visión global.
+            {language === "es"
+              ? "Sea cual sea tu punto de partida, estamos aquí para acompañarte con conocimiento, cercanía y visión global."
+              : "Whatever your starting point, we are here to support you with knowledge, closeness and global vision."}
           </p>
           <p className="text-xl font-semibold">
-            Conviértete en el protagonista de tu desarrollo. Crece con GET.
+            {language === "es"
+              ? "Conviértete en el protagonista de tu desarrollo. Crece con GET."
+              : "Become the protagonist of your development. Grow with GET."}
           </p>
         </motion.div>
       </div>

@@ -4,11 +4,13 @@ import Image from "next/image";
 import Link from "next/link";
 import ItemMenu from "./ItemMenu";
 import { usePathname } from "next/navigation";
-import { FaPaypal, FaWhatsapp } from "react-icons/fa";
+import { FaWhatsapp } from "react-icons/fa";
+import { useLanguage } from "./LanguageContext";
 
 const MenuPrincipal = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [Scroll, setScroll] = useState("");
+  const { language, toggleLanguage, t } = useLanguage();
 
   const pathname = usePathname();
 
@@ -27,14 +29,15 @@ const MenuPrincipal = () => {
     };
 
     window.addEventListener("scroll", handleScroll);
-
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
   return (
     <>
       <div className="fixed bottom-5 right-5 z-[100] space-y-5">
+        {/* ✅ AQUÍ FALTABA EL <a ...> */}
         <a
           href="https://api.whatsapp.com/send?phone=51932067330&text=Hola%2C%20quiero%20m%C3%A1s%20informaci%C3%B3n%20sobre%20"
           target="_blank"
@@ -42,44 +45,39 @@ const MenuPrincipal = () => {
           rel="noopener noreferrer"
           className="flex items-center justify-center w-16 h-16 rounded-full bg-green-500 hover:bg-green-600 text-white focus:outline-none"
         >
-          <FaWhatsapp className="w-10 h-10" />{" "}
+          <FaWhatsapp className="w-10 h-10" />
         </a>
-
-        {/* add button de paypal  href="https://www.paypal.com/sdk/js?client-id=BAACucgOAtxMe_cBKAHW2hWAwImUs5WNz-mjh438RLgrvOcRFqn4sWoYosWTzzDtnR3y_BWvdlsjFa5tWI&components=hosted-buttons&enable-funding=venmo&currency=USD">   */}
-
-        {/* <a
-          href="/"
-          target="_blank"
-          title="paypal"
-          rel="noopener noreferrer"
-          className="flex items-center justify-center w-16 h-16 rounded-full bg-[#002991] hover:bg-[#60cdff] text-white focus:outline-none"
-        >
-          <FaPaypal className="w-10 h-10" />{" "}
-        </a> */}
       </div>
+
       <nav
         style={{ filter: "drop-shadow(0px 0px 3px black)" }}
-        className={`sticky z-50 top-0 p-2 md:px-20 shadow-sm md:flex md:items-center md:justify-around 2xl:justify-around  ${Scroll}`}
+        className={`sticky z-50 top-0 p-2 md:px-20 shadow-sm md:flex md:items-center md:justify-around 2xl:justify-around ${Scroll}`}
       >
-        <div className="  flex justify-between items-  ">
-          {/* Escudo Logo "inicio" */}
+        <div className="flex justify-between items-center">
           <Link href="/">
-            <div
-              // style={{ filter: "drop-shadow(0px 0px 6px #99C5B5)" }}
-              className="cursor-pointer"
-            >
+            <div className="cursor-pointer">
               <Image
                 title="Ir a inicio"
                 src="/Logo.webp"
                 width={80}
                 height={30}
                 alt="Logotype"
-                style={{
-                  objectFit: "cover",
-                }}
+                style={{ objectFit: "cover" }}
               />
             </div>
           </Link>
+
+          {/* Botón de idioma - Desktop */}
+          <button
+            onClick={toggleLanguage}
+            className="hidden md:flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors ml-4"
+            title={language === "es" ? "Switch to English" : "Cambiar a Español"}
+          >
+            <span className="text-sm font-semibold">
+              {language === "es" ? "🇪🇸 ES" : "🇺🇸 EN"}
+            </span>
+          </button>
+
           <span className="text-3xl cursor-pointer mx-2 md:hidden block text-white">
             <button name="Menu" onClick={() => setIsOpen(!isOpen)}>
               <svg
@@ -94,51 +92,51 @@ const MenuPrincipal = () => {
                   strokeLinejoin="round"
                   d="M4 6h16M4 12h16M4 18h16"
                 />
-              </svg>{" "}
+              </svg>
             </button>
           </span>
         </div>
+
         <div>
           <div
-            className={` text-center  flex flex-col h-screen md:h-auto  md:flex md:flex-row  md:items-center z-[-1] md:z-auto md:static gap-2 absolute text-white md:text-white bg-[#004f51]    md:bg-transparent  w-full left-0 top-full md:w-auto md:py-0  md:pl-0 pl-7 md:opacity-100 opacity-0 right-[-400px] transition-all ease-in  ${
-              isOpen ? ` right-0 py-11 opacity-100` : `hidden`
+            className={`text-center flex flex-col h-screen md:h-auto md:flex md:flex-row md:items-center z-[-1] md:z-auto md:static gap-2 absolute text-white md:text-white bg-[#004f51] md:bg-transparent w-full left-0 top-full md:w-auto md:py-0 md:pl-0 pl-7 md:opacity-100 opacity-0 right-[-400px] transition-all ease-in ${
+              isOpen ? `right-0 py-11 opacity-100` : `hidden`
             }`}
           >
-            {/*  */}
-            <ItemMenu
-              ruta="/"
-              setIsOpen={setIsOpen}
-              border={pathname == "/" ? true : false}
-            >
-              Inicio
+            <ItemMenu ruta="/" setIsOpen={setIsOpen} border={pathname == "/" ? true : false}>
+              {t("inicio")}
             </ItemMenu>
+
             <ItemMenu
               ruta="/Nosotros"
               setIsOpen={setIsOpen}
               border={pathname == "/Nosotros" ? true : false}
             >
-              Nosotros
+              {t("nosotros")}
             </ItemMenu>
+
             <ItemMenu
               ruta="/Servicios"
               setIsOpen={setIsOpen}
               border={pathname == "/Servicios" ? true : false}
             >
-              Servicios
+              {t("servicios")}
             </ItemMenu>
+
             <ItemMenu
               ruta="/Eventos"
               setIsOpen={setIsOpen}
               border={pathname == "/Eventos" ? true : false}
             >
-              Eventos
+              {t("eventos")}
             </ItemMenu>
+
             <ItemMenu
               ruta="/Podcast"
               setIsOpen={setIsOpen}
               border={pathname == "/Podcast" ? true : false}
             >
-              Pódcast
+              {t("podcast")}
             </ItemMenu>
 
             <ItemMenu
@@ -146,15 +144,22 @@ const MenuPrincipal = () => {
               setIsOpen={setIsOpen}
               border={pathname == "/Contacto" ? true : false}
             >
-              Contacto
+              {t("contacto")}
             </ItemMenu>
-            <ItemMenu
-              ruta="/Blog"
-              setIsOpen={setIsOpen}
-              border={pathname == "/Blog" ? true : false}
+
+            <ItemMenu ruta="/Blog" setIsOpen={setIsOpen} border={pathname == "/Blog" ? true : false}>
+              {t("blog")}
+            </ItemMenu>
+
+            {/* Botón de idioma - Mobile */}
+            <button
+              onClick={toggleLanguage}
+              className="md:hidden flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors mx-auto mt-4"
             >
-              Blog
-            </ItemMenu>
+              <span className="text-sm font-semibold">
+                {language === "es" ? "🇪🇸 Español" : "🇺🇸 English"}
+              </span>
+            </button>
           </div>
         </div>
       </nav>
