@@ -234,7 +234,7 @@ const Nosotros = () => {
                 <section className="w-full h-full">
                   <figure className="relative w-full h-[200px] md:h-[300px] lg:h-[500px]">
                     <Image
-                      src={"/imgNosotros.webp"}
+                      src={"/img4.jpg"}
                       alt="Global Executive Training"
                       fill
                       style={{
@@ -245,6 +245,80 @@ const Nosotros = () => {
                   </figure>
                 </section>
               </section>
+            </div>
+          </CardContent>
+        </motion.div>
+
+        {/* CEO Message Section */}
+        <motion.div
+          className="border-2 border-[#004f51] bg-white grid w-full grid-cols-1 my-auto mb-8 shadow-md overflow-hidden"
+          variants={sectionVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.3 }}
+        >
+          <CardContent className="p-0">
+            <div className="grid grid-cols-1 lg:grid-cols-2">
+              {/* Image Section */}
+              <section className="relative w-full h-[500px] lg:h-auto flex items-center justify-center bg-gray-100">
+                <Image
+                  src={"/fundadora2.png"}
+                  alt="Miryam Roncal - Fundadora y CEO de GET"
+                  fill
+                  style={{
+                    objectFit: "contain",
+                  }}
+                />
+              </section>
+
+              {/* Text Section */}
+              <div className="flex flex-col justify-center p-6 lg:p-10 space-y-5 bg-gradient-to-br from-white via-gray-50 to-[#004f51]/5">
+                <div className="space-y-3">
+                  <div className="inline-block">
+                    <div className="h-1 w-16 bg-[#004f51] mb-3"></div>
+                  </div>
+                  <h2 className="text-2xl lg:text-3xl font-bold text-[#004f51]">
+                    {language === "es" 
+                      ? "Mensaje de la Fundadora" 
+                      : "Founder's Message"}
+                  </h2>
+                </div>
+
+                <div className="space-y-4 text-gray-700 text-justify">
+                  <p className="leading-relaxed">
+                    {language === "es"
+                      ? "Creo profundamente que el talento, cuando se desarrolla con intención, estrategia y propósito, tiene el poder de transformar no solo carreras profesionales, sino también empresas y comunidades."
+                      : "I deeply believe that talent, when developed with intention, strategy and purpose, has the power to transform not only professional careers, but also companies and communities."}
+                  </p>
+                  
+                  <p className="leading-relaxed">
+                    {language === "es"
+                      ? "GET nace de mi experiencia acompañando a personas que desean crecer, reinventarse o emprender, pero que muchas veces no cuentan con la guía, las herramientas o la claridad necesarias para dar el siguiente paso. Nuestra misión es acompañarlas con cercanía, visión global y una metodología práctica orientada a resultados."
+                      : "GET was born from my experience supporting people who want to grow, reinvent themselves or start a business, but who often lack the guidance, tools or clarity needed to take the next step. Our mission is to support them with closeness, global vision and a practical results-oriented methodology."}
+                  </p>
+                  
+                  <p className="leading-relaxed">
+                    {language === "es"
+                      ? "Mi compromiso es seguir impulsando líderes conscientes, profesionales preparados y emprendedores responsables, capaces de generar impacto positivo en un entorno cada vez más desafiante."
+                      : "My commitment is to continue driving conscious leaders, prepared professionals and responsible entrepreneurs, capable of generating positive impact in an increasingly challenging environment."}
+                  </p>
+                  
+                  <p className="font-semibold text-[#004f51] italic">
+                    {language === "es"
+                      ? "Bienvenido a GET."
+                      : "Welcome to GET."}
+                  </p>
+                </div>
+
+                <div className="pt-4 border-t border-gray-200">
+                  <p className="text-lg font-bold text-[#004f51]">Miryam Roncal</p>
+                  <p className="text-sm text-gray-600 uppercase tracking-wide">
+                    {language === "es" 
+                      ? "Fundadora y CEO" 
+                      : "Founder & CEO"}
+                  </p>
+                </div>
+              </div>
             </div>
           </CardContent>
         </motion.div>

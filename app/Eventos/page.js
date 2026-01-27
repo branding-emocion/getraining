@@ -68,7 +68,6 @@ const Eventos = () => {
         ...doc.data(),
       }));
 
-      // 🔍 DEBUG: Ver qué eventos vienen de Firebase
       console.log("Eventos de Firebase:", EvenDb);
 
       setEventos((arr) => [...EvenDb, ...arr]);
@@ -77,7 +76,6 @@ const Eventos = () => {
     return () => unsubscribe();
   }, []);
 
-  // ✅ Asegura https://
   const formatLink = (link) => {
     if (!link) return "";
     const clean = String(link).trim();

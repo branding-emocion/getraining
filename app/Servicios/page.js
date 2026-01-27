@@ -192,6 +192,108 @@ const Servicios = () => {
           </div>
         </section>
 
+        {/* Galería de Fotos */}
+        <section className="my-12">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="text-center mb-8"
+          >
+            <h2 className="text-3xl font-bold text-[#004f51] mb-3">
+              {language === "es" ? "GET en Acción" : "GET in Action"}
+            </h2>
+            <p className="text-gray-600 max-w-2xl mx-auto">
+              {language === "es"
+                ? "Conoce cómo transformamos carreras y negocios a través de nuestros programas de capacitación y mentoría"
+                : "Discover how we transform careers and businesses through our training and mentorship programs"}
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.4, delay: 0.1 }}
+              className="group relative overflow-hidden rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300"
+            >
+              <div className="relative h-[350px] w-full">
+                <Image
+                  src="/img1.jpg"
+                  alt="GET Training Session"
+                  fill
+                  className="object-cover group-hover:scale-110 transition-transform duration-500"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#004f51]/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              </div>
+              <div className="absolute bottom-0 left-0 right-0 p-4 text-white transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                <p className="font-semibold text-lg">
+                  {language === "es" ? "Capacitación Profesional" : "Professional Training"}
+                </p>
+                <p className="text-sm opacity-90">
+                  {language === "es"
+                    ? "Desarrollo de habilidades y liderazgo"
+                    : "Skills and leadership development"}
+                </p>
+              </div>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.4, delay: 0.2 }}
+              className="group relative overflow-hidden rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300"
+            >
+              <div className="relative h-[350px] w-full">
+                <Image
+                  src="/img2.jpg"
+                  alt="GET Workshops"
+                  fill
+                  className="object-cover group-hover:scale-110 transition-transform duration-500"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#004f51]/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              </div>
+              <div className="absolute bottom-0 left-0 right-0 p-4 text-white transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                <p className="font-semibold text-lg">
+                  {language === "es" ? "Talleres Especializados" : "Specialized Workshops"}
+                </p>
+                <p className="text-sm opacity-90">
+                  {language === "es"
+                    ? "Marca personal y empoderamiento"
+                    : "Personal branding and empowerment"}
+                </p>
+              </div>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.4, delay: 0.3 }}
+              className="group relative overflow-hidden rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300"
+            >
+              <div className="relative h-[350px] w-full">
+                <Image
+                  src="/img3.jpg"
+                  alt="GET Business Consulting"
+                  fill
+                  className="object-cover group-hover:scale-110 transition-transform duration-500"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#004f51]/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              </div>
+              <div className="absolute bottom-0 left-0 right-0 p-4 text-white transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                <p className="font-semibold text-lg">
+                  {language === "es" ? "Consultoría Empresarial" : "Business Consulting"}
+                </p>
+                <p className="text-sm opacity-90">
+                  {language === "es"
+                    ? "Estrategias de mercado y análisis"
+                    : "Market strategies and analysis"}
+                </p>
+              </div>
+            </motion.div>
+          </div>
+        </section>
+
         {/* Secciones Expandibles */}
         <section className="space-y-6 my-8">
           <h2 className="text-3xl font-bold text-center text-[#004f51] mb-8">
