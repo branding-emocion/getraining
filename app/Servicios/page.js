@@ -219,7 +219,7 @@ const Servicios = () => {
             >
               <div className="relative h-[350px] w-full">
                 <Image
-                  src="/img1.jpg"
+                  src="/ser1.jpeg"
                   alt="GET Training Session"
                   fill
                   className="object-cover group-hover:scale-110 transition-transform duration-500"
@@ -246,7 +246,7 @@ const Servicios = () => {
             >
               <div className="relative h-[350px] w-full">
                 <Image
-                  src="/img2.jpg"
+                  src="/ser2.jpeg"
                   alt="GET Workshops"
                   fill
                   className="object-cover group-hover:scale-110 transition-transform duration-500"
