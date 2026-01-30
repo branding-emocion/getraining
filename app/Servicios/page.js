@@ -361,9 +361,9 @@ const Servicios = () => {
                           ))}
                         </div>
 
-                        {/* Sección de PayPal */}
+                        {/* Sección de PayPal Mejorada */}
                         <div className="mt-6 p-6 bg-gradient-to-r from-blue-50 to-blue-100 rounded-lg border-2 border-blue-200">
-                          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+                          <div className="flex flex-col md:flex-row items-center justify-between gap-8">
                             <div className="flex items-center gap-4">
                               <div className="p-3 bg-white rounded-full shadow-md">
                                 <CreditCard className="text-[#0070ba]" size={32} />
@@ -374,29 +374,46 @@ const Servicios = () => {
                                 </h4>
                                 <p className="text-gray-600">
                                   {language === "es"
-                                    ? "Aceptamos pagos seguros con PayPal"
-                                    : "We accept secure payments with PayPal"}
+                                    ? "Aceptamos pagos seguros con PayPal y Tarjetas"
+                                    : "We accept secure payments with PayPal and Cards"}
                                 </p>
                               </div>
                             </div>
 
-                            <div className="flex flex-col items-center gap-3">
-                              <Image
-                                src="https://www.paypalobjects.com/webstatic/mktg/logo/pp_cc_mark_111x69.jpg"
-                                alt="PayPal Logo"
-                                width={111}
-                                height={69}
-                                className="object-contain"
-                              />
+                            <div className="flex flex-col sm:flex-row items-center gap-8">
+                                {/* Código QR */}
+                                <div className="text-center">
+                                    <div className="bg-white p-2 rounded-lg shadow-sm mb-2">
+                                        <Image
+                                            src="/qr-code.png"
+                                            alt="PayPal QR Code"
+                                            width={120}
+                                            height={120}
+                                            className="object-contain"
+                                        />
+                                    </div>
+                                    <p className="text-xs font-bold text-[#0070ba] uppercase">Scan & Pay</p>
+                                </div>
 
-                              <a
-                                href="https://www.paypal.me/tuenlace"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="bg-[#0070ba] hover:bg-[#005ea6] text-white px-6 py-2 rounded-full font-semibold transition-colors shadow-md"
-                              >
-                                {language === "es" ? "Pagar con PayPal" : "Pay with PayPal"}
-                              </a>
+                                {/* Botón y Logo */}
+                                <div className="flex flex-col items-center gap-3">
+                                    <Image
+                                        src="https://www.paypalobjects.com/webstatic/mktg/logo/pp_cc_mark_111x69.jpg"
+                                        alt="PayPal Logo"
+                                        width={111}
+                                        height={69}
+                                        className="object-contain"
+                                    />
+
+                                    <a
+                                        href="https://www.paypal.com/ncp/payment/D78DRWYX9EP78"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="bg-[#0070ba] hover:bg-[#005ea6] text-white px-8 py-2 rounded-full font-semibold transition-colors shadow-md whitespace-nowrap"
+                                    >
+                                        {language === "es" ? "Pagar ahora" : "Pay now"}
+                                    </a>
+                                </div>
                             </div>
                           </div>
                         </div>
