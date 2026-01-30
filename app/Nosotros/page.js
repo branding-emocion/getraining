@@ -193,7 +193,6 @@ const Nosotros = () => {
         </div>
       </section>
       <div className="container -mt-[5rem]">
-        {/* Sección principal de bienvenida a GET */}
         <motion.div
           className="border-2 border-[#004f51] bg-white grid w-full grid-cols-1 my-auto mt-6 mb-8 shadow-md gap-6"
           variants={sectionVariants}
