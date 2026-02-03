@@ -34,6 +34,18 @@ const DashboardLayout = ({ children }) => {
       hidden: claims?.UsuarioBase,
     },
     {
+      name: "Banners",
+      link: "/Admin/Banners",
+      icon: <MonitorXIcon className="w-6 h-6 text-white" />,
+      hidden: claims?.UsuarioBase,
+    },
+    {
+      name: "Aliados",
+      link: "/Admin/Aliados",
+      icon: <Users className="w-6 h-6 text-white" />,
+      hidden: claims?.UsuarioBase,
+    },
+    {
       name: "Pódcast",
       link: "/Admin/Podcast",
       icon: <YoutubeIcon className="w-6 h-6 text-white" />,

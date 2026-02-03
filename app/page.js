@@ -6,25 +6,81 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Briefcase, Rocket, Building2, ChevronDown } from "lucide-react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useLanguage } from "./LanguageContext";
+import { collection, query, where, orderBy, onSnapshot } from "firebase/firestore";
+import { db } from "@/firebase/firebaseClient";
 
 const HomePage = () => {
   const [expandedService, setExpandedService] = useState(null);
   const { t, language } = useLanguage();
+  
+  // Estados para datos de Firestore
+  const [banners, setBanners] = useState([]);
+  const [aliados, setAliados] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [mounted, setMounted] = useState(false);
 
-  const Alianzas = [
-    {
-      img: "/Aliado1.webp",
-      nombre: language === "es" ? "Congreso Hispanoamericano de negocios" : "Hispanic American Business Congress",
-      link: "https://congresohispanoamericanodenegocios.com",
-    },
-    {
-      img: "/Aliado3.jpg",
-      nombre: language === "es" ? "Red Latinoamericana de conferencistas" : "Latin American Network of Speakers",
-      link: "https://redconferencistas.com/",
-    },
-  ];
+  // Asegurar que el componente está montado (hydration fix)
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  // Cargar Banners activos desde Firestore
+  useEffect(() => {
+    const qBanners = query(
+      collection(db, "Banners"),
+      orderBy("orden", "asc")
+    );
+    
+    const unsubBanners = onSnapshot(qBanners, (snapshot) => {
+      const bannersData = snapshot.docs
+        .map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }))
+        .filter((banner) => banner.activo === true);
+      
+      setBanners(bannersData);
+      setLoading(false);
+    }, (error) => {
+      console.error("Error loading banners:", error);
+      setLoading(false);
+    });
+
+    return () => unsubBanners();
+  }, []);
+
+  // Cargar Aliados activos desde Firestore
+  useEffect(() => {
+    const qAliados = query(
+      collection(db, "Aliados"),
+      orderBy("orden", "asc")
+    );
+    
+    const unsubAliados = onSnapshot(qAliados, (snapshot) => {
+      console.log("Total documentos en Aliados:", snapshot.docs.length);
+      
+      const aliadosData = snapshot.docs
+        .map((doc) => {
+          const data = { id: doc.id, ...doc.data() };
+          console.log("Aliado encontrado:", data);
+          return data;
+        })
+        .filter((aliado) => {
+          const isActive = aliado.activo === true;
+          console.log(`Aliado ${aliado.nombre_es} - Activo: ${isActive}`);
+          return isActive;
+        });
+      
+      console.log("Aliados activos filtrados:", aliadosData);
+      setAliados(aliadosData);
+    }, (error) => {
+      console.error("Error loading aliados:", error);
+    });
+
+    return () => unsubAliados();
+  }, []);
 
   const serviciosInicio = [
     {
@@ -119,11 +175,40 @@ const HomePage = () => {
 
   return (
     <div className="pb-10">
-      <Carousel infiniteLoop autoPlay showStatus={false}>
+      {/* Carrusel de Banners desde Firestore */}
+      {loading ? (
+        <div className="w-full h-[21rem] sm:h-[476px] bg-gray-200 animate-pulse flex items-center justify-center">
+          <p className="text-gray-500">Cargando banners...</p>
+        </div>
+      ) : banners.length > 0 ? (
+        <Carousel infiniteLoop autoPlay showStatus={false} showThumbs={false}>
+          {banners.map((banner) => (
+            <div key={banner.id} className="relative w-full h-[21rem] sm:h-[476px] bg-[#004f51]/80">
+              <Image
+                src={banner.imagenUrl || "/placeholder.svg"}
+                alt={banner.titulo || "Banner"}
+                fill
+                style={{
+                  objectFit: "cover",
+                }}
+                priority
+              />
+              <div className="absolute top-0 left-0 bg-[#004f51]/30 w-full h-full" />
+              {banner.titulo && (
+                <div className="absolute bottom-8 left-0 right-0 text-center">
+                  <h2 className="text-white text-2xl sm:text-4xl font-bold drop-shadow-lg">
+                    {banner.titulo}
+                  </h2>
+                </div>
+              )}
+            </div>
+          ))}
+        </Carousel>
+      ) : (
         <div className="relative w-full h-[21rem] sm:h-[476px] bg-[#004f51]/80">
           <Image
             src={"/Banners/Banner.webp"}
-            alt="banner1"
+            alt="banner default"
             fill
             style={{
               objectFit: "cover",
@@ -131,29 +216,8 @@ const HomePage = () => {
           />
           <div className="absolute top-0 left-0 bg-[#004f51]/30 w-full h-full" />
         </div>
-        <div className="relative w-full h-[20rem] sm:h-[476px] bg-[#004f51]/80">
-          <Image
-            src={"/Banners/Banner3.webp"}
-            alt="banner1"
-            fill
-            style={{
-              objectFit: "cover",
-            }}
-          />
-          <div className="absolute top-0 left-0 bg-[#004f51]/30 w-full h-full" />
-        </div>
-        <div className="relative w-full h-[20rem] sm:h-[476px] bg-[#004f51]/80">
-          <Image
-            src={"/Banners/Banner4.webp"}
-            alt="banner1"
-            fill
-            style={{
-              objectFit: "cover",
-            }}
-          />
-          <div className="absolute top-0 left-0 bg-[#004f51]/30 w-full h-full" />
-        </div>
-      </Carousel>
+      )}
+
       <div className="space-y-10 -mt-[6rem]">
         {/* Sección 1: Global Executive Training (GET) */}
         <motion.section
@@ -301,7 +365,7 @@ const HomePage = () => {
           </Card>
         </motion.section>
 
-        {/* Sección 3: NUESTRAS ALIANZAS */}
+        {/* Sección 3: NUESTRAS ALIANZAS desde Firestore */}
         <motion.section
           className="container mx-auto"
           variants={sectionVariants}
@@ -310,48 +374,70 @@ const HomePage = () => {
           viewport={{ once: true, amount: 0.3 }}
         >
           <Card className="bg-white shadow-lg">
-            <CardContent>
-              <div className="space-y-4 flex items-center flex-col justify-center">
-                <h1 className="text-xl text-center font-extrabold leading-tight lg:text-3xl text-grey-900 pt-4 uppercase">
+            <CardContent className="p-6">
+              <div className="space-y-4 flex items-center flex-col justify-center mb-6">
+                <h1 className="text-xl text-center font-extrabold leading-tight lg:text-3xl text-grey-900 uppercase">
                   {language === "es" ? "NUESTRAS ALIANZAS" : "OUR ALLIANCES"}
                 </h1>
               </div>
-              <motion.div
-                className="pt-3 grid place-items-center grid-cols-1 lg:grid-cols-2 gap-2 md:gap-4 lg:gap-x-8 gap-y-4"
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, amount: 0.3 }}
-                transition={{ staggerChildren: 0.2 }}
-              >
-                {Alianzas.map((alianza, key) => (
-                  <motion.a
-                    href={alianza.link}
-                    key={key}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-full max-w-72 shadow-lg"
-                    variants={cardVariants}
-                  >
-                    <div className="hover:-translate-y-2 shadow-md border rounded-lg bg-[#004f51] border-[#004f51]">
-                      <figure className="relative w-full h-[18rem]">
-                        <Image
-                          className="rounded-t-lg object-fill p-0.5"
-                          src={alianza.img || "/placeholder.svg"}
-                          fill
-                          alt={alianza.nombre}
-                        />
-                      </figure>
-                      <div className="p-4 h-32">
-                        <div>
-                          <h5 className="text-center font-bold text-2xl tracking-tight mb-2 text-white">
-                            {alianza.nombre}
-                          </h5>
-                        </div>
-                      </div>
+
+              {!mounted ? (
+                <div className="col-span-full text-center py-12">
+                  <div className="animate-pulse flex flex-col items-center gap-4">
+                    <div className="h-8 w-48 bg-gray-200 rounded"></div>
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 w-full max-w-4xl mx-auto">
+                      <div className="h-80 bg-gray-200 rounded-lg"></div>
+                      <div className="h-80 bg-gray-200 rounded-lg"></div>
                     </div>
-                  </motion.a>
-                ))}
-              </motion.div>
+                  </div>
+                </div>
+              ) : (
+                <div className="grid place-items-center grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8 lg:gap-10 pb-6">
+                  {aliados.length > 0 ? (
+                    aliados.map((aliado, index) => (
+                      <a
+                        href={aliado.link || "#"}
+                        key={`${aliado.id}-${index}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="w-full max-w-sm"
+                      >
+                        <div className="hover:-translate-y-2 shadow-xl border-2 rounded-lg bg-[#004f51] border-[#004f51] transition-transform duration-300 overflow-hidden">
+                          <div className="relative w-full h-[18rem] bg-gray-200">
+                            {aliado.imagenUrl ? (
+                              <Image
+                                className="object-cover"
+                                src={aliado.imagenUrl}
+                                fill
+                                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                                alt={language === "es" ? (aliado.nombre_es || "Aliado") : (aliado.nombre_en || "Ally")}
+                                onError={(e) => {
+                                  console.error("Error cargando imagen:", aliado.imagenUrl);
+                                }}
+                              />
+                            ) : (
+                              <div className="w-full h-full flex items-center justify-center bg-gray-300">
+                                <span className="text-gray-500">Sin imagen</span>
+                              </div>
+                            )}
+                          </div>
+                          <div className="p-4 min-h-[8rem] flex items-center justify-center bg-[#004f51]">
+                            <h5 className="text-center font-bold text-xl md:text-2xl tracking-tight text-white">
+                              {language === "es" ? (aliado.nombre_es || "Aliado sin nombre") : (aliado.nombre_en || "Unnamed Ally")}
+                            </h5>
+                          </div>
+                        </div>
+                      </a>
+                    ))
+                  ) : (
+                    <div className="col-span-full text-center py-12">
+                      <p className="text-gray-500 text-lg">
+                        {language === "es" ? "No hay alianzas disponibles actualmente" : "No alliances available currently"}
+                      </p>
+                    </div>
+                  )}
+                </div>
+              )}
             </CardContent>
           </Card>
         </motion.section>
