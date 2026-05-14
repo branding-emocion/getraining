@@ -1,9 +1,8 @@
-// app/Blog/[id]/page.jsx  (SERVER COMPONENT - sin "use client")
+// app/Blog/[id]/page.js  — SIN "use client", SIN otro componente
 import { dbServer } from "@/firebase/firebaseServer";
 import { doc, getDoc } from "firebase/firestore";
-import ItemBlog from "./ItemBlog"; // ajusta la ruta según tu estructura
+import ItemBlog from "./ItemBlog";
 
-// Genera los meta tags OG dinámicamente para cada blog
 export async function generateMetadata({ params }) {
   const { id } = params;
 
@@ -13,7 +12,6 @@ export async function generateMetadata({ params }) {
 
     if (docSnap.exists()) {
       const blog = docSnap.data();
-      // Limpia HTML para obtener texto plano para la descripción
       const plainText = blog.ContenidoBLog?.replace(/<[^>]*>/g, "")
         .substring(0, 160)
         .trim();
@@ -25,14 +23,7 @@ export async function generateMetadata({ params }) {
           title: blog.TituloBlog,
           description: plainText,
           images: blog.Imagenes?.[0]
-            ? [
-                {
-                  url: blog.Imagenes[0],
-                  width: 1200,
-                  height: 630,
-                  alt: blog.TituloBlog,
-                },
-              ]
+            ? [{ url: blog.Imagenes[0], width: 1200, height: 630, alt: blog.TituloBlog }]
             : [],
           type: "article",
           url: `https://www.getraining.org/Blog/${id}`,
@@ -52,8 +43,7 @@ export async function generateMetadata({ params }) {
 
   return {
     title: "Blog | GETraining",
-    description:
-      "Blog de Global Executive Training - Artículos sobre liderazgo, emprendimiento y desarrollo profesional.",
+    description: "Blog de Global Executive Training",
   };
 }
 

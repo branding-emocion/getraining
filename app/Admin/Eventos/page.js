@@ -27,7 +27,7 @@ import {
   WhatsappShareButton,
   LinkedinShareButton,
   FacebookIcon,
-  TwitterIcon,
+  XIcon,
   WhatsappIcon,
   LinkedinIcon,
 } from "react-share";
@@ -151,13 +151,10 @@ const EventosPage = () => {
                               doc(db, "Eventos", `${Eventos.id}`)
                             );
 
-                            // Lista todos los objetos (archivos) en el directorio
                             listAll(ImgRef)
                               .then((res) => {
                                 res.items.forEach((itemRef) => {
-                                  // Ahora debes borrar cada objeto (archivo)
                                   deleteObject(itemRef).catch((error) => {
-                                    // Maneja cualquier error
                                     alert(
                                       ` Error al eliminar ${itemRef.fullPath}`
                                     );
@@ -169,7 +166,6 @@ const EventosPage = () => {
                                 });
                               })
                               .catch((error) => {
-                                // Maneja cualquier error
                                 console.error(
                                   "Error al listar los objetos",
                                   error
@@ -185,21 +181,25 @@ const EventosPage = () => {
                     <div className="flex justify-center space-x-2 py-4">
                       <FacebookShareButton
                         url={`https://www.getraining.org/Eventos/${Eventos.id}`}
+                        hashtag="#GETraining"
                       >
                         <FacebookIcon size={32} round />
                       </FacebookShareButton>
                       <TwitterShareButton
                         url={`https://www.getraining.org/Eventos/${Eventos.id}`}
+                        title={Eventos?.TituloEvento}
                       >
-                        <TwitterIcon size={32} round />
+                        <XIcon size={32} round />
                       </TwitterShareButton>
                       <WhatsappShareButton
                         url={`https://www.getraining.org/Eventos/${Eventos.id}`}
+                        title={Eventos?.TituloEvento}
                       >
                         <WhatsappIcon size={32} round />
                       </WhatsappShareButton>
                       <LinkedinShareButton
                         url={`https://www.getraining.org/Eventos/${Eventos.id}`}
+                        title={Eventos?.TituloEvento}
                       >
                         <LinkedinIcon size={32} round />
                       </LinkedinShareButton>
