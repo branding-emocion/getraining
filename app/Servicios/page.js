@@ -2,13 +2,55 @@
 
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronDown, Briefcase, Rocket, Building2, CreditCard } from "lucide-react";
-import { useState } from "react";
+import { ChevronDown, ChevronLeft, ChevronRight, Briefcase, Rocket, Building2, CreditCard } from "lucide-react";
+import { useState, useEffect, useCallback } from "react";
 import { useLanguage } from "../LanguageContext";
+
+// ── Carousel images (add/remove as needed) ──
+const carouselImages = [
+  { src: "/slider/img4.webp", alt: "GET Training 1" },
+  { src: "/slider/img5.webp", alt: "GET Training 2" },
+  { src: "/slider/img6.webp", alt: "GET Training 3" },
+];
 
 const Servicios = () => {
   const [expandedSection, setExpandedSection] = useState(null);
   const { language } = useLanguage();
+
+  // ── Carousel state ──
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [direction, setDirection] = useState(1);
+
+  const nextSlide = useCallback(() => {
+    setDirection(1);
+    setCurrentSlide((prev) => (prev + 1) % carouselImages.length);
+  }, []);
+
+  const prevSlide = useCallback(() => {
+    setDirection(-1);
+    setCurrentSlide(
+      (prev) => (prev - 1 + carouselImages.length) % carouselImages.length
+    );
+  }, []);
+
+  const goToSlide = useCallback(
+    (index) => {
+      setDirection(index > currentSlide ? 1 : -1);
+      setCurrentSlide(index);
+    },
+    [currentSlide]
+  );
+
+  useEffect(() => {
+    const timer = setInterval(nextSlide, 5000);
+    return () => clearInterval(timer);
+  }, [nextSlide]);
+
+  const slideVariants = {
+    enter: (dir) => ({ x: dir > 0 ? "100%" : "-100%", opacity: 0 }),
+    center: { x: 0, opacity: 1 },
+    exit: (dir) => ({ x: dir > 0 ? "-100%" : "100%", opacity: 0 }),
+  };
 
   const toggleSection = (id) => {
     setExpandedSection(expandedSection === id ? null : id);
@@ -178,15 +220,62 @@ const Servicios = () => {
                 </p>
               </div>
 
+              {/* ── CAROUSEL ── */}
               <div className="w-full h-full">
-                <figure className="relative w-full h-[200px] md:h-[300px] lg:h-[500px]">
-                  <Image
-                    src={"/slider/img4.webp"}
-                    alt="GET Training"
-                    fill
-                    className="rounded-md object-cover"
-                  />
-                </figure>
+                <div className="relative w-full h-[200px] md:h-[300px] lg:h-[500px] rounded-md overflow-hidden group">
+                  <AnimatePresence initial={false} custom={direction} mode="popLayout">
+                    <motion.div
+                      key={currentSlide}
+                      custom={direction}
+                      variants={slideVariants}
+                      initial="enter"
+                      animate="center"
+                      exit="exit"
+                      transition={{ duration: 0.5, ease: "easeInOut" }}
+                      className="absolute inset-0"
+                    >
+                      <Image
+                        src={carouselImages[currentSlide].src}
+                        alt={carouselImages[currentSlide].alt}
+                        fill
+                        className="rounded-md object-cover"
+                        priority={currentSlide === 0}
+                      />
+                    </motion.div>
+                  </AnimatePresence>
+
+                  {/* Arrows — visible on hover */}
+                  <button
+                    onClick={prevSlide}
+                    className="absolute left-2 top-1/2 -translate-y-1/2 z-10 bg-[#004f51]/70 hover:bg-[#004f51] text-white rounded-full p-1.5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                    aria-label="Previous slide"
+                  >
+                    <ChevronLeft className="w-5 h-5" />
+                  </button>
+                  <button
+                    onClick={nextSlide}
+                    className="absolute right-2 top-1/2 -translate-y-1/2 z-10 bg-[#004f51]/70 hover:bg-[#004f51] text-white rounded-full p-1.5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                    aria-label="Next slide"
+                  >
+                    <ChevronRight className="w-5 h-5" />
+                  </button>
+
+                  {/* Dots */}
+                  <div className="absolute bottom-3 left-1/2 -translate-x-1/2 z-10 flex gap-2">
+                    {carouselImages.map((_, index) => (
+                      <button
+                        key={index}
+                        onClick={() => goToSlide(index)}
+                        className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
+                          index === currentSlide
+                            ? "bg-white scale-110"
+                            : "bg-white/50 hover:bg-white/80"
+                        }`}
+                        aria-label={`Go to slide ${index + 1}`}
+                      />
+                    ))}
+                  </div>
+                </div>
               </div>
             </div>
           </div>

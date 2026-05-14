@@ -24,13 +24,13 @@ import Image from "next/image";
 import { deleteObject, listAll, ref } from "firebase/storage";
 import {
   FacebookShareButton,
-  TwitterShareButton,
   WhatsappShareButton,
   LinkedinShareButton,
   FacebookIcon,
-  TwitterIcon,
   WhatsappIcon,
   LinkedinIcon,
+  XIcon,
+  TwitterShareButton,
 } from "react-share";
 
 const Blog = () => {
@@ -121,13 +121,6 @@ const Blog = () => {
                           __html: blog?.ContenidoBLog,
                         }}
                       />
-
-                      {/* <a
-                    className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-2 text-center inline-flex items-center"
-                    href="#"
-                  >
-                    Read more
-                  </a> */}
                     </div>
 
                     <div className="flex items-center justify-center gap-x-2 pb-2">
@@ -161,13 +154,10 @@ const Blog = () => {
 
                             await deleteDoc(doc(db, "Blog", `${blog.id}`));
 
-                            // Lista todos los objetos (archivos) en el directorio
                             listAll(ImgRef)
                               .then((res) => {
                                 res.items.forEach((itemRef) => {
-                                  // Ahora debes borrar cada objeto (archivo)
                                   deleteObject(itemRef).catch((error) => {
-                                    // Maneja cualquier error
                                     alert(
                                       ` Error al eliminar ${itemRef.fullPath}`
                                     );
@@ -179,7 +169,6 @@ const Blog = () => {
                                 });
                               })
                               .catch((error) => {
-                                // Maneja cualquier error
                                 console.error(
                                   "Error al listar los objetos",
                                   error
@@ -195,21 +184,25 @@ const Blog = () => {
                     <div className="flex justify-center space-x-2 py-4">
                       <FacebookShareButton
                         url={`https://www.getraining.org/Blog/${blog.id}`}
+                        hashtag="#GETraining"
                       >
                         <FacebookIcon size={32} round />
                       </FacebookShareButton>
                       <TwitterShareButton
                         url={`https://www.getraining.org/Blog/${blog.id}`}
+                        title={blog?.TituloBlog}
                       >
-                        <TwitterIcon size={32} round />
+                        <XIcon size={32} round />
                       </TwitterShareButton>
                       <WhatsappShareButton
                         url={`https://www.getraining.org/Blog/${blog.id}`}
+                        title={blog?.TituloBlog}
                       >
                         <WhatsappIcon size={32} round />
                       </WhatsappShareButton>
                       <LinkedinShareButton
                         url={`https://www.getraining.org/Blog/${blog.id}`}
+                        title={blog?.TituloBlog}
                       >
                         <LinkedinIcon size={32} round />
                       </LinkedinShareButton>

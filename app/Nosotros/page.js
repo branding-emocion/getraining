@@ -1,11 +1,56 @@
 "use client";
 import { CardContent } from "@/components/ui/card";
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { useLanguage } from "../LanguageContext";
+import { useState, useEffect, useCallback } from "react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+
+// ── Carousel images (add/remove as needed) ──
+const carouselImages = [
+  { src: "/img4.jpg", alt: "Global Executive Training 1" },
+  { src: "/img2.jpg", alt: "Global Executive Training 2" },
+  { src: "/img3.jpg", alt: "Global Executive Training 3" },
+];
 
 const Nosotros = () => {
   const { language } = useLanguage();
+
+  // ── Carousel state ──
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [direction, setDirection] = useState(1);
+
+  const nextSlide = useCallback(() => {
+    setDirection(1);
+    setCurrentSlide((prev) => (prev + 1) % carouselImages.length);
+  }, []);
+
+  const prevSlide = useCallback(() => {
+    setDirection(-1);
+    setCurrentSlide(
+      (prev) => (prev - 1 + carouselImages.length) % carouselImages.length
+    );
+  }, []);
+
+  const goToSlide = useCallback(
+    (index) => {
+      setDirection(index > currentSlide ? 1 : -1);
+      setCurrentSlide(index);
+    },
+    [currentSlide]
+  );
+
+  // Auto-play every 5 seconds
+  useEffect(() => {
+    const timer = setInterval(nextSlide, 5000);
+    return () => clearInterval(timer);
+  }, [nextSlide]);
+
+  const slideVariants = {
+    enter: (dir) => ({ x: dir > 0 ? "100%" : "-100%", opacity: 0 }),
+    center: { x: 0, opacity: 1 },
+    exit: (dir) => ({ x: dir > 0 ? "-100%" : "100%", opacity: 0 }),
+  };
 
   const Data = [
     {
@@ -31,7 +76,10 @@ const Nosotros = () => {
   const Valores = [
     {
       id: 1,
-      title: language === "es" ? "Desarrollo Humano Integral" : "Integral Human Development",
+      title:
+        language === "es"
+          ? "Desarrollo Humano Integral"
+          : "Integral Human Development",
       description:
         language === "es"
           ? "Creemos en el crecimiento personal como base del crecimiento profesional. Promovemos el autoconocimiento, la inteligencia emocional y el liderazgo con sentido."
@@ -39,7 +87,8 @@ const Nosotros = () => {
     },
     {
       id: 2,
-      title: language === "es" ? "Espíritu Emprendedor" : "Entrepreneurial Spirit",
+      title:
+        language === "es" ? "Espíritu Emprendedor" : "Entrepreneurial Spirit",
       description:
         language === "es"
           ? "Impulsamos la creatividad, la autonomía y la capacidad de generar valor desde cualquier lugar: una organización, una comunidad o un emprendimiento propio."
@@ -47,7 +96,10 @@ const Nosotros = () => {
     },
     {
       id: 3,
-      title: language === "es" ? "Innovación con Propósito" : "Innovation with Purpose",
+      title:
+        language === "es"
+          ? "Innovación con Propósito"
+          : "Innovation with Purpose",
       description:
         language === "es"
           ? "Fomentamos una actitud de aprendizaje constante y apertura al cambio, integrando nuevas ideas y tecnologías para resolver desafíos reales."
@@ -55,7 +107,10 @@ const Nosotros = () => {
     },
     {
       id: 4,
-      title: language === "es" ? "Excelencia y Mejora Continua" : "Excellence and Continuous Improvement",
+      title:
+        language === "es"
+          ? "Excelencia y Mejora Continua"
+          : "Excellence and Continuous Improvement",
       description:
         language === "es"
           ? "Nos comprometemos con altos estándares de calidad en todo lo que hacemos, impulsando procesos formativos que evolucionan junto a las necesidades del mundo actual."
@@ -63,7 +118,8 @@ const Nosotros = () => {
     },
     {
       id: 5,
-      title: language === "es" ? "Responsabilidad Social" : "Social Responsibility",
+      title:
+        language === "es" ? "Responsabilidad Social" : "Social Responsibility",
       description:
         language === "es"
           ? "Formamos profesionales y emprendedores conscientes de su impacto, que actúan con ética y compromiso para construir una sociedad más consciente, equitativa y sostenible."
@@ -71,7 +127,10 @@ const Nosotros = () => {
     },
     {
       id: 6,
-      title: language === "es" ? "Colaboración y Red de Valor" : "Collaboration and Value Network",
+      title:
+        language === "es"
+          ? "Colaboración y Red de Valor"
+          : "Collaboration and Value Network",
       description:
         language === "es"
           ? "Valoramos el trabajo en equipo, la construcción de redes y el intercambio de experiencias como motores del crecimiento colectivo."
@@ -79,7 +138,10 @@ const Nosotros = () => {
     },
     {
       id: 7,
-      title: language === "es" ? "Visión Global, Acción Local" : "Global Vision, Local Action",
+      title:
+        language === "es"
+          ? "Visión Global, Acción Local"
+          : "Global Vision, Local Action",
       description:
         language === "es"
           ? "Promovemos una mirada internacional y multicultural, con acciones concretas que generen transformación en contextos locales."
@@ -117,7 +179,10 @@ const Nosotros = () => {
     {
       id: 2,
       title: language === "es" ? "Para Emprendedores" : "For Entrepreneurs",
-      subtitle: language === "es" ? "Mentorías segmentadas por niveles" : "Mentorships segmented by levels",
+      subtitle:
+        language === "es"
+          ? "Mentorías segmentadas por niveles"
+          : "Mentorships segmented by levels",
       description:
         language === "es"
           ? "Creemos que emprender es una forma de liderar el cambio. Programa de mentorías que responde a las distintas necesidades del ecosistema emprendedor:"
@@ -141,7 +206,9 @@ const Nosotros = () => {
       id: 3,
       title: language === "es" ? "Para Empresas" : "For Companies",
       subtitle:
-        language === "es" ? "Invierte en tu talento y en tus clientes" : "Invest in your talent and your customers",
+        language === "es"
+          ? "Invierte en tu talento y en tus clientes"
+          : "Invest in your talent and your customers",
       description:
         language === "es"
           ? "Programas de entrenamiento corporativo y consultoría especializada para desarrollar el potencial de equipos y mejorar la experiencia de clientes."
@@ -230,18 +297,64 @@ const Nosotros = () => {
                       : "Training with GET is more than getting qualified: it's connecting with your purpose, with people who inspire and with opportunities that transform."}
                   </p>
                 </div>
+
+                {/* ── CAROUSEL ── */}
                 <section className="w-full h-full">
-                  <figure className="relative w-full h-[200px] md:h-[300px] lg:h-[500px]">
-                    <Image
-                      src={"/img4.jpg"}
-                      alt="Global Executive Training"
-                      fill
-                      style={{
-                        objectFit: "cover",
-                      }}
-                      className="rounded-md"
-                    />
-                  </figure>
+                  <div className="relative w-full h-[200px] md:h-[300px] lg:h-[500px] rounded-md overflow-hidden group">
+                    <AnimatePresence initial={false} custom={direction} mode="popLayout">
+                      <motion.div
+                        key={currentSlide}
+                        custom={direction}
+                        variants={slideVariants}
+                        initial="enter"
+                        animate="center"
+                        exit="exit"
+                        transition={{ duration: 0.5, ease: "easeInOut" }}
+                        className="absolute inset-0"
+                      >
+                        <Image
+                          src={carouselImages[currentSlide].src}
+                          alt={carouselImages[currentSlide].alt}
+                          fill
+                          style={{ objectFit: "cover" }}
+                          className="rounded-md"
+                          priority={currentSlide === 0}
+                        />
+                      </motion.div>
+                    </AnimatePresence>
+
+                    {/* Arrows — visible on hover */}
+                    <button
+                      onClick={prevSlide}
+                      className="absolute left-2 top-1/2 -translate-y-1/2 z-10 bg-[#004f51]/70 hover:bg-[#004f51] text-white rounded-full p-1.5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                      aria-label="Previous slide"
+                    >
+                      <ChevronLeft className="w-5 h-5" />
+                    </button>
+                    <button
+                      onClick={nextSlide}
+                      className="absolute right-2 top-1/2 -translate-y-1/2 z-10 bg-[#004f51]/70 hover:bg-[#004f51] text-white rounded-full p-1.5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                      aria-label="Next slide"
+                    >
+                      <ChevronRight className="w-5 h-5" />
+                    </button>
+
+                    {/* Dots */}
+                    <div className="absolute bottom-3 left-1/2 -translate-x-1/2 z-10 flex gap-2">
+                      {carouselImages.map((_, index) => (
+                        <button
+                          key={index}
+                          onClick={() => goToSlide(index)}
+                          className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
+                            index === currentSlide
+                              ? "bg-white scale-110"
+                              : "bg-white/50 hover:bg-white/80"
+                          }`}
+                          aria-label={`Go to slide ${index + 1}`}
+                        />
+                      ))}
+                    </div>
+                  </div>
                 </section>
               </section>
             </div>
@@ -277,8 +390,8 @@ const Nosotros = () => {
                     <div className="h-1 w-16 bg-[#004f51] mb-3"></div>
                   </div>
                   <h2 className="text-2xl lg:text-3xl font-bold text-[#004f51]">
-                    {language === "es" 
-                      ? "Mensaje de la Fundadora" 
+                    {language === "es"
+                      ? "Mensaje de la Fundadora"
                       : "Founder's Message"}
                   </h2>
                 </div>
@@ -289,32 +402,30 @@ const Nosotros = () => {
                       ? "Creo profundamente que el talento, cuando se desarrolla con intención, estrategia y propósito, tiene el poder de transformar no solo carreras profesionales, sino también empresas y comunidades."
                       : "I deeply believe that talent, when developed with intention, strategy and purpose, has the power to transform not only professional careers, but also companies and communities."}
                   </p>
-                  
+
                   <p className="leading-relaxed">
                     {language === "es"
                       ? "GET nace de mi experiencia acompañando a personas que desean crecer, reinventarse o emprender, pero que muchas veces no cuentan con la guía, las herramientas o la claridad necesarias para dar el siguiente paso. Nuestra misión es acompañarlas con cercanía, visión global y una metodología práctica orientada a resultados."
                       : "GET was born from my experience supporting people who want to grow, reinvent themselves or start a business, but who often lack the guidance, tools or clarity needed to take the next step. Our mission is to support them with closeness, global vision and a practical results-oriented methodology."}
                   </p>
-                  
+
                   <p className="leading-relaxed">
                     {language === "es"
                       ? "Mi compromiso es seguir impulsando líderes conscientes, profesionales preparados y emprendedores responsables, capaces de generar impacto positivo en un entorno cada vez más desafiante."
                       : "My commitment is to continue driving conscious leaders, prepared professionals and responsible entrepreneurs, capable of generating positive impact in an increasingly challenging environment."}
                   </p>
-                  
+
                   <p className="font-semibold text-[#004f51] italic">
-                    {language === "es"
-                      ? "Bienvenido a GET."
-                      : "Welcome to GET."}
+                    {language === "es" ? "Bienvenido a GET." : "Welcome to GET."}
                   </p>
                 </div>
 
                 <div className="pt-4 border-t border-gray-200">
-                  <p className="text-lg font-bold text-[#004f51]">Miryam Roncal</p>
+                  <p className="text-lg font-bold text-[#004f51]">
+                    Miryam Roncal
+                  </p>
                   <p className="text-sm text-gray-600 uppercase tracking-wide">
-                    {language === "es" 
-                      ? "Fundadora y CEO" 
-                      : "Founder & CEO"}
+                    {language === "es" ? "Fundadora y CEO" : "Founder & CEO"}
                   </p>
                 </div>
               </div>
@@ -334,7 +445,9 @@ const Nosotros = () => {
             <motion.div
               key={item.id}
               className={`p-8 space-y-3 border-2 border-[#004f51] rounded-xl shadow-lg ${
-                key === 0 ? "bg-[#004f51] text-white" : "bg-white text-gray-900"
+                key === 0
+                  ? "bg-[#004f51] text-white"
+                  : "bg-white text-gray-900"
               }`}
               variants={cardVariants}
             >
@@ -355,7 +468,9 @@ const Nosotros = () => {
           viewport={{ once: true, amount: 0.3 }}
         >
           <h2 className="text-3xl font-bold text-center text-[#004f51] mb-8">
-            {language === "es" ? "VALORES INSTITUCIONALES DE GET" : "GET INSTITUTIONAL VALUES"}
+            {language === "es"
+              ? "VALORES INSTITUCIONALES DE GET"
+              : "GET INSTITUTIONAL VALUES"}
           </h2>
           <motion.div
             className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3"
